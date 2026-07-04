@@ -1,0 +1,13 @@
+{
+  "$schema": "./node_modules/nx/schemas/nx-schema.json",
+  "workspaceLayout": {
+    "appsDir": "packages",
+    "libsDir": "packages"
+  },
+  "useDaemonProcess": false,
+  "targetDefaults": {
+    "build": {
+      "cache": true
+    }
+  }
+}

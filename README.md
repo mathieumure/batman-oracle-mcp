@@ -1,34 +1,60 @@
-# React + TypeScript + Vite
+# Batman Oracle Mcp
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+NX monorepo containing the Batman Oracle MCP server and its supporting packages.
 
-Currently, two official plugins are available:
+## Packages
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+| Package | Tech | Description |
+|---|---|---|
+| `packages/mcp-ui` | Vite + React + TypeScript | UI components served by the MCP server |
+| `packages/mcp` | Node + TypeScript | MCP server (`@modelcontextprotocol/sdk`) |
+| `packages/slides` | Slidev | Presentation |
+| `packages/data` | Redis (Docker) | Data layer |
 
-## React Compiler
+## Prerequisites
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+- [pnpm](https://pnpm.io/) v9+
+- [Node.js](https://nodejs.org/) v20+
+- [Docker](https://www.docker.com/) (for the `data` package)
 
-Note: This will impact Vite dev & build performances.
+## Installation
 
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
-
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+```bash
+pnpm install
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+## Commands
+
+### Start everything
+
+Builds `mcp-ui`, compiles `mcp`, then starts Redis and the MCP server in parallel:
+
+```bash
+pnpm serve
+```
+
+### Development
+
+```bash
+pnpm dev:ui        # mcp-ui — Vite dev server with HMR
+pnpm dev:slides    # slides — Slidev dev server
+```
+
+### Per-package targets via NX
+
+```bash
+nx run mcp-ui:build    # Vite production build
+nx run mcp:build       # Compile MCP server with tsup
+nx run data:serve      # Start Redis (docker compose up)
+nx run data:stop       # Stop Redis (docker compose down)
+nx run slides:build    # Build Slidev presentation
+nx run slides:export   # Export slides to PDF
+```
+
+## Task graph
+
+When `pnpm serve` runs:
+
+1. `mcp-ui:build` completes (Vite build)
+2. `mcp:build` completes (tsup compilation)
+3. `data:serve` and `node dist/index.js` start in parallel

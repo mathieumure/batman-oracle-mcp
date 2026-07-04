@@ -1,0 +1,25 @@
+{
+  "name": "mcp",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "packages/mcp/src",
+  "targets": {
+    "build": {
+      "executor": "nx:run-commands",
+      "outputs": ["{projectRoot}/dist"],
+      "options": {
+        "command": "pnpm build",
+        "cwd": "{projectRoot}"
+      }
+    },
+    "serve": {
+      "executor": "nx:run-commands",
+      "dependsOn": [{ "projects": ["mcp-ui"], "target": "build" }, "build"],
+      "options": {
+        "commands": ["nx run data:serve", "node dist/index.js"],
+        "parallel": true,
+        "cwd": "{projectRoot}"
+      }
+    }
+  }
+}

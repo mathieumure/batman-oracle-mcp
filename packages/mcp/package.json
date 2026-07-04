@@ -1,0 +1,20 @@
+{
+  "name": "@batman/mcp",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "tsup src/index.ts --format esm --dts",
+    "serve": "node dist/index.js",
+    "dev": "tsx watch src/index.ts"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.13.1"
+  },
+  "devDependencies": {
+    "@types/node": "^24.13.2",
+    "tsup": "^8.5.0",
+    "tsx": "^4.20.3",
+    "typescript": "~6.0.2"
+  }
+}

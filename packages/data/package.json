@@ -1,0 +1,9 @@
+{
+  "name": "@batman/data",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "serve": "docker compose up",
+    "stop": "docker compose down"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "name": "@batman/slides",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "slidev slides.md",
+    "build": "slidev build slides.md",
+    "export": "slidev export slides.md"
+  },
+  "dependencies": {
+    "@slidev/cli": "^52.16.0",
+    "@slidev/theme-default": "^0.25.0"
+  }
+}
