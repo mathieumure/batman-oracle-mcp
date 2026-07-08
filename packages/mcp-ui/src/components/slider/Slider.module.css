@@ -1,0 +1,45 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.track {
+  display: flex;
+  gap: 1.5rem;
+  overflow-x: scroll;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  flex: 1;
+  padding: 0.25rem 0;
+}
+
+.button {
+  flex: 0 0 auto;
+  background: transparent;
+  border: 1px solid #f5c518;
+  color: #f5c518;
+  font-size: 2rem;
+  line-height: 1;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition:
+    background 0.2s,
+    opacity 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button:hover:not(:disabled) {
+  background: #f5c51820;
+}
+
+.button:disabled {
+  opacity: 0.3;
+  cursor: default;
+}

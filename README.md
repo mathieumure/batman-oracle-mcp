@@ -4,12 +4,12 @@ NX monorepo containing the Batman Oracle MCP server and its supporting packages.
 
 ## Packages
 
-| Package | Tech | Description |
-|---|---|---|
-| `packages/mcp-ui` | Vite + React + TypeScript | UI components served by the MCP server |
-| `packages/mcp` | Node + TypeScript | MCP server (`@modelcontextprotocol/sdk`) |
-| `packages/slides` | Slidev | Presentation |
-| `packages/data` | Redis (Docker) | Data layer |
+| Package           | Tech                      | Description                              |
+| ----------------- | ------------------------- | ---------------------------------------- |
+| `packages/mcp-ui` | Vite + React + TypeScript | UI components served by the MCP server   |
+| `packages/mcp`    | Node + TypeScript         | MCP server (`@modelcontextprotocol/sdk`) |
+| `packages/slides` | Slidev                    | Presentation                             |
+| `packages/data`   | Redis (Docker)            | Data layer                               |
 
 ## Prerequisites
 

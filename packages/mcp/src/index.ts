@@ -1,11 +1,57 @@
-import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
+import { server } from './mcp.js';
+import Fastify from 'fastify';
+import fastifyStatic from '@fastify/static'
+import fastifyCors from '@fastify/cors'
 import { StreamableHTTPServerTransport } from '@modelcontextprotocol/sdk/server/streamableHttp';
+import { isInitializeRequest } from '@modelcontextprotocol/sdk/types.js';
+import { randomUUID } from 'node:crypto';
+import path from 'node:path';
 
-const server = new McpServer({
-  name: 'batman-oracle',
-  version: '0.0.0',
+const fastify = Fastify({
+  logger: true,
 });
 
-const transport = new StreamableHTTPServerTransport();
+fastify.register(fastifyCors, {
+  origin: '*',
+})
 
-await server.connect(transport);
+fastify.register(fastifyStatic, {
+  root: path.join(import.meta.dirname, '../../mcp-ui/dist/assets'),
+  prefix: '/assets/',
+})
+
+const transports: { [sessionId: string]: StreamableHTTPServerTransport } = {};
+
+fastify.post('/mcp', async (req, res) => {
+  const sessionId = req.headers['mcp-session-id'] as string | undefined;
+  let transport: StreamableHTTPServerTransport;
+
+  if (sessionId && transports[sessionId]) {
+    transport = transports[sessionId];
+  } else if (!sessionId && isInitializeRequest(req.body)) {
+    transport = new StreamableHTTPServerTransport({
+      sessionIdGenerator: () => randomUUID(),
+      onsessioninitialized: (sid) => {
+        transports[sid] = transport;
+        console.log(`MCP Session initialized: ${sid}`);
+      },
+    });
+
+    transport.onclose = () => {
+      if (transport.sessionId) {
+        console.log(`MCP Session closed: ${transport.sessionId}`);
+        delete transports[transport.sessionId];
+      }
+    };
+
+    await server.connect(transport);
+  } else {
+    return {
+      error: { message: 'Bad Request: No valid session ID provided' },
+    };
+  }
+
+  await transport.handleRequest(req.raw, res.raw, req.body);
+});
+
+fastify.listen({ port: 3000 });

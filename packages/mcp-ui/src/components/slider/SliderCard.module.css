@@ -1,0 +1,32 @@
+.card {
+  flex: 0 0 200px;
+  background: #111;
+  border: 1px solid #f5c518;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 0 12px #f5c51830;
+  transition: box-shadow 0.2s;
+}
+
+.card:hover {
+  box-shadow: 0 0 24px #f5c51860;
+}
+
+.image {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  display: block;
+  background: #1a1a1a;
+}
+
+.name {
+  color: #f5c518;
+  text-align: center;
+  padding: 0.75rem;
+  font-size: 0.95rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border-top: 1px solid #f5c51840;
+  margin: 0;
+}
