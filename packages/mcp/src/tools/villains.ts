@@ -8,6 +8,7 @@ import {
 import { z } from 'zod';
 import { readFile } from 'node:fs/promises';
 import { join } from 'node:path';
+import { rewriteAssetOrigin } from '../public-origin.js';
 
 const resourceURI = 'ui://batman/villains';
 const meta = {
@@ -34,7 +35,7 @@ export const register: Register = (server) => {
           {
             uri: resourceURI,
             mimeType: RESOURCE_MIME_TYPE,
-            text: html,
+            text: rewriteAssetOrigin(html),
             _meta: meta,
           },
         ],

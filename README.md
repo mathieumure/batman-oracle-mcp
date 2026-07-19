@@ -59,7 +59,15 @@ claude.ai needs an HTTPS URL for custom connectors, so tunnel the local server:
 ngrok http 3000
 ```
 
-Grab the `https://...ngrok-free.dev` URL it prints.
+Grab the `https://...ngrok-free.dev` URL it prints, then restart the server with it so the widget's own assets (script/css) point somewhere Claude can actually reach, not `localhost`:
+
+```bash
+lsof -ti:3000 -sTCP:LISTEN | xargs -r kill
+cd packages/mcp
+PUBLIC_ORIGIN=https://<your-ngrok-domain> node dist/index.js
+```
+
+There's no `.env` for this yet, it's a plain env var you set by hand each time the tunnel restarts (ngrok's free tier hands out a new URL every time). Skip this step and the widget silently falls back to a generic rendering instead of the real one, since its assets aren't reachable from Claude's side.
 
 1. **Settings** > **Connectors** > **Add custom connector**
 2. URL: `https://<your-ngrok-domain>/mcp`

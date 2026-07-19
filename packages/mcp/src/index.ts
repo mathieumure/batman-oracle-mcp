@@ -1,5 +1,5 @@
 import { createServer } from './mcp.js';
-import Fastify from 'fastify';
+import Fastify, { type FastifyReply, type FastifyRequest } from 'fastify';
 import fastifyStatic from '@fastify/static';
 import fastifyCors from '@fastify/cors';
 import { StreamableHTTPServerTransport } from '@modelcontextprotocol/sdk/server/streamableHttp.js';
@@ -53,5 +53,21 @@ fastify.post('/mcp', async (req, res) => {
 
   await transport.handleRequest(req.raw, res.raw, req.body);
 });
+
+const handleSessionRequest = async (req: FastifyRequest, res: FastifyReply) => {
+  const sessionId = req.headers['mcp-session-id'] as string | undefined;
+
+  if (!sessionId || !transports[sessionId]) {
+    res.code(400).send('Invalid or missing session ID');
+    return;
+  }
+
+  const transport = transports[sessionId];
+
+  await transport.handleRequest(req.raw, res.raw);
+};
+
+fastify.get('/mcp', handleSessionRequest);
+fastify.delete('/mcp', handleSessionRequest);
 
 fastify.listen({ port: 3000 });
