@@ -1,8 +1,8 @@
-import { server } from './mcp.js';
+import { createServer } from './mcp.js';
 import Fastify from 'fastify';
 import fastifyStatic from '@fastify/static'
 import fastifyCors from '@fastify/cors'
-import { StreamableHTTPServerTransport } from '@modelcontextprotocol/sdk/server/streamableHttp';
+import { StreamableHTTPServerTransport } from '@modelcontextprotocol/sdk/server/streamableHttp.js';
 import { isInitializeRequest } from '@modelcontextprotocol/sdk/types.js';
 import { randomUUID } from 'node:crypto';
 import path from 'node:path';
@@ -44,7 +44,7 @@ fastify.post('/mcp', async (req, res) => {
       }
     };
 
-    await server.connect(transport);
+    await createServer().connect(transport);
   } else {
     return {
       error: { message: 'Bad Request: No valid session ID provided' },
