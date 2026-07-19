@@ -3,9 +3,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 
 const toolsPath = path.join(import.meta.dirname, 'tools');
-const toolModules = await Promise.all(
-  (await fs.readdir(toolsPath)).map((tool) => import(path.join(toolsPath, tool))),
-);
+const toolModules = await Promise.all((await fs.readdir(toolsPath)).map((tool) => import(path.join(toolsPath, tool))));
 
 export const createServer = () => {
   const server = new McpServer({

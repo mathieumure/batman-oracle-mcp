@@ -1,43 +1,46 @@
 import type { Register } from '../types.js';
 import {
-    registerAppTool,
-    registerAppResource,
-    RESOURCE_MIME_TYPE,
-    type McpUiAppResourceConfig
+  registerAppTool,
+  registerAppResource,
+  RESOURCE_MIME_TYPE,
+  type McpUiAppResourceConfig,
 } from '@modelcontextprotocol/ext-apps/server';
 import { z } from 'zod';
-import {readFile} from "node:fs/promises";
-import {join} from "node:path";
+import { readFile } from 'node:fs/promises';
+import { join } from 'node:path';
 
 const resourceURI = 'ui://batman/villains';
 const meta = {
-    ui: {
-        csp: {
-            resourceDomains: [],
-        },
+  ui: {
+    csp: {
+      resourceDomains: [],
     },
-} satisfies NonNullable<McpUiAppResourceConfig["_meta"]>;
+  },
+} satisfies NonNullable<McpUiAppResourceConfig['_meta']>;
 
 export const register: Register = (server) => {
-  registerAppResource(server, 'batman_villains_ui', resourceURI, {
-    mimeType: RESOURCE_MIME_TYPE,
-    _meta: meta,
-  }, async () => {
-      const html = await readFile(
-          join(import.meta.dirname, "../../../mcp-ui/dist/src/villains/index.html"),
-          "utf-8",
-      );
+  registerAppResource(
+    server,
+    'batman_villains_ui',
+    resourceURI,
+    {
+      mimeType: RESOURCE_MIME_TYPE,
+      _meta: meta,
+    },
+    async () => {
+      const html = await readFile(join(import.meta.dirname, '../../../mcp-ui/dist/src/villains/index.html'), 'utf-8');
       return {
-          contents: [
-              {
-                  uri: resourceURI,
-                  mimeType: RESOURCE_MIME_TYPE,
-                  text: html,
-                  _meta: meta,
-              },
-          ],
+        contents: [
+          {
+            uri: resourceURI,
+            mimeType: RESOURCE_MIME_TYPE,
+            text: html,
+            _meta: meta,
+          },
+        ],
       };
-  });
+    },
+  );
   registerAppTool(
     server,
     'get_villains',
@@ -52,9 +55,9 @@ export const register: Register = (server) => {
         ),
       },
       _meta: {
-          ui: {
-              resourceUri: resourceURI,
-          }
+        ui: {
+          resourceUri: resourceURI,
+        },
       },
     },
     async () => {

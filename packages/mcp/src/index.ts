@@ -1,7 +1,7 @@
 import { createServer } from './mcp.js';
 import Fastify from 'fastify';
-import fastifyStatic from '@fastify/static'
-import fastifyCors from '@fastify/cors'
+import fastifyStatic from '@fastify/static';
+import fastifyCors from '@fastify/cors';
 import { StreamableHTTPServerTransport } from '@modelcontextprotocol/sdk/server/streamableHttp.js';
 import { isInitializeRequest } from '@modelcontextprotocol/sdk/types.js';
 import { randomUUID } from 'node:crypto';
@@ -13,12 +13,12 @@ const fastify = Fastify({
 
 fastify.register(fastifyCors, {
   origin: '*',
-})
+});
 
 fastify.register(fastifyStatic, {
   root: path.join(import.meta.dirname, '../../mcp-ui/dist/assets'),
   prefix: '/assets/',
-})
+});
 
 const transports: { [sessionId: string]: StreamableHTTPServerTransport } = {};
 
