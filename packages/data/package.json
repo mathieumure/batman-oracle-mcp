@@ -2,8 +2,13 @@
   "name": "@batman/data",
   "version": "0.0.0",
   "private": true,
+  "type": "module",
   "scripts": {
-    "serve": "docker compose up",
-    "stop": "docker compose down"
+    "generate": "tsx generate/generate.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^24.13.2",
+    "tsx": "^4.20.3",
+    "typescript": "~6.0.2"
   }
 }

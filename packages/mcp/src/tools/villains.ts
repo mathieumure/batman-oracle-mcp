@@ -61,16 +61,7 @@ export const register: Register = (server) => {
       },
     },
     async () => {
-      const villains = [
-        {
-          name: 'Joker',
-          picture: 'https://static.wikia.nocookie.net/marvel_dc/images/4/41/Batman_Vol_2_23.1_The_Joker_Textless.jpg',
-        },
-        {
-          name: 'Bane',
-          picture: 'https://static.wikia.nocookie.net/marvel_dc/images/b/b0/Batman_Vol_3_18_Textless.jpg',
-        },
-      ];
+      const villains = fetch('http://localhost:8080/villains').then((it) => it.json());
       return {
         content: [{ type: 'text', text: JSON.stringify(villains) }],
         structuredContent: { villains },

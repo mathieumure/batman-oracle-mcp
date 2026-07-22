@@ -1,0 +1,20 @@
+{
+  "name": "@batman/gcpd-api",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "tsx src/index.ts"
+  },
+  "dependencies": {
+    "@batman/data": "workspace:",
+    "@fastify/cors": "^11.2.0",
+    "fastify": "^5.10.0",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@types/node": "^24.13.2",
+    "tsx": "^4.20.3",
+    "typescript": "~6.0.2"
+  }
+}

@@ -16,13 +16,15 @@
 
 ## 0. Écran d'attente
 
-## 1. Intro (Le problème)
+## 1. Intro (Situation initiale)
 
 On demande à Alfred de nous aider à surveiller Gotham
 Batman demande à Alfred de fournir la liste des villains et des crimes en cours, mais Alfred répond en texte brut illisible (JSON/liste).
 Conclusion : mais il est vieux et fatigué. Il a besoin d'aide pour gérer les crimes en cours.
 
-## 2. MCP UI (La carte apparaît)
+## 2. Une nouvelle scène de crime
+
+On doit aider à résoudre
 
 Live Coding progressif (liste, carte, carte intéractive...) : Alfred a besoin d'une interface pour gérer les crimes en cours, et on va lui en créer une.
 
