@@ -1,0 +1,32 @@
+.page {
+  background: #0a0a0a;
+  min-height: 100vh;
+  padding: 2rem;
+  font-family: 'Georgia', serif;
+}
+
+.heading {
+  color: #f5c518;
+  text-align: center;
+  font-size: 2rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+  text-shadow: 0 0 20px #f5c51880;
+}
+
+.map {
+  height: 480px;
+  width: 100%;
+  border-radius: 12px;
+  border: 2px solid #f5c518;
+}
+
+.marker img {
+  width: 56px !important;
+  height: 56px;
+  border-radius: 50%;
+  border: 3px solid #f5c518;
+  object-fit: cover;
+  box-shadow: 0 0 12px #f5c51880;
+}

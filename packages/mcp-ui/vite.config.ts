@@ -10,6 +10,7 @@ export default defineConfig({
     rolldownOptions: {
       input: {
         villains: resolve(import.meta.dirname, 'src/villains/index.html'),
+        'villains-map': resolve(import.meta.dirname, 'src/villains-map/index.html'),
       },
     },
   },
