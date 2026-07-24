@@ -1,12 +1,12 @@
 import { writeFile } from 'node:fs/promises';
-import { fetchBatmanVillains } from './villains.js';
+import { fetchBatmanVillains } from './index.js';
 
 console.log('Generating villains...');
 
 const villains = await fetchBatmanVillains();
 
-const outputUrl = new URL('../../villains.ts', import.meta.url);
-const fileContent = `import type { BatmanVillain } from './src/generate/villains.js';
+const outputUrl = new URL('../../../villains.ts', import.meta.url);
+const fileContent = `import type { BatmanVillain } from './src/generate/villains/index.js';
 
 export const villains: BatmanVillain[] = ${JSON.stringify(villains, null, 2)};
 `;

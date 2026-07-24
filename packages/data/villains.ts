@@ -1,4 +1,4 @@
-import type { BatmanVillain } from './src/generate/villains.js';
+import type { BatmanVillain } from './src/generate/villains/index.js';
 
 export const villains: BatmanVillain[] = [
   {
