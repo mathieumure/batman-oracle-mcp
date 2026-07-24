@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "generate": "tsx generate/generate.ts"
+    "generate": "tsx src/generate/generate.ts"
   },
   "devDependencies": {
     "@types/node": "^24.13.2",

@@ -8,6 +8,7 @@ const extractScalarField = (wikitext: string, fieldName: string): string | null 
 };
 
 export const fetchVillainDetails = async (name: string): Promise<VillainDetails | null> => {
+  console.log(`[INFO] Fetching ${name} details...`);
   const pageTitle = await resolveNewEarthPageTitle(name);
   if (!pageTitle) {
     return null;

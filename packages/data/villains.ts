@@ -4,7 +4,7 @@ export const villains: BatmanVillain[] = [
   {
     name: 'Joker',
     picture:
-      'https://static.wikia.nocookie.net/marvel_dc/images/3/35/Joker_Earth-Two_001.jpg/revision/latest/scale-to-width-down/253?cb=20160110070539',
+      'https://static.wikia.nocookie.net/marvel_dc/images/4/41/Batman_Vol_2_23.1_The_Joker_Textless.jpg/revision/latest/scale-to-width-down/1000?cb=20130904201016',
     details: {
       realName: 'Unknown',
       aliases: ['Johnny Jape', 'Red Hood', 'Domino Killer', 'Gravedigger', 'Joe Kerr', 'Oberon Sexton', 'The Fool', 'Detective Joker'],

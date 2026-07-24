@@ -62,7 +62,7 @@ export const register: Register = (server) => {
       },
     },
     async () => {
-      const villains = fetch('http://localhost:8080/villains').then((it) => it.json());
+      const villains = await fetch('http://localhost:8080/villains').then((it) => it.json());
       return {
         content: [{ type: 'text', text: JSON.stringify(villains) }],
         structuredContent: { villains },

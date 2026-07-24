@@ -4,19 +4,24 @@
   "projectType": "application",
   "sourceRoot": "packages/mcp/src",
   "targets": {
-    "build": {
+    "dev": {
       "executor": "nx:run-commands",
-      "outputs": ["{projectRoot}/dist"],
+      "dependsOn": [{ "projects": ["mcp-ui"], "target": "build" }],
       "options": {
-        "command": "pnpm build",
-        "cwd": "{projectRoot}"
-      }
-    },
-    "serve": {
-      "executor": "nx:run-commands",
-      "dependsOn": [{ "projects": ["mcp-ui"], "target": "build" }, "build"],
-      "options": {
-        "commands": ["nx run data:serve", "node dist/index.js"],
+        "commands": [
+          {
+            "command": "nx run gcpd-api:dev"
+          },
+          {
+            "command": "nx run mcp-ui:dev"
+          },
+          {
+            "command": "tsx watch src/index.ts"
+          },
+          {
+            "command": "pnpm inspect"
+          }
+        ],
         "parallel": true,
         "cwd": "{projectRoot}"
       }

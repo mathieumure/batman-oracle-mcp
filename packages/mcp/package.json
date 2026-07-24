@@ -6,7 +6,7 @@
   "scripts": {
     "build": "tsup src/index.ts 'src/tools/*.ts' --format esm",
     "serve": "node dist/index.js",
-    "dev": "tsx watch src/index.ts",
+    "dev": "nx dev",
     "inspect": "mcp-inspector"
   },
   "dependencies": {

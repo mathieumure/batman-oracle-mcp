@@ -4,9 +4,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "serve": "nx run mcp:serve",
     "dev:slides": "nx run slides:dev",
     "dev:ui": "nx run mcp-ui:dev",
+    "dev:mcp": "nx run mcp:dev",
     "fmt": "oxfmt",
     "fmt:check": "oxfmt --check"
   },

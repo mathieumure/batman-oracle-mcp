@@ -21,8 +21,10 @@ export const fetchBatmanVillains = async (): Promise<BatmanVillain[]> => {
   if (!page) {
     throw new Error('Batman_Villains page could not be found on dc.fandom.com');
   }
+  console.log('[INFO] Base page reached');
 
   const names = parseVillainNames(page.wikitext);
+  console.log(`[INFO] Found ${names.length} villains to fetch`);
   return Promise.all(
     names.map(async (name) => ({
       name,
