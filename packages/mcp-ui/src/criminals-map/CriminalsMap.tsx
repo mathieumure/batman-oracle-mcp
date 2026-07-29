@@ -1,9 +1,9 @@
 import 'leaflet/dist/leaflet.css';
 import { divIcon } from 'leaflet';
 import { MapContainer, Marker, TileLayer } from 'react-leaflet';
-import styles from './VillainsMap.module.css';
+import styles from './CriminalsMap.module.css';
 
-export type LocatedVillain = {
+export type LocatedCriminal = {
   name: string;
   picture: string;
   lat: number;
@@ -18,18 +18,18 @@ export type MapCenter = {
 type Props = {
   city: string;
   center: MapCenter;
-  villains: Array<LocatedVillain>;
+  criminals: Array<LocatedCriminal>;
 };
 
-const villainIcon = (villain: LocatedVillain) =>
+const criminalIcon = (criminal: LocatedCriminal) =>
   divIcon({
     className: styles.marker,
-    html: `<img src="${villain.picture}" alt="${villain.name}" />`,
+    html: `<img src="${criminal.picture}" alt="${criminal.name}" />`,
     iconSize: [56, 56],
     iconAnchor: [28, 28],
   });
 
-export const VillainsMap = ({ city, center, villains }: Props) => {
+export const CriminalsMap = ({ city, center, criminals }: Props) => {
   return (
     <div className={styles.page}>
       <h1 className={styles.heading}>Gotham Watch — {city}</h1>
@@ -38,8 +38,8 @@ export const VillainsMap = ({ city, center, villains }: Props) => {
           url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
           attribution="&copy; OpenStreetMap contributors &copy; CARTO"
         />
-        {villains.map((villain) => (
-          <Marker key={villain.name} position={[villain.lat, villain.lng]} icon={villainIcon(villain)} />
+        {criminals.map((criminal) => (
+          <Marker key={criminal.name} position={[criminal.lat, criminal.lng]} icon={criminalIcon(criminal)} />
         ))}
       </MapContainer>
     </div>

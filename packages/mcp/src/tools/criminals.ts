@@ -10,7 +10,7 @@ import { readFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { rewriteAssetOrigin } from '../public-origin.js';
 
-const resourceURI = 'ui://batman/villains';
+const resourceURI = 'ui://batman/criminals';
 const meta = {
   ui: {
     csp: {
@@ -22,14 +22,14 @@ const meta = {
 export const register: Register = (server) => {
   registerAppResource(
     server,
-    'batman_villains_ui',
+    'batman_criminals_ui',
     resourceURI,
     {
       mimeType: RESOURCE_MIME_TYPE,
       _meta: meta,
     },
     async () => {
-      const html = await readFile(join(import.meta.dirname, '../../../mcp-ui/dist/src/villains/index.html'), 'utf-8');
+      const html = await readFile(join(import.meta.dirname, '../../../mcp-ui/dist/src/criminals/index.html'), 'utf-8');
       return {
         contents: [
           {
@@ -44,11 +44,11 @@ export const register: Register = (server) => {
   );
   registerAppTool(
     server,
-    'get_villains',
+    'get_criminals',
     {
-      description: 'Get the list of all villans already faced.',
+      description: 'Get the list of all criminals from the GCPD database.',
       outputSchema: {
-        villains: z.array(
+        criminals: z.array(
           z.object({
             name: z.string(),
             picture: z.url(),
@@ -62,10 +62,10 @@ export const register: Register = (server) => {
       },
     },
     async () => {
-      const villains = await fetch('http://localhost:8080/villains').then((it) => it.json());
+      const criminals = await fetch('http://localhost:8080/criminals').then((it) => it.json());
       return {
-        content: [{ type: 'text', text: JSON.stringify(villains) }],
-        structuredContent: { villains },
+        content: [{ type: 'text', text: JSON.stringify(criminals) }],
+        structuredContent: { criminals },
       };
     },
   );

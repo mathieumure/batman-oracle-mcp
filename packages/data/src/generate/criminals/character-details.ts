@@ -1,5 +1,5 @@
 import { fetchWikitext } from './fandom-client.js';
-import { resolveNewEarthPageTitle, type VillainDetails } from './character-page.js';
+import { resolveNewEarthPageTitle, type CriminalDetails } from './character-page.js';
 import { cleanWikiText, extractTemplateField, splitWikiList } from './wikitext.js';
 
 const extractScalarField = (wikitext: string, fieldName: string): string | null => {
@@ -7,7 +7,7 @@ const extractScalarField = (wikitext: string, fieldName: string): string | null 
   return value.length > 0 ? value : null;
 };
 
-export const fetchVillainDetails = async (name: string): Promise<VillainDetails | null> => {
+export const fetchCriminalDetails = async (name: string): Promise<CriminalDetails | null> => {
   console.log(`[INFO] Fetching ${name} details...`);
   const pageTitle = await resolveNewEarthPageTitle(name);
   if (!pageTitle) {

@@ -72,7 +72,7 @@ There's no `.env` for this yet, it's a plain env var you set by hand each time t
 1. **Settings** > **Connectors** > **Add custom connector**
 2. URL: `https://<your-ngrok-domain>/mcp`
 3. Connect, then enable the connector in a conversation
-4. Ask for exemple "Alfred, montre-moi la liste des vilains". Claude calls `get_villains` and renders the `Villains` widget inline.
+4. Ask for exemple "Alfred, montre-moi la liste des vilains". Claude calls `get_criminals` and renders the `Criminals` widget inline.
 
 ## Try the UI
 
@@ -82,7 +82,7 @@ There's no `.env` for this yet, it's a plain env var you set by hand each time t
 pnpm dev:ui
 ```
 
-Open `http://localhost:5173/src/villains/`. HMR on.
+Open `http://localhost:5173/src/criminals/`. HMR on.
 
 - MCP Inspector, raw protocol view (tools, resources, JSON-RPC):
 

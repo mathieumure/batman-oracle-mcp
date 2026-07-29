@@ -1,22 +1,22 @@
-import styles from './Villains.module.css';
+import styles from './Criminals.module.css';
 import { Slider, SliderCard } from '../components/slider';
 
-export type Villain = {
+export type Criminal = {
   name: string;
   picture: string;
 };
 
 type Props = {
-  villains: Array<Villain>;
+  criminals: Array<Criminal>;
 };
 
-export const Villains = ({ villains }: Props) => {
+export const Criminals = ({ criminals }: Props) => {
   return (
     <div className={styles.page}>
       <h1 className={styles.heading}>Gotham's Most Wanted</h1>
       <Slider>
-        {villains?.map((villain) => (
-          <SliderCard key={villain.name} name={villain.name} picture={villain.picture} />
+        {criminals?.map((criminal) => (
+          <SliderCard key={criminal.name} name={criminal.name} picture={criminal.picture} />
         ))}
       </Slider>
     </div>

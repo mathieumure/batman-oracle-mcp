@@ -1,4 +1,4 @@
-import { villains } from '@batman/data/villains';
+import { criminals } from '@batman/data/criminals';
 import Fastify from 'fastify';
 import fastifyCors from '@fastify/cors';
 
@@ -10,8 +10,8 @@ fastify.register(fastifyCors, {
   origin: '*',
 });
 
-fastify.get('/villains', () => {
-  return villains;
+fastify.get('/criminals', () => {
+  return criminals;
 });
 
 fastify.listen({ port: 8080 });

@@ -1,4 +1,4 @@
-import { villains } from '../../../villains.js';
+import { criminals } from '../../../criminals.js';
 
 const NAMED_SUSPECT_WEIGHTS: Record<string, number> = {
   Joker: 0.2,
@@ -14,15 +14,15 @@ const EXCLUDED_GROUP_NAMES = ['Court of Owls', 'League of Assassins', 'Dark Knig
 
 const namedTotalWeight = Object.values(NAMED_SUSPECT_WEIGHTS).reduce((sum, weight) => sum + weight, 0);
 
-const otherVillainNames = villains
-  .map((villain) => villain.name)
+const otherCriminalNames = criminals
+  .map((criminal) => criminal.name)
   .filter((name) => !(name in NAMED_SUSPECT_WEIGHTS) && !EXCLUDED_GROUP_NAMES.includes(name));
 
-const otherVillainWeight = (1 - namedTotalWeight) / otherVillainNames.length;
+const otherCriminalWeight = (1 - namedTotalWeight) / otherCriminalNames.length;
 
 const SUSPECT_WEIGHTS: Array<[string, number]> = [
   ...Object.entries(NAMED_SUSPECT_WEIGHTS),
-  ...otherVillainNames.map((name): [string, number] => [name, otherVillainWeight]),
+  ...otherCriminalNames.map((name): [string, number] => [name, otherCriminalWeight]),
 ];
 
 export const pickWeightedSuspectName = (): string => {

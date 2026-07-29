@@ -10,7 +10,7 @@ import { readFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { rewriteAssetOrigin } from '../public-origin.js';
 
-const resourceURI = 'ui://batman/villains-map';
+const resourceURI = 'ui://batman/criminals-map';
 const meta = {
   ui: {
     csp: {
@@ -21,7 +21,7 @@ const meta = {
 
 const MAX_RADIUS_METERS = 400;
 
-const villains = [
+const criminals = [
   {
     name: 'Joker',
     picture: 'https://static.wikia.nocookie.net/marvel_dc/images/4/41/Batman_Vol_2_23.1_The_Joker_Textless.jpg',
@@ -68,14 +68,14 @@ function randomOffset(center: Coordinates, maxRadiusMeters: number): Coordinates
 export const register: Register = (server) => {
   registerAppResource(
     server,
-    'batman_villains_map_ui',
+    'batman_criminals_map_ui',
     resourceURI,
     {
       mimeType: RESOURCE_MIME_TYPE,
       _meta: meta,
     },
     async () => {
-      const html = await readFile(join(import.meta.dirname, '../../../mcp-ui/dist/src/villains-map/index.html'), 'utf-8');
+      const html = await readFile(join(import.meta.dirname, '../../../mcp-ui/dist/src/criminals-map/index.html'), 'utf-8');
       return {
         contents: [
           {
@@ -91,16 +91,16 @@ export const register: Register = (server) => {
 
   registerAppTool(
     server,
-    'localize_villains',
+    'localize_criminals',
     {
-      description: 'Locate all known villains scattered around a given city on a map.',
+      description: 'Locate all known criminals scattered around a given city on a map.',
       inputSchema: {
         city: z.string().describe('City name to center the map on, e.g. "Clermont-Ferrand"'),
       },
       outputSchema: {
         city: z.string(),
         center: z.object({ lat: z.number(), lng: z.number() }),
-        villains: z.array(
+        criminals: z.array(
           z.object({
             name: z.string(),
             picture: z.url(),
@@ -125,14 +125,14 @@ export const register: Register = (server) => {
         };
       }
 
-      const locatedVillains = villains.map((villain) => ({
-        ...villain,
+      const locatedCriminals = criminals.map((criminal) => ({
+        ...criminal,
         ...randomOffset(center, MAX_RADIUS_METERS),
       }));
 
       return {
-        content: [{ type: 'text', text: JSON.stringify({ city, center, villains: locatedVillains }) }],
-        structuredContent: { city, center, villains: locatedVillains },
+        content: [{ type: 'text', text: JSON.stringify({ city, center, criminals: locatedCriminals }) }],
+        structuredContent: { city, center, criminals: locatedCriminals },
       };
     },
   );

@@ -1,31 +1,30 @@
 import { App } from '@modelcontextprotocol/ext-apps';
 import { createRoot } from 'react-dom/client';
-import { type LocatedVillain, type MapCenter, VillainsMap } from './VillainsMap.tsx';
+import { type LocatedCriminal, type MapCenter, CriminalsMap } from './CriminalsMap.tsx';
 import { crimes } from '@batman/data/crimes.ts';
-import { villains } from '@batman/data/villains.ts';
+import { criminals } from '@batman/data/criminals.ts';
 
 type ToolResult = {
   structuredContent?: {
     city: string;
     center: MapCenter;
-    villains: LocatedVillain[];
+    criminals: LocatedCriminal[];
   };
 };
 
 const render = (result: ToolResult) => {
   const data = result.structuredContent;
   if (!data) return;
-  createRoot(document.getElementById('root')!).render(<VillainsMap city={data.city} center={data.center} villains={data.villains} />);
+  createRoot(document.getElementById('root')!).render(<CriminalsMap city={data.city} center={data.center} criminals={data.criminals} />);
 };
 
-// TODO : We can maybe use the same villains as in the ‘villains’ tool? wyt mister M ?
 const mockResult: ToolResult = {
   structuredContent: {
     city: 'Clermont-Ferrand',
     center: { lat: 45.7797, lng: 3.0863 },
-    villains: crimes.map(it => ({
+    criminals: crimes.map(it => ({
       name: it.id,
-      picture: villains.find(villain => villain.name === it.suspect)?.picture ?? 'https://i.ebayimg.com/images/g/r9sAAOSwBMNlZRCk/s-l1200.jpg',
+      picture: criminals.find(criminal => criminal.name === it.suspect)?.picture ?? 'https://i.ebayimg.com/images/g/r9sAAOSwBMNlZRCk/s-l1200.jpg',
       lat: it.location.lat,
       lng: it.location.lng
     }))

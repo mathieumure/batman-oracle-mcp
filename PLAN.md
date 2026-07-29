@@ -2,7 +2,7 @@
 
 - MCP donnée de position de crimes
 - MCP UI
-  - Villains database
+  - Criminals database
   - Carte de Gotham
   - Externals libs / assets
   - push notif depuis mcp vers client
@@ -19,7 +19,7 @@
 ## 1. Intro (Situation initiale)
 
 On demande à Alfred de nous aider à surveiller Gotham
-Batman demande à Alfred de fournir la liste des villains et des crimes en cours, mais Alfred répond en texte brut illisible (JSON/liste).
+Batman demande à Alfred de fournir la liste des criminals et des crimes en cours, mais Alfred répond en texte brut illisible (JSON/liste).
 Conclusion : mais il est vieux et fatigué. Il a besoin d'aide pour gérer les crimes en cours.
 
 ## 2. Une nouvelle scène de crime

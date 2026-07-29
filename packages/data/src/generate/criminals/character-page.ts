@@ -1,6 +1,6 @@
 import { fetchWikitext } from './fandom-client.js';
 
-export interface VillainDetails {
+export interface CriminalDetails {
   realName: string | null;
   aliases: string[];
   relatives: string[];
