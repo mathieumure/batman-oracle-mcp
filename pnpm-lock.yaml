@@ -57,9 +57,6 @@ importers:
 
   packages/mcp:
     dependencies:
-      '@batman/data':
-        specifier: 'workspace:'
-        version: link:../data
       '@fastify/cors':
         specifier: ^11.2.0
         version: 11.2.0

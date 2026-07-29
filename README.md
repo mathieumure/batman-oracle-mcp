@@ -8,6 +8,7 @@ NX monorepo containing the Batman Oracle MCP server and its supporting packages.
 | ----------------- | ------------------------- | ---------------------------------------- |
 | `packages/mcp-ui` | Vite + React + TypeScript | UI components served by the MCP server   |
 | `packages/mcp`    | Node + TypeScript         | MCP server (`@modelcontextprotocol/sdk`) |
+| `packages/gcpd-api` | Fastify                 | Mock GCPD API (`/criminals`, `/crimes`)  |
 | `packages/slides` | Slidev                    | Presentation                             |
 | `packages/data`   | Redis (Docker)            | Data layer                               |
 
@@ -110,6 +111,20 @@ nx run data:serve      # Start Redis (docker compose up)
 nx run data:stop       # Stop Redis (docker compose down)
 nx run slides:build    # Build Slidev presentation
 nx run slides:export   # Export slides to PDF
+```
+
+### GCPD API
+
+Mock HTTP API on `http://localhost:8080`. Start with `nx run gcpd-api:dev`, or use `pnpm dev:mcp` / `nx run mcp:dev` (starts gcpd-api alongside MCP).
+
+| Route | Description |
+| ----- | ----------- |
+| `GET /criminals` | Full criminals list (`get_criminals`, criminals widget in dev) |
+| `GET /crimes` | Full crimes list (`get_crime_map`) |
+
+```bash
+curl http://localhost:8080/criminals
+curl http://localhost:8080/crimes
 ```
 
 ## Task graph

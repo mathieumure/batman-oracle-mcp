@@ -9,9 +9,6 @@ import { z } from 'zod';
 import { readFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { rewriteAssetOrigin } from '../public-origin.js';
-import { crimes as datasetCrimes } from '@batman/data/crimes';
-
-type Crime = (typeof datasetCrimes)[number];
 
 const resourceURI = 'ui://batman/crime-map';
 const meta = {
@@ -34,6 +31,8 @@ const crimeSchema = z.object({
   suspect: z.string().nullable(),
   forensics: crimeForensicsSchema,
 });
+
+type Crime = z.infer<typeof crimeSchema>;
 
 type Coordinates = { lat: number; lng: number };
 
@@ -86,6 +85,26 @@ function translateCrimesToCenter(crimes: Crime[], targetCenter: Coordinates): Cr
   }));
 }
 
+type CrimeMapFilters = {
+  suspect?: string[];
+  molecule?: string[];
+  fingerprint?: string[];
+};
+
+function buildCrimesApiUrl(filters: CrimeMapFilters): string {
+  const url = new URL('http://localhost:8080/crimes');
+  for (const value of filters.suspect ?? []) {
+    url.searchParams.append('suspect', value);
+  }
+  for (const value of filters.molecule ?? []) {
+    url.searchParams.append('molecule', value);
+  }
+  for (const value of filters.fingerprint ?? []) {
+    url.searchParams.append('fingerprint', value);
+  }
+  return url.toString();
+}
+
 export const register: Register = (server) => {
   registerAppResource(
     server,
@@ -114,9 +133,13 @@ export const register: Register = (server) => {
     server,
     'get_crime_map',
     {
-      description: 'Show crimes on a map centered on a given city.',
+      description:
+        'Show crimes on a map centered on a given city. Optional GCPD filters: suspect, molecule, fingerprint.',
       inputSchema: {
         city: z.string().describe('City name to center the map on, e.g. "Clermont-Ferrand"'),
+        suspect: z.array(z.string()).optional().describe('Filter by suspect name(s)'),
+        molecule: z.array(z.string()).optional().describe('Filter by forensic molecule(s)'),
+        fingerprint: z.array(z.string()).optional().describe('Filter by fingerprint id(s)'),
       },
       outputSchema: {
         city: z.string(),
@@ -129,7 +152,7 @@ export const register: Register = (server) => {
         },
       },
     },
-    async ({ city }) => {
+    async ({ city, suspect, molecule, fingerprint }) => {
       const center = await geocodeCity(city);
 
       if (!center) {
@@ -139,6 +162,15 @@ export const register: Register = (server) => {
         };
       }
 
+      const response = await fetch(buildCrimesApiUrl({ suspect, molecule, fingerprint }));
+      if (!response.ok) {
+        return {
+          content: [{ type: 'text', text: 'Impossible de récupérer les crimes.' }],
+          isError: true,
+        };
+      }
+
+      const datasetCrimes = (await response.json()) as Crime[];
       const crimes = translateCrimesToCenter(datasetCrimes, center);
 
       return {
