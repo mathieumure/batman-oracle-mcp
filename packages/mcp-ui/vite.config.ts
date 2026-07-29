@@ -10,7 +10,7 @@ export default defineConfig({
     rolldownOptions: {
       input: {
         criminals: resolve(import.meta.dirname, 'src/criminals/index.html'),
-        'criminals-map': resolve(import.meta.dirname, 'src/criminals-map/index.html'),
+        'crime-map': resolve(import.meta.dirname, 'src/crime-map/index.html'),
       },
     },
   },

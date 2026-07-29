@@ -9,8 +9,11 @@ import { z } from 'zod';
 import { readFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { rewriteAssetOrigin } from '../public-origin.js';
+import { crimes as datasetCrimes } from '@batman/data/crimes';
 
-const resourceURI = 'ui://batman/criminals-map';
+type Crime = (typeof datasetCrimes)[number];
+
+const resourceURI = 'ui://batman/crime-map';
 const meta = {
   ui: {
     csp: {
@@ -19,18 +22,18 @@ const meta = {
   },
 } satisfies NonNullable<McpUiAppResourceConfig['_meta']>;
 
-const MAX_RADIUS_METERS = 400;
-
-const criminals = [
-  {
-    name: 'Joker',
-    picture: 'https://static.wikia.nocookie.net/marvel_dc/images/4/41/Batman_Vol_2_23.1_The_Joker_Textless.jpg',
-  },
-  {
-    name: 'Bane',
-    picture: 'https://static.wikia.nocookie.net/marvel_dc/images/b/b0/Batman_Vol_3_18_Textless.jpg',
-  },
-];
+const crimeLocationSchema = z.object({ lat: z.number(), lng: z.number() });
+const crimeForensicsSchema = z.object({
+  molecules: z.array(z.string()),
+  fingerprints: z.array(z.string()),
+});
+const crimeSchema = z.object({
+  id: z.string(),
+  location: crimeLocationSchema,
+  occurredAt: z.string(),
+  suspect: z.string().nullable(),
+  forensics: crimeForensicsSchema,
+});
 
 type Coordinates = { lat: number; lng: number };
 
@@ -56,26 +59,44 @@ async function geocodeCity(city: string): Promise<Coordinates | undefined> {
   }
 }
 
-function randomOffset(center: Coordinates, maxRadiusMeters: number): Coordinates {
-  const radius = Math.random() * maxRadiusMeters;
-  const angle = Math.random() * 2 * Math.PI;
-  const dLat = (radius * Math.cos(angle)) / 111320;
-  const dLng = (radius * Math.sin(angle)) / (111320 * Math.cos((center.lat * Math.PI) / 180));
+function referenceCenterFromCrimes(crimes: Crime[]): Coordinates {
+  const sum = crimes.reduce(
+    (acc, crime) => ({
+      lat: acc.lat + crime.location.lat,
+      lng: acc.lng + crime.location.lng,
+    }),
+    { lat: 0, lng: 0 },
+  );
+  return { lat: sum.lat / crimes.length, lng: sum.lng / crimes.length };
+}
 
-  return { lat: center.lat + dLat, lng: center.lng + dLng };
+function translateCrimesToCenter(crimes: Crime[], targetCenter: Coordinates): Crime[] {
+  if (crimes.length === 0) {
+    return [];
+  }
+  const reference = referenceCenterFromCrimes(crimes);
+  const deltaLat = targetCenter.lat - reference.lat;
+  const deltaLng = targetCenter.lng - reference.lng;
+  return crimes.map((crime) => ({
+    ...crime,
+    location: {
+      lat: crime.location.lat + deltaLat,
+      lng: crime.location.lng + deltaLng,
+    },
+  }));
 }
 
 export const register: Register = (server) => {
   registerAppResource(
     server,
-    'batman_criminals_map_ui',
+    'batman_crime_map_ui',
     resourceURI,
     {
       mimeType: RESOURCE_MIME_TYPE,
       _meta: meta,
     },
     async () => {
-      const html = await readFile(join(import.meta.dirname, '../../../mcp-ui/dist/src/criminals-map/index.html'), 'utf-8');
+      const html = await readFile(join(import.meta.dirname, '../../../mcp-ui/dist/src/crime-map/index.html'), 'utf-8');
       return {
         contents: [
           {
@@ -91,23 +112,16 @@ export const register: Register = (server) => {
 
   registerAppTool(
     server,
-    'localize_criminals',
+    'get_crime_map',
     {
-      description: 'Locate all known criminals scattered around a given city on a map.',
+      description: 'Show crimes on a map centered on a given city.',
       inputSchema: {
         city: z.string().describe('City name to center the map on, e.g. "Clermont-Ferrand"'),
       },
       outputSchema: {
         city: z.string(),
-        center: z.object({ lat: z.number(), lng: z.number() }),
-        criminals: z.array(
-          z.object({
-            name: z.string(),
-            picture: z.url(),
-            lat: z.number(),
-            lng: z.number(),
-          }),
-        ),
+        center: crimeLocationSchema,
+        crimes: z.array(crimeSchema),
       },
       _meta: {
         ui: {
@@ -125,14 +139,11 @@ export const register: Register = (server) => {
         };
       }
 
-      const locatedCriminals = criminals.map((criminal) => ({
-        ...criminal,
-        ...randomOffset(center, MAX_RADIUS_METERS),
-      }));
+      const crimes = translateCrimesToCenter(datasetCrimes, center);
 
       return {
-        content: [{ type: 'text', text: JSON.stringify({ city, center, criminals: locatedCriminals }) }],
-        structuredContent: { city, center, criminals: locatedCriminals },
+        content: [{ type: 'text', text: JSON.stringify({ city, center, crimes }) }],
+        structuredContent: { city, center, crimes },
       };
     },
   );
