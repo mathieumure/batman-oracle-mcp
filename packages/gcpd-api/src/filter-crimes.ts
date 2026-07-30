@@ -48,9 +48,7 @@ export const filterCrimes = (crimes: Crime[], filters: CrimeFilters): Crime[] =>
     }
 
     if (filters.fingerprints.length > 0) {
-      const matchesFingerprint = filters.fingerprints.some((fingerprint) =>
-        crime.forensics.fingerprints.includes(fingerprint),
-      );
+      const matchesFingerprint = filters.fingerprints.some((fingerprint) => crime.forensics.fingerprints.includes(fingerprint));
       if (!matchesFingerprint) {
         return false;
       }

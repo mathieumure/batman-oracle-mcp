@@ -133,8 +133,7 @@ export const register: Register = (server) => {
     server,
     'get_crime_map',
     {
-      description:
-        'Show crimes on a map centered on a given city. Optional GCPD filters: suspect, molecule, fingerprint.',
+      description: 'Show crimes on a map centered on a given city. Optional GCPD filters: suspect, molecule, fingerprint.',
       inputSchema: {
         city: z.string().describe('City name to center the map on, e.g. "Clermont-Ferrand"'),
         suspect: z.array(z.string()).optional().describe('Filter by suspect name(s)'),

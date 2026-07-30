@@ -30,3 +30,12 @@
   object-fit: cover;
   box-shadow: 0 0 12px #f5c51880;
 }
+
+.marker span {
+  width: 8px !important;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #f5c518;
+  display: block;
+  box-shadow: 0 0 12px #f5c51880;
+}

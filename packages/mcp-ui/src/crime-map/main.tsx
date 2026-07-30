@@ -9,6 +9,7 @@ type ToolResult = {
     city: string;
     center: MapCenter;
     crimes: Crime[];
+    connectChronologically?: boolean;
   };
 };
 
@@ -16,7 +17,7 @@ const render = (result: ToolResult) => {
   const data = result.structuredContent;
   if (!data) return;
   createRoot(document.getElementById('root')!).render(
-    <CrimeMap city={data.city} center={data.center} crimes={data.crimes} />,
+    <CrimeMap city={data.city} center={data.center} crimes={data.crimes} connectChronologically={data.connectChronologically} />,
   );
 };
 
@@ -24,7 +25,8 @@ const mockResult: ToolResult = {
   structuredContent: {
     city: 'Clermont-Ferrand',
     center: { lat: 45.7797, lng: 3.0863 },
-    crimes,
+    crimes: crimes.filter((it) => it.suspect === 'Scarecrow'),
+    connectChronologically: true,
   },
 };
 

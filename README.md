@@ -4,13 +4,13 @@ NX monorepo containing the Batman Oracle MCP server and its supporting packages.
 
 ## Packages
 
-| Package           | Tech                      | Description                              |
-| ----------------- | ------------------------- | ---------------------------------------- |
-| `packages/mcp-ui` | Vite + React + TypeScript | UI components served by the MCP server   |
-| `packages/mcp`    | Node + TypeScript         | MCP server (`@modelcontextprotocol/sdk`) |
-| `packages/gcpd-api` | Fastify                 | Mock GCPD API (`/criminals`, `/crimes`)  |
-| `packages/slides` | Slidev                    | Presentation                             |
-| `packages/data`   | Redis (Docker)            | Data layer                               |
+| Package             | Tech                      | Description                              |
+| ------------------- | ------------------------- | ---------------------------------------- |
+| `packages/mcp-ui`   | Vite + React + TypeScript | UI components served by the MCP server   |
+| `packages/mcp`      | Node + TypeScript         | MCP server (`@modelcontextprotocol/sdk`) |
+| `packages/gcpd-api` | Fastify                   | Mock GCPD API (`/criminals`, `/crimes`)  |
+| `packages/slides`   | Slidev                    | Presentation                             |
+| `packages/data`     | Redis (Docker)            | Data layer                               |
 
 ## Prerequisites
 
@@ -117,10 +117,10 @@ nx run slides:export   # Export slides to PDF
 
 Mock HTTP API on `http://localhost:8080`. Start with `nx run gcpd-api:dev`, or use `pnpm dev:mcp` / `nx run mcp:dev` (starts gcpd-api alongside MCP).
 
-| Route | Description |
-| ----- | ----------- |
+| Route            | Description                                                    |
+| ---------------- | -------------------------------------------------------------- |
 | `GET /criminals` | Full criminals list (`get_criminals`, criminals widget in dev) |
-| `GET /crimes` | Full crimes list (`get_crime_map`) |
+| `GET /crimes`    | Full crimes list (`get_crime_map`)                             |
 
 ```bash
 curl http://localhost:8080/criminals

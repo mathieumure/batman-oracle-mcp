@@ -6,8 +6,7 @@ import { randomNightDateTime } from './crime-schedule.js';
 import { pickWeightedSuspectName } from './crime-suspects.js';
 import { pickForensics } from './crime-forensics.js';
 
-const randomCrimeCount = (): number =>
-  CONFIG.minCrimeCount + Math.floor(Math.random() * (CONFIG.maxCrimeCount - CONFIG.minCrimeCount + 1));
+const randomCrimeCount = (): number => CONFIG.minCrimeCount + Math.floor(Math.random() * (CONFIG.maxCrimeCount - CONFIG.minCrimeCount + 1));
 
 const buildCrime = (center: CrimeLocation): Crime => ({
   id: randomUUID(),
