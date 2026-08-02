@@ -8,6 +8,7 @@ NX monorepo containing the Batman Oracle MCP server and its supporting packages.
 | ------------------- | ------------------------- | ---------------------------------------- |
 | `packages/mcp-ui`   | Vite + React + TypeScript | UI components served by the MCP server   |
 | `packages/mcp`      | Node + TypeScript         | MCP server (`@modelcontextprotocol/sdk`) |
+| `packages/auth`     | Fastify + Better Auth     | OAuth 2.1 authorization server, see [AUTH.md](AUTH.md) |
 | `packages/gcpd-api` | Fastify                   | Mock GCPD API (`/criminals`, `/crimes`)  |
 | `packages/slides`   | Slidev                    | Presentation                             |
 | `packages/data`     | Redis (Docker)            | Data layer                               |
@@ -24,16 +25,27 @@ NX monorepo containing the Batman Oracle MCP server and its supporting packages.
 pnpm install
 ```
 
-## How to run
+## Quick start
 
-Make sure Docker is running, then:
+Everything needed for a working local setup reachable from Claude, in order:
 
 ```bash
 pnpm install
-pnpm serve
+npx nx run mcp-ui:build
+npx nx run mcp:build
+
+npx nx run auth:db:migrate                 # one-time, creates auth.db's tables on a fresh clone
+
+npx nx run gcpd-api:dev &                  # mock GCPD API on :8080 (needed by get_criminals / get_crime_map)
+npx tsx packages/auth/src/index.ts &       # auth server on :3001 (no build step, runs straight from source)
+node packages/mcp/dist/index.js &          # MCP server on :3000
 ```
 
-`pnpm serve` builds `mcp-ui`, compiles `mcp`, starts Redis and the server together (see [Task graph](#task-graph)).
+`packages/mcp` does not enforce OAuth by default (`REQUIRE_AUTH` is off), so the setup above works immediately for local tool iteration, `pnpm inspect`, etc. See [AUTH.md](AUTH.md) for how the auth actually works, and set `REQUIRE_AUTH=true` (see [Try it in Claude](#try-it-in-claude)) whenever the server is reachable from Claude or from anywhere outside your machine.
+
+## How to run
+
+See [Quick start](#quick-start) above for the full sequence. Once the MCP server is up:
 
 #### Check it's alive:
 
@@ -43,37 +55,46 @@ curl -s -X POST http://localhost:3000/mcp \
   -d '{"jsonrpc":"2.0","id":1,"method":"initialize","params":{"protocolVersion":"2025-06-18","capabilities":{},"clientInfo":{"name":"smoke-test","version":"0.0.1"}}}'
 ```
 
-A `200` with `result.serverInfo` means it's healthy.
+A `200` with `result.serverInfo` means it's healthy. If you started the server with `REQUIRE_AUTH=true`, expect a `401` here instead, see [AUTH.md](AUTH.md).
 
 #### Stop everything:
 
 ```bash
-lsof -ti:3000 -sTCP:LISTEN | xargs -r kill
+lsof -ti:3000,3001 -sTCP:LISTEN | xargs -r kill
 nx run data:stop
 ```
 
 ## Try it in Claude
 
-claude.ai needs an HTTPS URL for custom connectors, so tunnel the local server:
+claude.ai and Claude Desktop both need an HTTPS URL for custom connectors, so tunnel the local servers. Use **Cloudflare Tunnel**, not ngrok. Since OAuth now involves two servers (the MCP server and the auth server), tunnel both:
 
 ```bash
-ngrok http 3000
+cloudflared tunnel --url http://localhost:3000   # MCP server, prints its own https://<mcp-tunnel>.trycloudflare.com
+cloudflared tunnel --url http://localhost:3001   # auth server, prints its own https://<auth-tunnel>.trycloudflare.com
 ```
 
-Grab the `https://...ngrok-free.dev` URL it prints, then restart the server with it so the widget's own assets (script/css) point somewhere Claude can actually reach, not `localhost`:
+(`brew install cloudflared` if you don't have it. No account needed, the quick-tunnel command above is enough.)
+
+Grab both `https://...trycloudflare.com` URLs, then restart both servers pointing at each other so the widget's own assets and the OAuth discovery URLs all point somewhere Claude can actually reach, not `localhost`:
 
 ```bash
-lsof -ti:3000 -sTCP:LISTEN | xargs -r kill
-cd packages/mcp
-PUBLIC_ORIGIN=https://<your-ngrok-domain> node dist/index.js
+lsof -ti:3000,3001 -sTCP:LISTEN | xargs -r kill
+AUTH_ORIGIN=https://<auth-tunnel> MCP_ORIGIN=https://<mcp-tunnel> npx tsx packages/auth/src/index.ts &
+REQUIRE_AUTH=true PUBLIC_ORIGIN=https://<mcp-tunnel> AUTH_ORIGIN=https://<auth-tunnel> node packages/mcp/dist/index.js &
 ```
 
-There's no `.env` for this yet, it's a plain env var you set by hand each time the tunnel restarts (ngrok's free tier hands out a new URL every time). Skip this step and the widget silently falls back to a generic rendering instead of the real one, since its assets aren't reachable from Claude's side.
+`REQUIRE_AUTH=true` is required here, without it Claude can call every tool with no login at all.
+
+The origin vars (`PUBLIC_ORIGIN`, `AUTH_ORIGIN`, `MCP_ORIGIN`) are a separate concern from `REQUIRE_AUTH`: they control whether the widget's assets and the OAuth discovery URLs point somewhere Claude can actually reach, not `localhost`. Skip them and the widget silently falls back to a generic rendering instead of the real one, and the OAuth flow fails outright since the auth server can't validate the MCP server as a resource, regardless of what `REQUIRE_AUTH` is set to.
+
+There's no `.env` for this yet, it's plain env vars you set by hand each time the tunnels restart.
 
 1. **Settings** > **Connectors** > **Add custom connector**
-2. URL: `https://<your-ngrok-domain>/mcp`
-3. Connect, then enable the connector in a conversation
+2. URL: `https://<mcp-tunnel>/mcp`
+3. Connect: you'll be sent to the auth server's login page, then a consent screen. Log in as the seeded demo user, `alfred@wayne-enterprises.com` / `IAmBatman!123`, and allow the `mcp:tools` scope.
 4. Ask for exemple "Alfred, montre-moi la liste des vilains". Claude calls `get_criminals` and renders the `Criminals` widget inline.
+
+See [AUTH.md](AUTH.md) for how the OAuth flow works.
 
 ## Try the UI
 
@@ -85,13 +106,13 @@ pnpm dev:ui
 
 Open `http://localhost:5173/src/criminals/`. HMR on.
 
-- MCP Inspector, raw protocol view (tools, resources, JSON-RPC):
+- MCP Inspector, raw protocol view (tools, resources, JSON-RPC). Works against the default `REQUIRE_AUTH`-off setup from [Quick start](#quick-start), Inspector doesn't drive the OAuth login/consent flow:
 
 ```bash
 cd packages/mcp && pnpm inspect
 ```
 
-- ngrok inspector: while the tunnel above is running, `http://127.0.0.1:4040` shows every request/response crossing it.
+- ngrok inspector (only if you fell back to ngrok): while the tunnel is running, `http://127.0.0.1:4040` shows every request/response crossing it. `cloudflared` has no equivalent local dashboard.
 
 ## Commands
 

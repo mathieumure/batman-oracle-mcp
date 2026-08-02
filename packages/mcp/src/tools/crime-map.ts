@@ -9,12 +9,13 @@ import { z } from 'zod';
 import { readFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { rewriteAssetOrigin } from '../public-origin.js';
+import { PUBLIC_ORIGIN } from '../config.js';
 
 const resourceURI = 'ui://batman/crime-map';
 const meta = {
   ui: {
     csp: {
-      resourceDomains: ['https://static.wikia.nocookie.net', 'https://*.basemaps.cartocdn.com'],
+      resourceDomains: [PUBLIC_ORIGIN, 'https://static.wikia.nocookie.net', 'https://*.basemaps.cartocdn.com'],
     },
   },
 } satisfies NonNullable<McpUiAppResourceConfig['_meta']>;

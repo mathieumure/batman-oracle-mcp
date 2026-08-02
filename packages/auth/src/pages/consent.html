@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Wayne Enterprises — Authorize access</title>
+    <style>
+      body {
+        background: #0a0a0a;
+        color: #f5c518;
+        font-family: Georgia, serif;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        margin: 0;
+      }
+      .card {
+        background: #141414;
+        border: 2px solid #f5c518;
+        border-radius: 12px;
+        padding: 2rem;
+        width: 340px;
+        text-align: center;
+      }
+      h1 {
+        text-transform: uppercase;
+        letter-spacing: 0.2em;
+        font-size: 1.2rem;
+        margin-bottom: 1rem;
+      }
+      p {
+        font-size: 0.9rem;
+        line-height: 1.4;
+      }
+      .scopes {
+        text-align: left;
+        margin: 1rem 0;
+        padding-left: 1.2rem;
+      }
+      .buttons {
+        display: flex;
+        gap: 0.75rem;
+        margin-top: 1.5rem;
+      }
+      button {
+        flex: 1;
+        padding: 0.6rem;
+        border: none;
+        border-radius: 6px;
+        font-weight: bold;
+        cursor: pointer;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+      #allow {
+        background: #f5c518;
+        color: #0a0a0a;
+      }
+      #deny {
+        background: transparent;
+        border: 1px solid #f5c518;
+        color: #f5c518;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <h1>Access request</h1>
+      <p><strong id="client-name">A client</strong> wants access to:</p>
+      <ul class="scopes" id="scopes"></ul>
+      <div class="buttons">
+        <button id="deny">Deny</button>
+        <button id="allow">Allow</button>
+      </div>
+    </div>
+    <script>
+      const oauthQuery = location.search.slice(1);
+      const params = new URLSearchParams(location.search);
+      const clientId = params.get('client_id');
+      const scope = params.get('scope') ?? '';
+
+      document.getElementById('client-name').textContent = clientId ?? 'A client';
+      document.getElementById('scopes').innerHTML = scope
+        .split(' ')
+        .filter(Boolean)
+        .map((s) => `<li>${s}</li>`)
+        .join('');
+
+      async function respond(accept) {
+        const response = await fetch('/oauth2/consent', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ accept, oauth_query: oauthQuery }),
+        });
+        const result = await response.json();
+        location.href = result.url;
+      }
+
+      document.getElementById('allow').addEventListener('click', () => respond(true));
+      document.getElementById('deny').addEventListener('click', () => respond(false));
+    </script>
+  </body>
+</html>

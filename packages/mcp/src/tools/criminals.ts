@@ -9,12 +9,13 @@ import { z } from 'zod';
 import { readFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { rewriteAssetOrigin } from '../public-origin.js';
+import { PUBLIC_ORIGIN } from '../config.js';
 
 const resourceURI = 'ui://batman/criminals';
 const meta = {
   ui: {
     csp: {
-      resourceDomains: [],
+      resourceDomains: [PUBLIC_ORIGIN, 'https://static.wikia.nocookie.net'],
     },
   },
 } satisfies NonNullable<McpUiAppResourceConfig['_meta']>;
@@ -62,7 +63,9 @@ export const register: Register = (server) => {
       },
     },
     async () => {
-      const criminals = await fetch('http://localhost:8080/criminals').then((it) => it.json());
+      const criminals = await fetch('http://localhost:8080/criminals')
+        .then((it) => it.json())
+        .then((all: Array<{ name: string; picture: string }>) => all.slice(0, 8).map((v) => ({ name: v.name, picture: v.picture })));
       return {
         content: [{ type: 'text', text: JSON.stringify(criminals) }],
         structuredContent: { criminals },

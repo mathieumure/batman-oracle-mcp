@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Wayne Enterprises — Sign in</title>
+    <style>
+      body {
+        background: #0a0a0a;
+        color: #f5c518;
+        font-family: Georgia, serif;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        margin: 0;
+      }
+      form {
+        background: #141414;
+        border: 2px solid #f5c518;
+        border-radius: 12px;
+        padding: 2rem;
+        width: 300px;
+      }
+      h1 {
+        text-align: center;
+        text-transform: uppercase;
+        letter-spacing: 0.2em;
+        font-size: 1.2rem;
+        margin-bottom: 1.5rem;
+      }
+      label {
+        display: block;
+        margin-bottom: 1rem;
+        font-size: 0.9rem;
+      }
+      input {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 0.5rem;
+        margin-top: 0.25rem;
+        background: #0a0a0a;
+        border: 1px solid #f5c518;
+        color: #f5c518;
+        border-radius: 6px;
+      }
+      button {
+        width: 100%;
+        padding: 0.6rem;
+        background: #f5c518;
+        color: #0a0a0a;
+        border: none;
+        border-radius: 6px;
+        font-weight: bold;
+        cursor: pointer;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+      }
+      #error {
+        color: #ff6b6b;
+        font-size: 0.85rem;
+        margin-top: 1rem;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <form id="login-form">
+      <h1>Wayne Enterprises</h1>
+      <label>Email<input type="email" id="email" required /></label>
+      <label>Password<input type="password" id="password" required /></label>
+      <button type="submit">Sign in</button>
+      <div id="error"></div>
+    </form>
+    <script>
+      const oauthQuery = location.search.slice(1);
+
+      document.getElementById('login-form').addEventListener('submit', async (event) => {
+        event.preventDefault();
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        const errorEl = document.getElementById('error');
+        errorEl.textContent = '';
+
+        const response = await fetch('/sign-in/email', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password, oauth_query: oauthQuery }),
+        });
+
+        if (!response.ok) {
+          errorEl.textContent = 'Invalid credentials.';
+          return;
+        }
+
+        location.href = '/oauth2/authorize?' + oauthQuery;
+      });
+    </script>
+  </body>
+</html>

@@ -4,3 +4,4 @@ packages:
 allowBuilds:
   esbuild: true
   nx: true
+  better-sqlite3: true
