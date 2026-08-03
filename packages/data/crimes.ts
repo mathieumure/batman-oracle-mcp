@@ -1,6 +1,8 @@
 import type { Crime } from './src/generate/crimes/crime.js';
 import { crimes as specialCrimes } from './src/specials/volcamp-crimes.generated.js';
 
+export type { Crime };
+
 export const crimes: Crime[] = [
   {
     id: '508d9585-0981-4515-833b-396a41f452dc',

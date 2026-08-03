@@ -4,10 +4,9 @@ import fastifyStatic from '@fastify/static';
 import fastifyCors from '@fastify/cors';
 import { StreamableHTTPServerTransport } from '@modelcontextprotocol/sdk/server/streamableHttp.js';
 import { isInitializeRequest } from '@modelcontextprotocol/sdk/types.js';
-import { verifyAccessToken } from 'better-auth/oauth2';
 import { randomUUID } from 'node:crypto';
 import path from 'node:path';
-import { PUBLIC_ORIGIN, AUTH_ORIGIN, REQUIRE_AUTH } from './config.js';
+import { requireBearerAuth } from './auth.js';
 
 const fastify = Fastify({
   logger: true,
@@ -28,46 +27,14 @@ fastify.register(fastifyStatic, {
   decorateReply: false,
 });
 
-if (REQUIRE_AUTH) {
+if (process.env.REQUIRE_AUTH === 'true') {
   fastify.get('/.well-known/oauth-protected-resource', async () => {
     return {
-      resource: `${PUBLIC_ORIGIN}/mcp`,
-      authorization_servers: [AUTH_ORIGIN],
+      resource: `${process.env.PUBLIC_ORIGIN}/mcp`,
+      authorization_servers: [process.env.AUTH_ORIGIN],
       scopes_supported: ['mcp:tools'],
     };
   });
-}
-
-async function requireBearerAuth(req: FastifyRequest, res: FastifyReply): Promise<boolean> {
-  if (!REQUIRE_AUTH) return false;
-
-  const authHeader = req.headers['authorization'];
-  const token = typeof authHeader === 'string' && authHeader.startsWith('Bearer ') ? authHeader.slice('Bearer '.length) : undefined;
-
-  const challenge = () => {
-    res
-      .code(401)
-      .header('WWW-Authenticate', `Bearer realm="mcp", resource_metadata="${PUBLIC_ORIGIN}/.well-known/oauth-protected-resource"`)
-      .send();
-  };
-
-  if (!token) {
-    challenge();
-    return true;
-  }
-
-  try {
-    await verifyAccessToken(token, {
-      verifyOptions: { audience: `${PUBLIC_ORIGIN}/mcp`, issuer: AUTH_ORIGIN },
-      scopes: ['mcp:tools'],
-      jwksUrl: `${AUTH_ORIGIN}/jwks`,
-    });
-  } catch {
-    challenge();
-    return true;
-  }
-
-  return false;
 }
 
 const transports: { [sessionId: string]: StreamableHTTPServerTransport } = {};

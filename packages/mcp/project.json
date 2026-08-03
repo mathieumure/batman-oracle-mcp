@@ -5,26 +5,22 @@
   "sourceRoot": "packages/mcp/src",
   "targets": {
     "dev": {
+      "continuous": true,
       "executor": "nx:run-commands",
-      "dependsOn": [{ "projects": ["mcp-ui"], "target": "build" }],
+      "dependsOn": [
+        { "projects": ["mcp-ui"], "target": "build" },
+        { "projects": ["gcpd-api"], "target": "dev" },
+        {
+          "target": "inspect"
+        }
+      ],
       "options": {
-        "commands": [
-          {
-            "command": "nx run gcpd-api:dev"
-          },
-          {
-            "command": "nx run mcp-ui:dev"
-          },
-          {
-            "command": "tsx watch src/index.ts"
-          },
-          {
-            "command": "pnpm inspect"
-          }
-        ],
-        "parallel": true,
-        "cwd": "{projectRoot}"
+        "command": "tsx watch src/index.ts",
+        "cwd": "packages/mcp"
       }
+    },
+    "inspect": {
+      "continuous": true
     }
   }
 }

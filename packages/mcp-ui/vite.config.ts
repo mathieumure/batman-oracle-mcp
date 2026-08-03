@@ -14,5 +14,5 @@ export default defineConfig({
       },
     },
   },
-  base: 'http://localhost:3000/',
+  base: process.env.MCP_ORIGIN,
 });

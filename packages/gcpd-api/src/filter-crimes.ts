@@ -4,6 +4,7 @@ export type CrimeFilters = {
   suspects: string[];
   molecules: string[];
   fingerprints: string[];
+  city: string;
 };
 
 const toStringArray = (value: unknown): string[] => {
@@ -23,6 +24,7 @@ export const parseCrimeQuery = (query: Record<string, unknown>): CrimeFilters =>
   suspects: toStringArray(query.suspect),
   molecules: toStringArray(query.molecule),
   fingerprints: toStringArray(query.fingerprint),
+  city: query.city as string,
 });
 
 const hasAnyFilter = (filters: CrimeFilters): boolean =>

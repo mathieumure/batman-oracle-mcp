@@ -8,15 +8,13 @@ import {
 import { z } from 'zod';
 import { readFile } from 'node:fs/promises';
 import { join } from 'node:path';
-import { rewriteAssetOrigin } from '../public-origin.js';
-import { GCPD_API, PUBLIC_ORIGIN } from '../config.js';
-import type { BatmanCriminal } from '@batman/data/criminals.js';
+import { GCPDClient } from '../gcpd.api.js';
 
 const resourceURI = 'ui://batman/criminals';
 const meta = {
   ui: {
     csp: {
-      resourceDomains: [PUBLIC_ORIGIN, 'https://static.wikia.nocookie.net'],
+      resourceDomains: [process.env.MCP_ORIGIN, 'https://static.wikia.nocookie.net'],
     },
   },
 } satisfies NonNullable<McpUiAppResourceConfig['_meta']>;
@@ -37,7 +35,7 @@ export const register: Register = (server) => {
           {
             uri: resourceURI,
             mimeType: RESOURCE_MIME_TYPE,
-            text: rewriteAssetOrigin(html),
+            text: html,
             _meta: meta,
           },
         ],
@@ -86,12 +84,7 @@ export const register: Register = (server) => {
       },
     },
     async ({ filter }) => {
-      const url = new URL(GCPD_API + '/criminals');
-      if (filter?.affiliation) {
-        url.searchParams.append('affiliation', filter.affiliation);
-      }
-      const rawCriminals = (await fetch(url).then((it) => it.json())) as BatmanCriminal[];
-      const criminals = rawCriminals.map((it) => ({ ...it, picture: it.picture ? rewriteAssetOrigin(it.picture) : it.picture }));
+      const criminals = await GCPDClient.getCriminals({ affiliation: filter?.affiliation });
       return {
         content: [{ type: 'text', text: JSON.stringify(criminals) }],
         structuredContent: { criminals },

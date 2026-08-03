@@ -2,5 +2,9 @@
   "name": "gcpd-api",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
-  "targets": {}
+  "targets": {
+    "dev": {
+      "continuous": true
+    }
+  }
 }

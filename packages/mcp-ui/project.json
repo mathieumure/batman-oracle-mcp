@@ -5,6 +5,7 @@
   "sourceRoot": "packages/mcp-ui/src",
   "targets": {
     "build": {
+      "inputs": ["{projectRoot}/../../.env"],
       "executor": "nx:run-commands",
       "outputs": ["{projectRoot}/dist"],
       "options": {

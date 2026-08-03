@@ -3,6 +3,7 @@ import { crimes } from '@batman/data/crimes';
 import Fastify from 'fastify';
 import fastifyCors from '@fastify/cors';
 import { filterCrimes, parseCrimeQuery } from './filter-crimes.js';
+import { geocodeCity, translateCrimesToCenter } from './map.utils';
 
 const fallbackPicture = 'http://localhost:3000/img/default-crime.jpg';
 
@@ -23,15 +24,26 @@ fastify.get('/criminals', (request) => {
   return criminals.filter((criminal) => criminal.details?.affiliation.includes(query.affiliation as string));
 });
 
-fastify.get('/crimes', (request) => {
+fastify.get('/crimes', async (request) => {
   const filters = parseCrimeQuery(request.query as Record<string, unknown>);
-  return filterCrimes(
+  const datasetCrimes = filterCrimes(
     crimes.map((crime) => ({
       ...crime,
       suspectPicture: criminals.find((criminal) => criminal.name === crime.suspect)?.picture ?? fallbackPicture,
     })),
     filters,
   );
+
+  const center = await geocodeCity(filters.city);
+
+  if (!center) {
+    throw new Error(`Unable to find city ${filters.city}`);
+  }
+
+  return {
+    crimes: translateCrimesToCenter(datasetCrimes, center),
+    center,
+  };
 });
 
 fastify.listen({ port: 8080 });
