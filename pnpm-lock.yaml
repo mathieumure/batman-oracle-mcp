@@ -8,9 +8,6 @@ importers:
 
   .:
     devDependencies:
-      concurrently:
-        specifier: ^9.1.2
-        version: 9.2.4
       nx:
         specifier: ^21.2.2
         version: 21.6.11
@@ -114,8 +111,8 @@ importers:
         version: 4.4.3
     devDependencies:
       '@modelcontextprotocol/inspector':
-        specifier: ^0.22.0
-        version: 0.22.0(@types/node@24.13.3)(@types/react-dom@19.2.4(@types/react@19.2.18))(@types/react@19.2.18)(typescript@6.0.3)
+        specifier: 1.0.1
+        version: 1.0.1(@types/node@24.13.3)(@types/react-dom@19.2.4(@types/react@19.2.18))(@types/react@19.2.18)(typescript@6.0.3)
       '@types/node':
         specifier: ^24.13.2
         version: 24.13.3
@@ -966,23 +963,23 @@ packages:
       react-dom:
         optional: true
 
-  '@modelcontextprotocol/inspector-cli@0.22.0':
-    resolution: {integrity: sha512-Z3NHqa1zTjZyfcd3qJcpIwqiSG7QlR3YkYPFAIoMsPw3hId0AoHtlG4SRueJzymCsF9Rqein3NzUn3qT+aqUBw==}
+  '@modelcontextprotocol/inspector-cli@1.0.1':
+    resolution: {integrity: sha512-BvuDpAVmo92X1dbz6Zm8fgY/+OFKCTTos7MILvNFB295aL9YFfET6aKYh9/uov7N9Soh6Pnm+qYxH0PfC0u4jw==}
     deprecated: 'v1 is deprecated. Upgrade to v2: npm i @modelcontextprotocol/inspector@latest. v1 gets security fixes only, published under the v1-latest tag.'
     hasBin: true
 
-  '@modelcontextprotocol/inspector-client@0.22.0':
-    resolution: {integrity: sha512-LAFijdt2L4xxjqA16dkqVPjB85VeyHAa32M+nAZyMe4to8s35cW9sZVPnBEFjXGFN4A2WsZ07ViiG+wM6SKS4w==}
+  '@modelcontextprotocol/inspector-client@1.0.1':
+    resolution: {integrity: sha512-V7TrzNc2jBf3B7yd5XIbDJpTBJLyVEPHIpujlGRP+0TIsBObMtBa+jHOw1oJAgGJSq3mXZ/BA7CedG/kUFH0vA==}
     deprecated: 'v1 is deprecated. Upgrade to v2: npm i @modelcontextprotocol/inspector@latest. v1 gets security fixes only, published under the v1-latest tag.'
     hasBin: true
 
-  '@modelcontextprotocol/inspector-server@0.22.0':
-    resolution: {integrity: sha512-hOrExnp8wOlSEWVU+t9UD/POHFZy09Xx8LZqX7P9R7mzcDdrwTVB96tbPD8cIi9mVYWFQDKGNVUsF6I7u7fPGA==}
+  '@modelcontextprotocol/inspector-server@1.0.1':
+    resolution: {integrity: sha512-99TMp1jx6OTZ31yLpNvlxr/bVo8yuJxCJr0+t/TFrGFChwGyhn3jSGdlN06g/4/TtGEvHoVFydmttrxcxuD3FA==}
     deprecated: 'v1 is deprecated. Upgrade to v2: npm i @modelcontextprotocol/inspector@latest. v1 gets security fixes only, published under the v1-latest tag.'
     hasBin: true
 
-  '@modelcontextprotocol/inspector@0.22.0':
-    resolution: {integrity: sha512-HUyvF+6C3e/sL3wZSc71Li1SkuWysixblFpVdm8csJKBOlT2kNG5kWP0AAgdXRiRWRZ27ZajNtagYgwoJ+QBpQ==}
+  '@modelcontextprotocol/inspector@1.0.1':
+    resolution: {integrity: sha512-ZMefwjYUFeeiv4eGqi0/GArUmbdGjoo2scvfnI7fbnafigVVdaPPlU5gmES4h2Pr7Bjtefyep4TbqDYdRtySNA==}
     engines: {node: '>=22.7.5'}
     deprecated: 'v1 is deprecated. Upgrade to v2: npm i @modelcontextprotocol/inspector@latest. v1 gets security fixes only, published under the v1-latest tag.'
     hasBin: true
@@ -5207,6 +5204,10 @@ packages:
     resolution: {integrity: sha512-7++dFhtcx3353uBaq8DDR4NuxBetBzC7ZQOhmTQInHEd6bSrXdiEyzCvG07Z44UYdLShWUyXt5M/yhz8ekcb1A==}
     engines: {node: '>=8'}
 
+  shell-quote@1.10.0:
+    resolution: {integrity: sha512-w1aiOKwKuRgtwAReIIj89puqg+I7GvX4IbLrvmhXbzQsj1+Zwi4VO3+fa6ZF91TWSjIxoEkKnMeHcLEODK5ZXA==}
+    engines: {node: '>= 0.4'}
+
   shell-quote@1.9.0:
     resolution: {integrity: sha512-Iov+JwFv/2HcTpcwNMKd8+IWNb8tboQJNQTkAY/LLVK7gGH9jy+LGkVqPxfekHl+yMmiqXszdGWXgkfml7hjqA==}
     engines: {node: '>= 0.4'}
@@ -6632,7 +6633,7 @@ snapshots:
       react: 19.2.8
       react-dom: 19.2.8(react@19.2.8)
 
-  '@modelcontextprotocol/inspector-cli@0.22.0(zod@3.25.76)':
+  '@modelcontextprotocol/inspector-cli@1.0.1(zod@3.25.76)':
     dependencies:
       '@modelcontextprotocol/sdk': 1.30.0(zod@3.25.76)
       commander: 13.1.0
@@ -6643,7 +6644,7 @@ snapshots:
       - supports-color
       - zod
 
-  '@modelcontextprotocol/inspector-client@0.22.0(@types/react-dom@19.2.4(@types/react@19.2.18))(@types/react@19.2.18)':
+  '@modelcontextprotocol/inspector-client@1.0.1(@types/react-dom@19.2.4(@types/react@19.2.18))(@types/react@19.2.18)':
     dependencies:
       '@mcp-ui/client': 6.1.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@modelcontextprotocol/ext-apps': 1.7.5(@modelcontextprotocol/sdk@1.30.0(zod@3.25.76))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(zod@3.25.76)
@@ -6678,13 +6679,13 @@ snapshots:
       - '@types/react-dom'
       - supports-color
 
-  '@modelcontextprotocol/inspector-server@0.22.0':
+  '@modelcontextprotocol/inspector-server@1.0.1':
     dependencies:
       '@modelcontextprotocol/sdk': 1.30.0(zod@3.25.76)
       cors: 2.8.6
       express: 5.2.1
       express-rate-limit: 8.6.1(express@5.2.1)
-      shell-quote: 1.9.0
+      shell-quote: 1.10.0
       shx: 0.3.4
       spawn-rx: 5.1.2
       ws: 8.21.1
@@ -6695,16 +6696,16 @@ snapshots:
       - supports-color
       - utf-8-validate
 
-  '@modelcontextprotocol/inspector@0.22.0(@types/node@24.13.3)(@types/react-dom@19.2.4(@types/react@19.2.18))(@types/react@19.2.18)(typescript@6.0.3)':
+  '@modelcontextprotocol/inspector@1.0.1(@types/node@24.13.3)(@types/react-dom@19.2.4(@types/react@19.2.18))(@types/react@19.2.18)(typescript@6.0.3)':
     dependencies:
-      '@modelcontextprotocol/inspector-cli': 0.22.0(zod@3.25.76)
-      '@modelcontextprotocol/inspector-client': 0.22.0(@types/react-dom@19.2.4(@types/react@19.2.18))(@types/react@19.2.18)
-      '@modelcontextprotocol/inspector-server': 0.22.0
+      '@modelcontextprotocol/inspector-cli': 1.0.1(zod@3.25.76)
+      '@modelcontextprotocol/inspector-client': 1.0.1(@types/react-dom@19.2.4(@types/react@19.2.18))(@types/react@19.2.18)
+      '@modelcontextprotocol/inspector-server': 1.0.1
       '@modelcontextprotocol/sdk': 1.30.0(zod@3.25.76)
       concurrently: 9.2.4
       node-fetch: 3.3.2
       open: 10.2.0
-      shell-quote: 1.9.0
+      shell-quote: 1.10.0
       spawn-rx: 5.1.2
       ts-node: 10.9.2(@types/node@24.13.3)(typescript@6.0.3)
       zod: 3.25.76
@@ -11342,6 +11343,8 @@ snapshots:
       shebang-regex: 3.0.0
 
   shebang-regex@3.0.0: {}
+
+  shell-quote@1.10.0: {}
 
   shell-quote@1.9.0: {}
 
