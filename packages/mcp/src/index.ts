@@ -22,16 +22,18 @@ fastify.register(fastifyStatic, {
   prefix: '/assets/',
 });
 
-fastify.get('/.well-known/oauth-protected-resource', async () => {
-  return {
-    resource: `${PUBLIC_ORIGIN}/mcp`,
-    authorization_servers: [AUTH_ORIGIN],
-    scopes_supported: ['mcp:tools'],
-  };
-});
+if (REQUIRE_AUTH) {
+  fastify.get('/.well-known/oauth-protected-resource', async () => {
+    return {
+      resource: `${PUBLIC_ORIGIN}/mcp`,
+      authorization_servers: [AUTH_ORIGIN],
+      scopes_supported: ['mcp:tools'],
+    };
+  });
+}
 
 async function requireBearerAuth(req: FastifyRequest, res: FastifyReply): Promise<boolean> {
-  if (!REQUIRE_AUTH) return true;
+  if (!REQUIRE_AUTH) return false;
 
   const authHeader = req.headers['authorization'];
   const token = typeof authHeader === 'string' && authHeader.startsWith('Bearer ') ? authHeader.slice('Bearer '.length) : undefined;
@@ -45,7 +47,7 @@ async function requireBearerAuth(req: FastifyRequest, res: FastifyReply): Promis
 
   if (!token) {
     challenge();
-    return false;
+    return true;
   }
 
   try {
@@ -56,16 +58,17 @@ async function requireBearerAuth(req: FastifyRequest, res: FastifyReply): Promis
     });
   } catch {
     challenge();
-    return false;
+    return true;
   }
 
-  return true;
+  return false;
 }
 
 const transports: { [sessionId: string]: StreamableHTTPServerTransport } = {};
 
 fastify.post('/mcp', async (req, res) => {
-  if (!(await requireBearerAuth(req, res))) return;
+  const needToBeAuthenticated = await requireBearerAuth(req, res)
+  if (needToBeAuthenticated) return;
 
   const sessionId = req.headers['mcp-session-id'] as string | undefined;
   let transport: StreamableHTTPServerTransport;
@@ -99,7 +102,8 @@ fastify.post('/mcp', async (req, res) => {
 });
 
 const handleSessionRequest = async (req: FastifyRequest, res: FastifyReply) => {
-  if (!(await requireBearerAuth(req, res))) return;
+  const needToBeAuthenticated = await requireBearerAuth(req, res)
+  if (needToBeAuthenticated) return;
 
   const sessionId = req.headers['mcp-session-id'] as string | undefined;
 
