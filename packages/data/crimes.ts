@@ -1,4 +1,5 @@
 import type { Crime } from './src/generate/crimes/crime.js';
+import { crimes as specialCrimes } from './src/specials/volcamp-crimes.generated.js';
 
 export const crimes: Crime[] = [
   {
@@ -12078,4 +12079,5 @@ export const crimes: Crime[] = [
       fingerprints: ['FP-5e0d74'],
     },
   },
+  ...specialCrimes,
 ];

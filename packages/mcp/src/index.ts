@@ -22,6 +22,12 @@ fastify.register(fastifyStatic, {
   prefix: '/assets/',
 });
 
+fastify.register(fastifyStatic, {
+  root: path.join(import.meta.dirname, '../../data/img'),
+  prefix: '/img/',
+  decorateReply: false,
+});
+
 if (REQUIRE_AUTH) {
   fastify.get('/.well-known/oauth-protected-resource', async () => {
     return {
@@ -67,7 +73,7 @@ async function requireBearerAuth(req: FastifyRequest, res: FastifyReply): Promis
 const transports: { [sessionId: string]: StreamableHTTPServerTransport } = {};
 
 fastify.post('/mcp', async (req, res) => {
-  const needToBeAuthenticated = await requireBearerAuth(req, res)
+  const needToBeAuthenticated = await requireBearerAuth(req, res);
   if (needToBeAuthenticated) return;
 
   const sessionId = req.headers['mcp-session-id'] as string | undefined;
@@ -102,7 +108,7 @@ fastify.post('/mcp', async (req, res) => {
 });
 
 const handleSessionRequest = async (req: FastifyRequest, res: FastifyReply) => {
-  const needToBeAuthenticated = await requireBearerAuth(req, res)
+  const needToBeAuthenticated = await requireBearerAuth(req, res);
   if (needToBeAuthenticated) return;
 
   const sessionId = req.headers['mcp-session-id'] as string | undefined;

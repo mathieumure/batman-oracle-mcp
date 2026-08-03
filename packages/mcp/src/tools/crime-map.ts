@@ -9,13 +9,17 @@ import { z } from 'zod';
 import { readFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { rewriteAssetOrigin } from '../public-origin.js';
-import { PUBLIC_ORIGIN } from '../config.js';
+import { GCPD_API, PUBLIC_ORIGIN } from '../config.js';
+
+const DEFAULT_PAGE = 1;
+const DEFAULT_PAGE_SIZE = 100;
+const MAX_PAGE_SIZE = 200;
 
 const resourceURI = 'ui://batman/crime-map';
 const meta = {
   ui: {
     csp: {
-      resourceDomains: [PUBLIC_ORIGIN, 'https://static.wikia.nocookie.net', 'https://*.basemaps.cartocdn.com'],
+      resourceDomains: [PUBLIC_ORIGIN, 'https://static.wikia.nocookie.net', 'https://i.ebayimg.com', 'https://*.basemaps.cartocdn.com'],
     },
   },
 } satisfies NonNullable<McpUiAppResourceConfig['_meta']>;
@@ -30,10 +34,37 @@ const crimeSchema = z.object({
   location: crimeLocationSchema,
   occurredAt: z.string(),
   suspect: z.string().nullable(),
+  suspectPicture: z.string().nullable(),
   forensics: crimeForensicsSchema,
 });
 
 type Crime = z.infer<typeof crimeSchema>;
+
+const paginationSchema = z.object({
+  page: z.number(),
+  pageSize: z.number(),
+  total: z.number(),
+  totalPages: z.number(),
+  hasNextPage: z.boolean(),
+  hasPreviousPage: z.boolean(),
+});
+
+function paginateCrimes(items: Crime[], page: number, pageSize: number) {
+  const total = items.length;
+  const totalPages = total === 0 ? 0 : Math.ceil(total / pageSize);
+  const start = (page - 1) * pageSize;
+  return {
+    crimes: items.slice(start, start + pageSize),
+    pagination: {
+      page,
+      pageSize,
+      total,
+      totalPages,
+      hasNextPage: page < totalPages,
+      hasPreviousPage: page > 1 && totalPages > 0,
+    },
+  };
+}
 
 type Coordinates = { lat: number; lng: number };
 
@@ -93,7 +124,7 @@ type CrimeMapFilters = {
 };
 
 function buildCrimesApiUrl(filters: CrimeMapFilters): string {
-  const url = new URL('http://localhost:8080/crimes');
+  const url = new URL(GCPD_API + '/crimes');
   for (const value of filters.suspect ?? []) {
     url.searchParams.append('suspect', value);
   }
@@ -134,17 +165,31 @@ export const register: Register = (server) => {
     server,
     'get_crime_map',
     {
-      description: 'Show crimes on a map centered on a given city. Optional GCPD filters: suspect, molecule, fingerprint.',
+      description:
+        'Show paginated crimes on a map centered on a given city. Default page size is 20. When pagination.hasNextPage is true, call again with the next page. Optional GCPD filters: suspect, molecule, fingerprint.',
       inputSchema: {
         city: z.string().describe('City name to center the map on, e.g. "Clermont-Ferrand"'),
+        page: z.number().int().min(1).optional().describe('Page number (1-based, default 1)'),
+        pageSize: z
+          .number()
+          .int()
+          .min(1)
+          .max(MAX_PAGE_SIZE)
+          .optional()
+          .describe(`Items per page (default ${DEFAULT_PAGE_SIZE}, max ${MAX_PAGE_SIZE})`),
         suspect: z.array(z.string()).optional().describe('Filter by suspect name(s)'),
         molecule: z.array(z.string()).optional().describe('Filter by forensic molecule(s)'),
         fingerprint: z.array(z.string()).optional().describe('Filter by fingerprint id(s)'),
+        connectChronologically: z
+          .boolean()
+          .optional()
+          .describe('Connect all crime chronologically, only pass the information if the user explicitly request it'),
       },
       outputSchema: {
         city: z.string(),
         center: crimeLocationSchema,
         crimes: z.array(crimeSchema),
+        pagination: paginationSchema,
       },
       _meta: {
         ui: {
@@ -152,7 +197,9 @@ export const register: Register = (server) => {
         },
       },
     },
-    async ({ city, suspect, molecule, fingerprint }) => {
+    async ({ city, page, pageSize, suspect, molecule, fingerprint, connectChronologically }) => {
+      const resolvedPage = page ?? DEFAULT_PAGE;
+      const resolvedPageSize = pageSize ?? DEFAULT_PAGE_SIZE;
       const center = await geocodeCity(city);
 
       if (!center) {
@@ -171,11 +218,18 @@ export const register: Register = (server) => {
       }
 
       const datasetCrimes = (await response.json()) as Crime[];
-      const crimes = translateCrimesToCenter(datasetCrimes, center);
+      datasetCrimes.forEach((it) => {
+        if (it.suspectPicture) {
+          it.suspectPicture = rewriteAssetOrigin(it.suspectPicture);
+        }
+      });
+      const translatedCrimes = translateCrimesToCenter(datasetCrimes, center);
+      const { crimes, pagination } = paginateCrimes(translatedCrimes, resolvedPage, resolvedPageSize);
+      const payload = { city, center, crimes, pagination, connectChronologically };
 
       return {
-        content: [{ type: 'text', text: JSON.stringify({ city, center, crimes }) }],
-        structuredContent: { city, center, crimes },
+        content: [{ type: 'text', text: JSON.stringify(payload) }],
+        structuredContent: payload,
       };
     },
   );

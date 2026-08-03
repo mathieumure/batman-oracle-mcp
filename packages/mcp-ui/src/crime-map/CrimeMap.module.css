@@ -1,6 +1,6 @@
 .page {
   background: #0a0a0a;
-  min-height: 100vh;
+  min-height: 250px;
   padding: 2rem;
   font-family: 'Georgia', serif;
 }
@@ -16,7 +16,7 @@
 }
 
 .map {
-  height: 480px;
+  height: 528px;
   width: 100%;
   border-radius: 12px;
   border: 2px solid #f5c518;

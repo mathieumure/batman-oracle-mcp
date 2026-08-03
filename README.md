@@ -4,14 +4,14 @@ NX monorepo containing the Batman Oracle MCP server and its supporting packages.
 
 ## Packages
 
-| Package             | Tech                      | Description                              |
-| ------------------- | ------------------------- | ---------------------------------------- |
-| `packages/mcp-ui`   | Vite + React + TypeScript | UI components served by the MCP server   |
-| `packages/mcp`      | Node + TypeScript         | MCP server (`@modelcontextprotocol/sdk`) |
+| Package             | Tech                      | Description                                            |
+| ------------------- | ------------------------- | ------------------------------------------------------ |
+| `packages/mcp-ui`   | Vite + React + TypeScript | UI components served by the MCP server                 |
+| `packages/mcp`      | Node + TypeScript         | MCP server (`@modelcontextprotocol/sdk`)               |
 | `packages/auth`     | Fastify + Better Auth     | OAuth 2.1 authorization server, see [AUTH.md](AUTH.md) |
-| `packages/gcpd-api` | Fastify                   | Mock GCPD API (`/criminals`, `/crimes`)  |
-| `packages/slides`   | Slidev                    | Presentation                             |
-| `packages/data`     | Redis (Docker)            | Data layer                               |
+| `packages/gcpd-api` | Fastify                   | Mock GCPD API (`/criminals`, `/crimes`)                |
+| `packages/slides`   | Slidev                    | Presentation                                           |
+| `packages/data`     | Redis (Docker)            | Data layer                                             |
 
 ## Prerequisites
 

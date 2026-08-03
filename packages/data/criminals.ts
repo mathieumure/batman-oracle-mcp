@@ -1,4 +1,7 @@
 import type { BatmanCriminal } from './src/generate/criminals/index.js';
+import { criminals as specialCriminals } from './src/specials/volcamp-criminals.js';
+
+export type { BatmanCriminal };
 
 export const criminals: BatmanCriminal[] = [
   {
@@ -681,6 +684,7 @@ export const criminals: BatmanCriminal[] = [
       affiliation: [],
     },
   },
+  ...specialCriminals,
   {
     name: 'Polka Dot Man',
     picture:

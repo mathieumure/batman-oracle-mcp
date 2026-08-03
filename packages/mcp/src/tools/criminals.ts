@@ -9,7 +9,8 @@ import { z } from 'zod';
 import { readFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { rewriteAssetOrigin } from '../public-origin.js';
-import { PUBLIC_ORIGIN } from '../config.js';
+import { GCPD_API, PUBLIC_ORIGIN } from '../config.js';
+import type { BatmanCriminal } from '@batman/data/criminals.js';
 
 const resourceURI = 'ui://batman/criminals';
 const meta = {
@@ -48,11 +49,33 @@ export const register: Register = (server) => {
     'get_criminals',
     {
       description: 'Get the list of all criminals from the GCPD database.',
+      inputSchema: {
+        filter: z
+          .object({
+            affiliation: z.string().optional().describe('Filter the list of criminals based on the affiliation'),
+          })
+          .optional()
+          .describe('Optional filtering the list of criminals'),
+      },
       outputSchema: {
         criminals: z.array(
           z.object({
             name: z.string(),
-            picture: z.url(),
+            picture: z.url().nullable(),
+            details: z
+              .object({
+                realName: z.string().nullable(),
+                aliases: z.array(z.string()),
+                relatives: z.array(z.string()),
+                citizenship: z.string().nullable(),
+                gender: z.string().nullable(),
+                height: z.string().nullable(),
+                weight: z.string().nullable(),
+                eyes: z.string().nullable(),
+                hair: z.string().nullable(),
+                affiliation: z.array(z.string()),
+              })
+              .nullable(),
           }),
         ),
       },
@@ -62,10 +85,13 @@ export const register: Register = (server) => {
         },
       },
     },
-    async () => {
-      const criminals = await fetch('http://localhost:8080/criminals')
-        .then((it) => it.json())
-        .then((all: Array<{ name: string; picture: string }>) => all.slice(0, 8).map((v) => ({ name: v.name, picture: v.picture })));
+    async ({ filter }) => {
+      const url = new URL(GCPD_API + '/criminals');
+      if (filter?.affiliation) {
+        url.searchParams.append('affiliation', filter.affiliation);
+      }
+      const rawCriminals = (await fetch(url).then((it) => it.json())) as BatmanCriminal[];
+      const criminals = rawCriminals.map((it) => ({ ...it, picture: it.picture ? rewriteAssetOrigin(it.picture) : it.picture }));
       return {
         content: [{ type: 'text', text: JSON.stringify(criminals) }],
         structuredContent: { criminals },
