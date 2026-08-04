@@ -1,6 +1,6 @@
 import type { BatmanCriminal } from '@batman/data/criminals.js';
 import type { Crime } from '@batman/data/crimes.js';
-import { ApiClient } from './api/apiClient.js';
+import { ApiClient } from './apiClient.js';
 
 type AuthenticatedRequest<T> = T & { token?: string };
 

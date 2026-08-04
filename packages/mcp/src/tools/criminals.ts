@@ -8,7 +8,7 @@ import {
 import { z } from 'zod';
 import { readFile } from 'node:fs/promises';
 import { join } from 'node:path';
-import { GCPDClient } from '../gcpd.api.js';
+import { GCPDClient } from '../api/gcpd.api.js';
 
 const resourceURI = 'ui://batman/criminals';
 const meta = {

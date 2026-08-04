@@ -1,31 +1,10 @@
 import { createServer } from './mcp.js';
 import Fastify, { type FastifyReply, type FastifyRequest } from 'fastify';
-import fastifyStatic from '@fastify/static';
-import fastifyCors from '@fastify/cors';
 import { StreamableHTTPServerTransport } from '@modelcontextprotocol/sdk/server/streamableHttp.js';
 import { isInitializeRequest } from '@modelcontextprotocol/sdk/types.js';
 import { randomUUID } from 'node:crypto';
-import path from 'node:path';
 import { requireBearerAuth } from './auth.js';
-
-const fastify = Fastify({
-  logger: true,
-});
-
-fastify.register(fastifyCors, {
-  origin: '*',
-});
-
-fastify.register(fastifyStatic, {
-  root: path.join(import.meta.dirname, '../../mcp-ui/dist/assets'),
-  prefix: '/assets/',
-});
-
-fastify.register(fastifyStatic, {
-  root: path.join(import.meta.dirname, '../../data/img'),
-  prefix: '/img/',
-  decorateReply: false,
-});
+import { fastify } from './http-server.js';
 
 if (process.env.REQUIRE_AUTH === 'true') {
   fastify.get('/.well-known/oauth-protected-resource', async () => {
