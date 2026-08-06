@@ -1,5 +1,6 @@
 import type { BatmanCriminal } from '@batman/data/criminals.js';
 import type { Crime } from '@batman/data/crimes.js';
+import type { CrimeScene } from '@batman/data/crime-scene.js';
 import { ApiClient } from './apiClient.js';
 
 type AuthenticatedRequest<T> = T & { token?: string };
@@ -28,6 +29,10 @@ class GCPDApiClient extends ApiClient {
     url += `?${searchParams.toString()}`;
 
     return this.fetch(url);
+  }
+
+  async getCrimeScene(): Promise<CrimeScene> {
+    return this.fetch('/crime-scene');
   }
 }
 

@@ -11,6 +11,7 @@ export default defineConfig({
       input: {
         criminals: resolve(import.meta.dirname, 'src/criminals/index.html'),
         'crime-map': resolve(import.meta.dirname, 'src/crime-map/index.html'),
+        'crime-scene': resolve(import.meta.dirname, 'src/crime-scene/index.html'),
       },
     },
   },

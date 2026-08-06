@@ -1,5 +1,6 @@
 import { criminals } from '@batman/data/criminals';
 import { crimes } from '@batman/data/crimes';
+import { crimeScene } from '@batman/data/crime-scene';
 import Fastify from 'fastify';
 import fastifyCors from '@fastify/cors';
 import { filterCrimes, parseCrimeQuery } from './filter-crimes.js';
@@ -45,5 +46,7 @@ fastify.get('/crimes', async (request) => {
     center,
   };
 });
+
+fastify.get('/crime-scene', () => crimeScene);
 
 fastify.listen({ port: 8080 });
