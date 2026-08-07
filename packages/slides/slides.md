@@ -6,19 +6,8 @@ colorSchema: light
 monaco: true
 twoslash: true
 lineNumbers: true
-layout: title
-align: center
-note: 'layout: title — props: align (center/left) · slots: number, default, subtitle'
+layout: splash-screen
 ---
-
-::number::
-01
-
-::default::
-Coucou Double M
-
-::subtitle::
-Un sous-titre pour compléter le message
 
 ---
 layout: title
