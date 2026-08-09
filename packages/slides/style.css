@@ -1,0 +1,12 @@
+:root {
+  --color-yellow: #fdff00;
+  --color-gold: #988829;
+  --color-black: #242424;
+  --color-navy: #282e3c;
+  --color-slate: #505c7c;
+
+  --text-primary: #eeeeee;
+  --text-secondary: #b9c0cf;
+
+  --slidev-theme-primary: var(--color-yellow);
+}
