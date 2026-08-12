@@ -1,10 +1,10 @@
 <script setup>
-import Background from '../components/Background.vue'
+import Background from '../components/Background.vue';
 
 defineProps({
   steps: { type: Number, default: 4 },
   background: { type: String, default: '/assets/images/bg-cave-cove.svg' },
-})
+});
 </script>
 
 <template>

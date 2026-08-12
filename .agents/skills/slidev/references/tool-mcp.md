@@ -28,16 +28,16 @@ slidev mcp [entry]
 
 ## Tools
 
-| Tool | Description |
-| --- | --- |
-| `slidev-get-info` | Deck overview: entry, title, slide count, markdown files, server URL, current position |
-| `slidev-list-slides` | All slides with number, title, layout, source file |
-| `slidev-get-slide` | Full source of one slide: frontmatter, content, note |
-| `slidev-update-slide` | Update content, note, and/or frontmatter of a slide |
-| `slidev-insert-slide` | Insert a new slide after an existing one |
-| `slidev-remove-slide` | Remove a slide |
-| `slidev-move-slide` | Move a slide before/after another to reorder the deck |
-| `slidev-goto-slide` | Navigate the live presentation to a slide (dev server only) |
+| Tool                  | Description                                                                            |
+| --------------------- | -------------------------------------------------------------------------------------- |
+| `slidev-get-info`     | Deck overview: entry, title, slide count, markdown files, server URL, current position |
+| `slidev-list-slides`  | All slides with number, title, layout, source file                                     |
+| `slidev-get-slide`    | Full source of one slide: frontmatter, content, note                                   |
+| `slidev-update-slide` | Update content, note, and/or frontmatter of a slide                                    |
+| `slidev-insert-slide` | Insert a new slide after an existing one                                               |
+| `slidev-remove-slide` | Remove a slide                                                                         |
+| `slidev-move-slide`   | Move a slide before/after another to reorder the deck                                  |
+| `slidev-goto-slide`   | Navigate the live presentation to a slide (dev server only)                            |
 
 ## Behavior
 

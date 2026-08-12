@@ -66,8 +66,7 @@ export const register: Register = (server) => {
     server,
     'get_crime_map',
     {
-      description:
-        'Show paginated crimes on a map centered on a given city. Default page size is 20. When pagination.hasNextPage is true, call again with the next page. Optional GCPD filters: suspect, molecule, fingerprint.',
+      description: 'Show the crimes on a map centered on a given city. Optional GCPD filters: suspect, molecule, fingerprint.',
       inputSchema: {
         city: z.string().describe('City name to center the map on, e.g. "Clermont-Ferrand"'),
         suspect: z.array(z.string()).optional().describe('Filter by suspect name(s)'),
@@ -79,9 +78,13 @@ export const register: Register = (server) => {
           .describe('Connect all crime chronologically, only pass the information if the user explicitly request it'),
       },
       outputSchema: {
-        city: z.string(),
-        center: crimeLocationSchema,
-        crimes: z.array(crimeSchema),
+        crimesInfo: z
+          .object({
+            total: z.number().describe('The total crimes that occures tonight'),
+            molecules: z.array(z.string()).describe('Exhaustive list of the different molecules founded on all the crimes scenes.'),
+            fingerprints: z.array(z.string()).describe('Exhaustive list of the different fingerprints founded on all the crimes scenes.'),
+          })
+          .describe('The information of all the crimes that occures on the city tonight.'),
       },
       _meta: {
         ui: {
@@ -91,11 +94,23 @@ export const register: Register = (server) => {
     },
     async ({ city, suspect, molecule, fingerprint, connectChronologically }) => {
       const { crimes, center } = await GCPDClient.getCrimes({ suspect, molecule, fingerprint, city });
-      const payload = { city, center, crimes, connectChronologically };
+      const payload = {
+        crimesInfo: {
+          total: crimes.length,
+          molecules: Array.from(new Set(crimes.flatMap((it) => it.forensics.molecules))),
+          fingerprints: Array.from(new Set(crimes.flatMap((it) => it.forensics.fingerprints))),
+        },
+      };
 
       return {
         content: [{ type: 'text', text: JSON.stringify(payload) }],
         structuredContent: payload,
+        _meta: {
+          crimes,
+          center,
+          city,
+          connectChronologically,
+        },
       };
     },
   );

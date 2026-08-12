@@ -168,3 +168,24 @@
   font-size: 0.9rem;
   line-height: 1.4;
 }
+
+.evidenceList .evidenceListEmpty {
+  color: #8a1f1f;
+  font-style: italic;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  width: 100%;
+
+  button {
+    background: transparent;
+    border: solid #8a1f1f;
+    border-radius: 3px;
+    padding: 2px 23px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-family: monospace;
+    color: #8a1f1f;
+    cursor: pointer;
+  }
+}

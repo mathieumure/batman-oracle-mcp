@@ -1,20 +1,17 @@
 <script setup>
-import Background from '../components/Background.vue'
+import Background from '../components/Background.vue';
 
 defineProps({
   columns: { type: Number, default: 1 },
   background: { type: String, default: '/assets/images/background.svg' },
-})
+});
 </script>
 
 <template>
   <div class="content-layout">
     <Background :src="background" />
     <h1 v-if="$slots.title" class="content-title"><slot name="title" /></h1>
-    <div
-      class="content-body"
-      :style="{ gridTemplateColumns: columns > 1 ? `repeat(${columns}, 1fr)` : '1fr' }"
-    >
+    <div class="content-body" :style="{ gridTemplateColumns: columns > 1 ? `repeat(${columns}, 1fr)` : '1fr' }">
       <div class="content-col"><slot /></div>
       <div v-if="columns > 1" class="content-col"><slot name="col-2" /></div>
     </div>

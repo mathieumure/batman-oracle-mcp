@@ -11,11 +11,8 @@ Highlight specific lines in code blocks.
 
 ````md
 ```ts {2,3}
-function add(
-  a: Ref<number> | number,
-  b: Ref<number> | number
-) {
-  return computed(() => unref(a) + unref(b))
+function add(a: Ref<number> | number, b: Ref<number> | number) {
+  return computed(() => unref(a) + unref(b));
 }
 ```
 ````
@@ -26,11 +23,8 @@ Use `|` to separate stages:
 
 ````md
 ```ts {2-3|5|all}
-function add(
-  a: Ref<number> | number,
-  b: Ref<number> | number
-) {
-  return computed(() => unref(a) + unref(b))
+function add(a: Ref<number> | number, b: Ref<number> | number) {
+  return computed(() => unref(a) + unref(b));
 }
 ```
 ````

@@ -9,7 +9,7 @@ import { fastify } from './http-server.js';
 if (process.env.REQUIRE_AUTH === 'true') {
   fastify.get('/.well-known/oauth-protected-resource', async () => {
     return {
-      resource: `${process.env.PUBLIC_ORIGIN}/mcp`,
+      resource: `${process.env.MCP_ORIGIN}/mcp`,
       authorization_servers: [process.env.AUTH_ORIGIN],
       scopes_supported: ['mcp:tools'],
     };

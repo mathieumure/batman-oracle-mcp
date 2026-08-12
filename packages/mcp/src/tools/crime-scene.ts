@@ -64,8 +64,8 @@ export const register: Register = (server) => {
         },
       },
     },
-    async () => {
-      const crimeScene = await GCPDClient.getCrimeScene();
+    async (request) => {
+      const crimeScene = await GCPDClient.getCrimeScene(request.authInfo?.token as string);
 
       return {
         content: [{ type: 'text', text: JSON.stringify(crimeScene) }],
@@ -73,4 +73,30 @@ export const register: Register = (server) => {
       };
     },
   );
+
+  server.registerResource('batman_crime_scene_forensics_exhibits', `forensics:/exhibits`, { mimeType: 'application/json' }, async () => {
+    const crimeScene = await GCPDClient.getCrimeSceneWithForensic();
+    return {
+      contents: [
+        {
+          uri: `forensics:/exhibits`,
+          mimeType: 'application/json',
+          text: JSON.stringify(crimeScene.exhibits),
+        },
+      ],
+    };
+  });
+
+  server.registerResource('batman_crime_scene_forensics_residues', `forensics:/residues`, { mimeType: 'application/json' }, async () => {
+    const crimeScene = await GCPDClient.getCrimeSceneWithForensic();
+    return {
+      contents: [
+        {
+          uri: `forensics:/residues`,
+          mimeType: 'application/json',
+          text: JSON.stringify(crimeScene.residues),
+        },
+      ],
+    };
+  });
 };

@@ -10,6 +10,7 @@ When importing slides, frontmatter from main entry takes priority.
 ## Example
 
 Main file (`slides.md`):
+
 ```md
 ---
 src: ./cover.md
@@ -19,6 +20,7 @@ class: text-center
 ```
 
 Imported file (`cover.md`):
+
 ```md
 ---
 layout: cover
@@ -35,7 +37,7 @@ Cover Page
 ```md
 ---
 layout: cover
-background: https://sli.dev/bar.png  # main entry wins
+background: https://sli.dev/bar.png # main entry wins
 class: text-center
 ---
 

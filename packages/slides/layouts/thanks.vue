@@ -1,9 +1,9 @@
 <script setup>
-import Background from '../components/Background.vue'
+import Background from '../components/Background.vue';
 
 defineProps({
   background: { type: String, default: '/assets/images/bg-cave-canyon.svg' },
-})
+});
 </script>
 
 <template>

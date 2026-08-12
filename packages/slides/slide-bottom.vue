@@ -1,7 +1,7 @@
 <script setup>
-import { useSlideContext } from '@slidev/client'
+import { useSlideContext } from '@slidev/client';
 
-const { $frontmatter } = useSlideContext()
+const { $frontmatter } = useSlideContext();
 </script>
 
 <template>
@@ -22,7 +22,7 @@ const { $frontmatter } = useSlideContext()
   background: rgba(0, 0, 0, 0.55);
   backdrop-filter: blur(4px);
   color: var(--color-yellow, #fdff00);
-  font-family: ui-monospace, "SF Mono", "JetBrains Mono", monospace;
+  font-family: ui-monospace, 'SF Mono', 'JetBrains Mono', monospace;
   font-size: 0.75rem;
   text-align: center;
   white-space: nowrap;

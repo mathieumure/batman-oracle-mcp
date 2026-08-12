@@ -73,25 +73,29 @@ Standard Markdown with Shiki highlighting:
 
 ````md
 ```ts
-const hello = 'world'
+const hello = 'world';
 ```
 ````
 
 With features:
-````md
-```ts {2,3}              // Line highlighting
+
+`````md
+````ts {2,3}              // Line highlighting
 ```ts {1|2-3|all}        // Click-based highlighting
 ```ts {monaco}           // Monaco editor
 ```ts {monaco-run}       // Runnable code
 ```ts twoslash           // TypeScript types
-```
 ````
+`````
+
+`````
 
 ## LaTeX Math
 
 Inline: `$E = mc^2$`
 
 Block:
+
 ```md
 $$
 \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}
@@ -101,14 +105,16 @@ $$
 ## Diagrams
 
 Mermaid:
+
 ````md
 ```mermaid
 graph LR
   A --> B --> C
 ```
-````
+`````
 
 PlantUML:
+
 ````md
 ```plantuml
 @startuml
@@ -148,6 +154,7 @@ src: ./pages/intro.md
 ```
 
 Import specific slides:
+
 ```md
 ---
 src: ./other.md#2,5-7

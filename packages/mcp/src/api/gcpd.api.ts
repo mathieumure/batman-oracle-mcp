@@ -31,8 +31,16 @@ class GCPDApiClient extends ApiClient {
     return this.fetch(url);
   }
 
-  async getCrimeScene(): Promise<CrimeScene> {
-    return this.fetch('/crime-scene');
+  async getCrimeScene(auth: string): Promise<CrimeScene> {
+    return this.fetch('/crime-scene', {
+      headers: {
+        Authorization: `Bearer ${auth}`,
+      },
+    });
+  }
+
+  async getCrimeSceneWithForensic(): Promise<CrimeScene> {
+    return this.fetch('/crime-scene/forensics');
   }
 }
 

@@ -36,8 +36,7 @@ Use component syntax `<collection-icon-name />`:
 Style like any HTML element:
 
 ```html
-<uim-rocket class="text-3xl text-red-400 mx-2" />
-<uim-rocket class="text-3xl text-orange-400 animate-ping" />
+<uim-rocket class="text-3xl text-red-400 mx-2" /> <uim-rocket class="text-3xl text-orange-400 animate-ping" />
 ```
 
 ## Browse Icons

@@ -1,10 +1,10 @@
 <script setup>
-import Background from '../components/Background.vue'
+import Background from '../components/Background.vue';
 
 defineProps({
   columns: { type: Number, default: 3 },
   background: { type: String, default: '/assets/images/bg-cave-stalactites.svg' },
-})
+});
 </script>
 
 <template>

@@ -1,8 +1,10 @@
 import styles from './CrimeScene.module.css';
 import type { CrimeScene as CrimeSceneData } from '@batman/data/crime-scene.js';
+import { useState } from 'react';
 
 type Props = {
   crimeScene: CrimeSceneData;
+  onUpdateData: (type: 'exhibits' | 'residues') => Promise<string[]>;
 };
 
 type IconProps = { className?: string };
@@ -76,7 +78,19 @@ const IconTag = ({ className }: IconProps) => (
   </svg>
 );
 
-export const CrimeScene = ({ crimeScene }: Props) => {
+export const CrimeScene = ({ crimeScene, onUpdateData }: Props) => {
+  const [residues, setResidues] = useState(crimeScene.residues);
+  const [exhibits, setExibits] = useState(crimeScene.exhibits);
+
+  const handleUpdateExhibits = () => {
+    onUpdateData('exhibits').then(setExibits);
+  };
+  const handleUpdateResidues = () => {
+    onUpdateData('residues').then(setResidues);
+  };
+
+  console.log('###################', residues);
+
   return (
     <div className={styles.stage}>
       <div className={styles.file}>
@@ -119,7 +133,13 @@ export const CrimeScene = ({ crimeScene }: Props) => {
             Résidus d'analyse
           </h2>
           <ul className={styles.evidenceList}>
-            {crimeScene.residues.map((residue) => (
+            {residues.length === 0 && (
+              <li className={styles.evidenceListEmpty}>
+                <span>En attente des donnée de la police scientifique...</span>
+                <button onClick={handleUpdateResidues}>Sync</button>
+              </li>
+            )}
+            {residues.map((residue) => (
               <li key={residue}>{residue}</li>
             ))}
           </ul>
@@ -131,7 +151,13 @@ export const CrimeScene = ({ crimeScene }: Props) => {
             Pièces à conviction
           </h2>
           <ul className={styles.evidenceList}>
-            {crimeScene.exhibits.map((exhibit) => (
+            {exhibits.length === 0 && (
+              <li className={styles.evidenceListEmpty}>
+                <span>En attente des donnée de la police scientifique...</span>
+                <button onClick={handleUpdateExhibits}>Sync</button>
+              </li>
+            )}
+            {exhibits.map((exhibit) => (
               <li key={exhibit}>{exhibit}</li>
             ))}
           </ul>

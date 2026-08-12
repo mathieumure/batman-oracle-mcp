@@ -1,10 +1,10 @@
 <script setup>
-import Background from '../components/Background.vue'
+import Background from '../components/Background.vue';
 
 defineProps({
   side: { type: String, default: 'right' }, // 'right' | 'left'
   background: { type: String, default: '/assets/images/background.svg' },
-})
+});
 </script>
 
 <template>

@@ -1,19 +1,17 @@
-import { App } from '@modelcontextprotocol/ext-apps';
+import { App, type McpUiToolResultNotification } from '@modelcontextprotocol/ext-apps';
 import { createRoot } from 'react-dom/client';
 import { type MapCenter, CrimeMap } from './CrimeMap.tsx';
 import type { Crime } from './types.ts';
 
 type ToolResult = {
-  structuredContent?: {
-    city: string;
-    center: MapCenter;
-    crimes: Crime[];
-    connectChronologically?: boolean;
-  };
+  city: string;
+  center: MapCenter;
+  crimes: Crime[];
+  connectChronologically?: boolean;
 };
 
-const render = (result: ToolResult) => {
-  const data = result.structuredContent;
+const render = (result: McpUiToolResultNotification['params']) => {
+  const data = result._meta as ToolResult;
   if (!data) return;
   createRoot(document.getElementById('root')!).render(
     <CrimeMap city={data.city} center={data.center} crimes={data.crimes} connectChronologically={data.connectChronologically} />,
@@ -25,7 +23,12 @@ if (import.meta.env.DEV) {
     .then((it) => it.json())
     .then((data) => {
       createRoot(document.getElementById('root')!).render(
-        <CrimeMap city="Clermont-Ferrand" center={{ lat: 45.7797, lng: 3.0863 }} crimes={data as Crime[]} connectChronologically={false} />,
+        <CrimeMap
+          city="Clermont-Ferrand"
+          center={{ lat: 45.7797, lng: 3.0863 }}
+          crimes={data.crimes as Crime[]}
+          connectChronologically={false}
+        />,
       );
     });
 } else {

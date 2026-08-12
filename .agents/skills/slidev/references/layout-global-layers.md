@@ -10,6 +10,7 @@ Create components that persist across slides.
 ## Layer Files
 
 Create in project root:
+
 - `global-top.vue` - Above all slides (single instance)
 - `global-bottom.vue` - Below all slides (single instance)
 - `slide-top.vue` - Above each slide (per-slide instance)
@@ -39,9 +40,7 @@ Create in project root:
 ```html
 <!-- Hide on cover layout -->
 <template>
-  <footer v-if="$nav.currentLayout !== 'cover'" class="absolute bottom-0 p-2">
-    {{ $nav.currentPage }} / {{ $nav.total }}
-  </footer>
+  <footer v-if="$nav.currentLayout !== 'cover'" class="absolute bottom-0 p-2">{{ $nav.currentPage }} / {{ $nav.total }}</footer>
 </template>
 ```
 

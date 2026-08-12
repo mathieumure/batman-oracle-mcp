@@ -10,10 +10,7 @@ export async function requireBearerAuth(req: FastifyRequest, res: FastifyReply):
   const challenge = () => {
     res
       .code(401)
-      .header(
-        'WWW-Authenticate',
-        `Bearer realm="mcp", resource_metadata="${process.env.PUBLIC_ORIGIN}/.well-known/oauth-protected-resource"`,
-      )
+      .header('WWW-Authenticate', `Bearer realm="mcp", resource_metadata="${process.env.MCP_ORIGIN}/.well-known/oauth-protected-resource"`)
       .send();
   };
 
@@ -24,7 +21,7 @@ export async function requireBearerAuth(req: FastifyRequest, res: FastifyReply):
 
   try {
     await verifyAccessToken(token, {
-      verifyOptions: { audience: `${process.env.PUBLIC_ORIGIN}/mcp`, issuer: process.env.AUTH_ORIGIN as string },
+      verifyOptions: { audience: `${process.env.MCP_ORIGIN}/mcp`, issuer: process.env.AUTH_ORIGIN as string },
       scopes: ['mcp:tools'],
       jwksUrl: `${process.env.AUTH_ORIGIN}/jwks`,
     });

@@ -1,12 +1,12 @@
 <script setup>
-import Background from '../components/Background.vue'
+import Background from '../components/Background.vue';
 
 defineProps({
   align: { type: String, default: 'center' }, // 'center' | 'left'
   background: { type: String, default: '/assets/images/bg-cave-drip.svg' },
   numberSize: { type: String, default: '5rem' },
   titleSize: { type: String, default: '5rem' },
-})
+});
 </script>
 
 <template>

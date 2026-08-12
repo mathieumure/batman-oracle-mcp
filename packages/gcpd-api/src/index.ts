@@ -47,6 +47,29 @@ fastify.get('/crimes', async (request) => {
   };
 });
 
-fastify.get('/crime-scene', () => crimeScene);
+function isValidAuth(token: string | undefined): boolean {
+  if (!token || !token.startsWith('Bearer ')) {
+    return false;
+  }
+  try {
+    const payload = JSON.parse(atob(token.replaceAll('Bearer ', '').split('.')[1]));
+    console.log('payload', payload);
+    return payload.iss === (process.env.AUTH_ORIGIN as string) && payload.aud === `${process.env.MCP_ORIGIN}/mcp`;
+  } catch {
+    return false;
+  }
+}
+
+fastify.get('/crime-scene', (request, reply) => {
+  // if (!isValidAuth(request.headers.authorization)) {
+  //   reply.code(401).send('Unauthorized')
+  //   return;
+  // }
+  return { ...crimeScene, residues: [], exhibits: [] };
+});
+
+fastify.get('/crime-scene/forensics', () => {
+  return crimeScene;
+});
 
 fastify.listen({ port: 8080 });

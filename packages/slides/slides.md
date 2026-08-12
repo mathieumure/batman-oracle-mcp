@@ -10,9 +10,11 @@ layout: splash-screen
 ---
 
 ---
+
 layout: title
 align: left
 note: 'Variante: align: left'
+
 ---
 
 ::number::
@@ -25,9 +27,11 @@ Coucou Double M à gauche
 Variante du layout "title" avec align: left
 
 ---
+
 layout: numbers
 columns: 3
 note: 'layout: numbers — props: columns · slots: title, item-1..6 (avec <span class="item-number">)'
+
 ---
 
 ::title::
@@ -55,9 +59,11 @@ Description courte de la section
 Description courte de la section
 
 ---
+
 layout: content
 columns: 2
 note: 'layout: content — props: columns (1 ou 2) · slots: title, default, col-2'
+
 ---
 
 ::title::
@@ -70,9 +76,11 @@ Voici le texte de la première colonne, avec plusieurs lignes pour tester le ren
 Et voici la deuxième colonne, utile pour comparer deux idées côte à côte.
 
 ---
+
 layout: content
 columns: 1
 note: 'Variante: columns: 1'
+
 ---
 
 ::title::
@@ -82,39 +90,47 @@ Une seule colonne
 Quand on n'a pas besoin de comparer deux idées, une seule colonne suffit et le texte prend toute la largeur disponible. Variante du layout "content" avec columns: 1.
 
 ---
+
 layout: grid
 columns: 2
 note: 'layout: grid — props: columns · slots: title, item-1..6'
+
 ---
 
 ::title::
 Une grille 2x2
 
 ::item-1::
+
 ### Élément A
 
 Description de l'élément A
 
 ::item-2::
+
 ### Élément B
 
 Description de l'élément B
 
 ::item-3::
+
 ### Élément C
 
 Description de l'élément C
 
 ::item-4::
+
 ### Élément D
 
 Description de l'élément D
 
 ---
+
 layout: mockup
 side: right
 note: "layout: mockup — props: side (right/left) · slots: title, default,
-  content (libre: texte, image, code...)"
+content (libre: texte, image, code...)"
+
 ---
 
 ::title::
@@ -127,16 +143,18 @@ Le layout "mockup" ne présume plus d'un "écran" — le slot content accepte n'
 <MacWindow title="villain.ts" height="140px">
 
 ```ts
-const villain = 'Joker'
-console.log(`Watch out for ${villain}`)
+const villain = 'Joker';
+console.log(`Watch out for ${villain}`);
 ```
 
 </MacWindow>
 
 ---
+
 layout: mockup
 side: left
 note: "Variante: side: left — ici avec un <ImagePlaceholder> dans le slot content"
+
 ---
 
 ::title::
@@ -149,10 +167,12 @@ Même layout "mockup", avec la prop side: left — le texte passe à droite, le 
 <ImagePlaceholder label="Photo du Batmobile" />
 
 ---
+
 layout: content
 columns: 1
 note: 'composant <MacWindow> (components/MacWindow.vue) — utilisable sur toutes
-  les slides · props: title, height, label'
+les slides · props: title, height, label'
+
 ---
 
 ::title::
@@ -163,87 +183,96 @@ Un bloc de code stylé
 
 ```ts
 interface Gadget {
-  name: string
-  durability: number
+  name: string;
+  durability: number;
 }
 
 class BatCave {
-  private gadgets: Gadget[] = []
+  private gadgets: Gadget[] = [];
 
   stock(gadget: Gadget) {
-    this.gadgets.push(gadget)
-    console.log(`Stocked ${gadget.name}`)
+    this.gadgets.push(gadget);
+    console.log(`Stocked ${gadget.name}`);
   }
 
   findByName(name: string): Gadget | undefined {
-    return this.gadgets.find(g => g.name === name)
+    return this.gadgets.find((g) => g.name === name);
   }
 
   get inventoryCount() {
-    return this.gadgets.length
+    return this.gadgets.length;
   }
 }
 
-const cave = new BatCave()
-cave.stock({ name: 'Batarang', durability: 92 })
-cave.stock({ name: 'Grapnel Gun', durability: 78 })
+const cave = new BatCave();
+cave.stock({ name: 'Batarang', durability: 92 });
+cave.stock({ name: 'Grapnel Gun', durability: 78 });
 
-console.log(`Gadgets ready: ${cave.inventoryCount}`)
+console.log(`Gadgets ready: ${cave.inventoryCount}`);
 ```
 
 </MacWindow>
 
 ---
+
 layout: blank
 background: /assets/images/bg-cave-drip.svg
 note: 'code block: Monaco natif — {monaco} rend le bloc éditable en mémoire (non persisté)'
+
 ---
 
 ::default::
+
 <div class="h-full flex items-center justify-center p-12">
 <MacWindow title="playground.ts" label="Monaco — éditable" height="420px" style="width: 100%">
 
 ```ts {monaco}
 function greet(name: string) {
-  return `Hello, ${name}!`
+  return `Hello, ${name}!`;
 }
 
-console.log(greet('Batman'))
+console.log(greet('Batman'));
 ```
 
 </MacWindow>
 </div>
 
 ---
+
 layout: blank
 background: /assets/images/background.svg
 note: 'code block: twoslash — hover sur les types, erreurs inline via // @errors: <code>'
+
 ---
 
 ::default::
+
 <div class="h-full flex items-center justify-center p-12">
 <MacWindow title="greet.ts" label="TwoSlash" height="420px" style="width: 100%">
 
 ```ts twoslash
 // @errors: 2345
 function greet(name: string) {
-  return `Hello, ${name}!`
+  return `Hello, ${name}!`;
 }
 
-greet(42)
-Untrucaupif
+greet(42);
+Untrucaupif;
 ```
 
 </MacWindow>
 </div>
 
 ---
+
 layout: blank
 background: /assets/images/bg-cave-canyon.svg
 note: 'code block: <<< fichier {monaco-write} — édition liée à un vrai fichier sur disque, sauvegardée directement'
+
 ---
 
 ::default::
+
 <div class="h-full flex items-center justify-center p-12">
 <MacWindow title="editable-example.ts" label="monaco-write" height="420px" style="width: 100%">
 
@@ -253,28 +282,34 @@ note: 'code block: <<< fichier {monaco-write} — édition liée à un vrai fich
 </div>
 
 ---
+
 layout: team
 columns: 2
 note: 'layout: team — props: columns · slots: title, person-1..6 (avec <img> ou placeholder)'
+
 ---
 
 ::title::
 L'équipe
 
 ::person-1::
+
 ### Mathieu Mure
 
 Rôle ou description courte
 
 ::person-2::
+
 ### Mickaël Alves
 
 Rôle ou description courte
 
 ---
+
 layout: blank
 background: /assets/images/background.svg
 note: 'layout: blank — prop: background (vide par défaut) · slot libre (default)'
+
 ---
 
 <div class="h-full flex items-center justify-center text-center">
@@ -285,12 +320,15 @@ note: 'layout: blank — prop: background (vide par défaut) · slot libre (defa
 </div>
 
 ---
+
 layout: blank
 note: "composant <Decoration> (components/Decoration.vue) — seule prop: name
-  (bat-01..bat-08) + style/class"
+(bat-01..bat-08) + style/class"
+
 ---
 
 ::default::
+
 <div class="h-full flex flex-col items-center justify-center gap-10">
   <h1 class="text-4xl font-bold" style="color: var(--text-primary)">Décorations disponibles</h1>
   <div class="grid grid-cols-4 gap-10">
@@ -331,11 +369,14 @@ note: "composant <Decoration> (components/Decoration.vue) — seule prop: name
 </div>
 
 ---
+
 layout: blank
 note: palette définie dans style.css (:root)
+
 ---
 
 ::default::
+
 <div class="h-full flex flex-col items-center justify-center gap-10">
   <h1 class="text-4xl font-bold" style="color: var(--text-primary)">Palette de couleurs</h1>
   <div class="grid grid-cols-5 gap-8">
@@ -378,8 +419,10 @@ note: palette définie dans style.css (:root)
 </div>
 
 ---
+
 layout: thanks
 note: 'layout: thanks — slots: default, question, contact'
+
 ---
 
 ::default::

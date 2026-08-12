@@ -3,7 +3,7 @@ defineProps({
   title: { type: String, default: 'code.ts' },
   height: { type: String, default: '260px' },
   label: { type: String, default: '' },
-})
+});
 </script>
 
 <template>

@@ -1,7 +1,7 @@
 <script setup>
 defineProps({
   name: { type: String, required: true }, // 'bat-01' .. 'bat-08'
-})
+});
 </script>
 
 <template>
