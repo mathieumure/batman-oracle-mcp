@@ -53,7 +53,6 @@ function isValidAuth(token: string | undefined): boolean {
   }
   try {
     const payload = JSON.parse(atob(token.replaceAll('Bearer ', '').split('.')[1]));
-    console.log('payload', payload);
     return payload.iss === (process.env.AUTH_ORIGIN as string) && payload.aud === `${process.env.MCP_ORIGIN}/mcp`;
   } catch {
     return false;
@@ -61,10 +60,10 @@ function isValidAuth(token: string | undefined): boolean {
 }
 
 fastify.get('/crime-scene', (request, reply) => {
-  // if (!isValidAuth(request.headers.authorization)) {
-  //   reply.code(401).send('Unauthorized')
-  //   return;
-  // }
+  if (!isValidAuth(request.headers.authorization)) {
+    reply.code(401).send('Unauthorized');
+    return;
+  }
   return { ...crimeScene, residues: [], exhibits: [] };
 });
 

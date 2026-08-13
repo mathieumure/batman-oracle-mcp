@@ -7,6 +7,7 @@
     "dev:slides": "nx run slides:dev",
     "dev:ui": "nx run mcp-ui:dev",
     "dev:mcp": "nx run mcp:dev",
+    "dev:auth": "nx run auth:dev",
     "fmt": "oxfmt",
     "fmt:check": "oxfmt --check"
   },

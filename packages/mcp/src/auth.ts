@@ -1,5 +1,6 @@
 import type { FastifyReply, FastifyRequest } from 'fastify';
 import { verifyAccessToken } from 'better-auth/oauth2';
+import type { AuthInfo } from '@modelcontextprotocol/sdk/server/auth/types.js';
 
 export async function requireBearerAuth(req: FastifyRequest, res: FastifyReply): Promise<boolean> {
   if (process.env.REQUIRE_AUTH !== 'true') return false;
@@ -20,11 +21,17 @@ export async function requireBearerAuth(req: FastifyRequest, res: FastifyReply):
   }
 
   try {
-    await verifyAccessToken(token, {
+    const result = await verifyAccessToken(token, {
       verifyOptions: { audience: `${process.env.MCP_ORIGIN}/mcp`, issuer: process.env.AUTH_ORIGIN as string },
       scopes: ['mcp:tools'],
       jwksUrl: `${process.env.AUTH_ORIGIN}/jwks`,
     });
+    (req.raw as any).auth = {
+      token,
+      clientId: result.sub as string,
+      scopes: (result.scopes as string[]) ?? ['mcp:tools'],
+      expiresAt: result.exp,
+    } satisfies AuthInfo;
   } catch {
     challenge();
     return true;

@@ -64,8 +64,8 @@ export const register: Register = (server) => {
         },
       },
     },
-    async (request) => {
-      const crimeScene = await GCPDClient.getCrimeScene(request.authInfo?.token as string);
+    async ({ authInfo }) => {
+      const crimeScene = await GCPDClient.getCrimeScene(authInfo?.token as string);
 
       return {
         content: [{ type: 'text', text: JSON.stringify(crimeScene) }],
