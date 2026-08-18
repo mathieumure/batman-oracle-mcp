@@ -7,14 +7,73 @@ monaco: true
 twoslash: true
 lineNumbers: true
 layout: splash-screen
+favicon: './assets/favicon.png'
+---
+<img src="https://www.volcamp.io/asset/images/logo_volcamp.png" />
+---
+layout: title
+align: center
 ---
 
+::number::
+<span style="font-size: 3rem;">Bat Family Assistance Program</span>
+
+::default::
+Police de Clermont-Ferrand
+
+::subtitle::
+How to resolve crimes harder, better, faster, stronger
+
+---
+layout: mockup
+side: right
 ---
 
+::title::
+GCPD API
+
+::default::
+Utiliser la database du crime la plus complète du monde
+
+::content::
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXLbo-aJImYe75g5BFNqFxYTdwwbJAj6whNVM0UDTR8A&s=10" />
+
+---
+layout: blank
+---
+<div style="height:100%;display:flex;">
+    <img src="./assets/murder-scene.jpeg" />
+</div>
+---
+layout: thanks
+note: 'layout: thanks — slots: default, question, contact'
+---
+
+::default::
+SAMPLES
+
+::question::
+DO NOT EDIT
+
+---
+layout: title
+align: center
+note: 'layout: title — props: align (center/left) · slots: number, default, subtitle'
+---
+
+::number::
+01
+
+::default::
+Coucou Double M
+
+::subtitle::
+Un sous-titre pour compléter
+
+---
 layout: title
 align: left
 note: 'Variante: align: left'
-
 ---
 
 ::number::
@@ -27,11 +86,9 @@ Coucou Double M à gauche
 Variante du layout "title" avec align: left
 
 ---
-
 layout: numbers
 columns: 3
 note: 'layout: numbers — props: columns · slots: title, item-1..6 (avec <span class="item-number">)'
-
 ---
 
 ::title::
@@ -59,11 +116,9 @@ Description courte de la section
 Description courte de la section
 
 ---
-
 layout: content
 columns: 2
 note: 'layout: content — props: columns (1 ou 2) · slots: title, default, col-2'
-
 ---
 
 ::title::
@@ -76,11 +131,9 @@ Voici le texte de la première colonne, avec plusieurs lignes pour tester le ren
 Et voici la deuxième colonne, utile pour comparer deux idées côte à côte.
 
 ---
-
 layout: content
 columns: 1
 note: 'Variante: columns: 1'
-
 ---
 
 ::title::
@@ -90,11 +143,9 @@ Une seule colonne
 Quand on n'a pas besoin de comparer deux idées, une seule colonne suffit et le texte prend toute la largeur disponible. Variante du layout "content" avec columns: 1.
 
 ---
-
 layout: grid
 columns: 2
 note: 'layout: grid — props: columns · slots: title, item-1..6'
-
 ---
 
 ::title::
@@ -125,12 +176,9 @@ Description de l'élément C
 Description de l'élément D
 
 ---
-
 layout: mockup
 side: right
-note: "layout: mockup — props: side (right/left) · slots: title, default,
-content (libre: texte, image, code...)"
-
+note: "layout: mockup — props: side (right/left) · slots: title, default, content (libre: texte, image, code...)"
 ---
 
 ::title::
@@ -150,11 +198,9 @@ console.log(`Watch out for ${villain}`);
 </MacWindow>
 
 ---
-
 layout: mockup
 side: left
 note: "Variante: side: left — ici avec un <ImagePlaceholder> dans le slot content"
-
 ---
 
 ::title::
@@ -167,12 +213,9 @@ Même layout "mockup", avec la prop side: left — le texte passe à droite, le 
 <ImagePlaceholder label="Photo du Batmobile" />
 
 ---
-
 layout: content
 columns: 1
-note: 'composant <MacWindow> (components/MacWindow.vue) — utilisable sur toutes
-les slides · props: title, height, label'
-
+note: 'composant <MacWindow> (components/MacWindow.vue) — utilisable sur toutes les slides · props: title, height, label'
 ---
 
 ::title::
@@ -214,11 +257,9 @@ console.log(`Gadgets ready: ${cave.inventoryCount}`);
 </MacWindow>
 
 ---
-
 layout: blank
 background: /assets/images/bg-cave-drip.svg
 note: 'code block: Monaco natif — {monaco} rend le bloc éditable en mémoire (non persisté)'
-
 ---
 
 ::default::
@@ -238,11 +279,9 @@ console.log(greet('Batman'));
 </div>
 
 ---
-
 layout: blank
 background: /assets/images/background.svg
 note: 'code block: twoslash — hover sur les types, erreurs inline via // @errors: <code>'
-
 ---
 
 ::default::
@@ -264,11 +303,9 @@ Untrucaupif;
 </div>
 
 ---
-
 layout: blank
 background: /assets/images/bg-cave-canyon.svg
 note: 'code block: <<< fichier {monaco-write} — édition liée à un vrai fichier sur disque, sauvegardée directement'
-
 ---
 
 ::default::
@@ -282,11 +319,9 @@ note: 'code block: <<< fichier {monaco-write} — édition liée à un vrai fich
 </div>
 
 ---
-
 layout: team
 columns: 2
 note: 'layout: team — props: columns · slots: title, person-1..6 (avec <img> ou placeholder)'
-
 ---
 
 ::title::
@@ -305,11 +340,9 @@ Rôle ou description courte
 Rôle ou description courte
 
 ---
-
 layout: blank
 background: /assets/images/background.svg
 note: 'layout: blank — prop: background (vide par défaut) · slot libre (default)'
-
 ---
 
 <div class="h-full flex items-center justify-center text-center">
@@ -320,11 +353,9 @@ note: 'layout: blank — prop: background (vide par défaut) · slot libre (defa
 </div>
 
 ---
-
 layout: blank
 note: "composant <Decoration> (components/Decoration.vue) — seule prop: name
 (bat-01..bat-08) + style/class"
-
 ---
 
 ::default::
@@ -369,10 +400,8 @@ note: "composant <Decoration> (components/Decoration.vue) — seule prop: name
 </div>
 
 ---
-
 layout: blank
 note: palette définie dans style.css (:root)
-
 ---
 
 ::default::
@@ -419,10 +448,8 @@ note: palette définie dans style.css (:root)
 </div>
 
 ---
-
 layout: thanks
 note: 'layout: thanks — slots: default, question, contact'
-
 ---
 
 ::default::

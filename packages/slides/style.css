@@ -10,3 +10,10 @@
 
   --slidev-theme-primary: var(--color-yellow);
 }
+
+@font-face {
+  font-family: 'Trajan';
+  font-style: normal;
+  font-weight: 400;
+  src: url('./assets/font/TrajanRegular.otf') format('opentype');
+}

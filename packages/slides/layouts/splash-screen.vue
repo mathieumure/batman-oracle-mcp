@@ -1,6 +1,7 @@
 <template>
   <div class="splash-screen-wrapper">
     <video src="../assets/intro.webm" autoplay muted loop />
+    <div class="conference-logo"><slot /></div>
     <div class="splash-screen-content">
       <img src="../assets/splash-screen-logo.png" />
       <h1 class="splash-screen-title">Créer son App<br />dans ChatGPT & Claude</h1>
@@ -9,12 +10,6 @@
 </template>
 
 <style scoped>
-@font-face {
-  font-family: 'Trajan';
-  font-style: normal;
-  font-weight: 400;
-  src: url('../assets/font/TrajanRegular.otf') format('opentype');
-}
 .splash-screen-wrapper {
   position: relative;
   height: 100%;
@@ -30,6 +25,12 @@
     filter: drop-shadow(0px 7px 5px black);
     width: 50%;
     height: auto;
+  }
+
+  .conference-logo {
+    position: absolute;
+    top: 25px;
+    right: 25px;
   }
 }
 

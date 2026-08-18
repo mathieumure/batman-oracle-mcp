@@ -3,4 +3,5 @@ import { defineConfig } from 'oxfmt';
 export default defineConfig({
   printWidth: 140,
   singleQuote: true,
+  ignorePatterns: ['packages/slides/slides.md'],
 });
