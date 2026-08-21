@@ -1,0 +1,3 @@
+---
+src: ./slides/thanks.md
+---
