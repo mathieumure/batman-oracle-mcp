@@ -9,7 +9,7 @@ if (import.meta.env.DEV) {
       createRoot(document.getElementById('root')!).render(<Criminals criminals={data as Criminal[]} />);
     });
 } else {
-  const app = new App({ name: 'DLP Hotels', version: '1.0.0' });
+  const app = new App({ name: 'Batman Oracle', version: '1.0.0' });
 
   app.ontoolresult = (result) => {
     createRoot(document.getElementById('root')!).render(<Criminals criminals={result.structuredContent?.criminals as Criminal[]} />);

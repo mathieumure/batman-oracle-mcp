@@ -4,12 +4,25 @@
   "projectType": "application",
   "sourceRoot": "packages/mcp/src",
   "targets": {
+    "demo": {
+      "continuous": true,
+      "executor": "nx:run-commands",
+      "dependsOn": [
+        { "projects": ["gcpd-api"], "target": "dev" },
+        { "projects": ["auth"], "target": "dev" }
+      ],
+      "options": {
+        "command": "tsx watch demo/main.ts",
+        "cwd": "packages/mcp"
+      }
+    },
     "dev": {
       "continuous": true,
       "executor": "nx:run-commands",
       "dependsOn": [
         { "projects": ["mcp-ui"], "target": "build" },
         { "projects": ["gcpd-api"], "target": "dev" },
+        { "projects": ["auth"], "target": "dev" },
         {
           "target": "inspect"
         }

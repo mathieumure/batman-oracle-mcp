@@ -39,3 +39,29 @@ export async function requireBearerAuth(req: FastifyRequest, res: FastifyReply):
 
   return false;
 }
+
+export async function isAuthenticated(req: FastifyRequest, res: FastifyReply): Promise<boolean> {
+  const authHeader = req.headers['authorization'];
+  const token = typeof authHeader === 'string' && authHeader.startsWith('Bearer ') ? authHeader.slice('Bearer '.length) : undefined;
+
+  if (!token) {
+    return false;
+  }
+
+  try {
+    const result = await verifyAccessToken(token, {
+      verifyOptions: { audience: `${process.env.MCP_ORIGIN}/mcp`, issuer: process.env.AUTH_ORIGIN as string },
+      scopes: ['mcp:tools'],
+      jwksUrl: `${process.env.AUTH_ORIGIN}/jwks`,
+    });
+    (req.raw as any).auth = {
+      token,
+      clientId: result.sub as string,
+      scopes: (result.scopes as string[]) ?? ['mcp:tools'],
+      expiresAt: result.exp,
+    } satisfies AuthInfo;
+    return true;
+  } catch {
+    return false;
+  }
+}

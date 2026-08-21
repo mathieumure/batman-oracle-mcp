@@ -87,16 +87,25 @@ export const register: Register = (server) => {
     };
   });
 
-  server.registerResource('batman_crime_scene_forensics_residues', `forensics:/residues`, { mimeType: 'application/json' }, async () => {
-    const crimeScene = await GCPDClient.getCrimeSceneWithForensic();
-    return {
-      contents: [
-        {
-          uri: `forensics:/residues`,
-          mimeType: 'application/json',
-          text: JSON.stringify(crimeScene.residues),
+  server.registerTool(
+    'get_forensics_residues',
+    {
+      description: 'Get the forensic lab residue analysis for the current crime scene from the GCPD found on site.',
+      outputSchema: {
+        residues: z.array(z.string()),
+      },
+      _meta: {
+        ui: {
+          visibility: ['app'],
         },
-      ],
-    };
-  });
+      },
+    },
+    async () => {
+      const crimeScene = await GCPDClient.getCrimeSceneWithForensic();
+      return {
+        content: [{ type: 'text', text: JSON.stringify({ residues: crimeScene.residues }) }],
+        structuredContent: { residues: crimeScene.residues },
+      };
+    },
+  );
 };
