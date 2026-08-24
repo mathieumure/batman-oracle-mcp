@@ -198,6 +198,9 @@ importers:
       '@slidev/theme-default':
         specifier: ^0.25.0
         version: 0.25.0
+      '@vue/compiler-sfc':
+        specifier: ^3.5.29
+        version: 3.5.40
       vue:
         specifier: ^3.5.29
         version: 3.5.40(typescript@6.0.3)
