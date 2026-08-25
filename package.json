@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev:slides": "nx run slides:dev",
+    "dev:demo": "nx run mcp:demo",
     "dev:ui": "nx run mcp-ui:dev",
     "dev:mcp": "nx run mcp:dev",
     "dev:auth": "nx run auth:dev",
@@ -12,6 +13,7 @@
     "fmt:check": "oxfmt --check"
   },
   "devDependencies": {
+    "@slidev/types": "^52.19.1",
     "nx": "^21.2.2",
     "oxfmt": "^0.57.0"
   },

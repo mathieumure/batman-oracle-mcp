@@ -146,6 +146,7 @@ export const crimeSceneRouteSchema = {
 export const crimeSceneForensicsRouteSchema = {
   description: 'Get full crime scene forensics including residues and exhibits',
   tags: ['crime-scene'],
+  security: [{ bearerAuth: [] }],
   response: {
     200: {
       description: 'Complete crime scene forensics',

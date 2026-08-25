@@ -32,7 +32,7 @@ async function bootstrap() {
       tags: [
         { name: 'criminals', description: 'Batman rogues gallery' },
         { name: 'crimes', description: 'Crime map data' },
-        { name: 'crime-scene', description: 'Crime scene forensics' },
+        { name: 'crime-scene', description: '(Authenticated) Crime scene forensics' },
       ],
       components: {
         securitySchemes: {

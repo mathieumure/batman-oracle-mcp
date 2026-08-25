@@ -7,6 +7,8 @@ monaco: true
 twoslash: true
 lineNumbers: true
 favicon: './assets/favicon.png'
+addons:
+  - livecode
 src: ./pages/00-intro/index.md
 ---
 
