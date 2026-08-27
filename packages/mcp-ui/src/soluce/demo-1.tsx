@@ -1,21 +1,16 @@
 import { App } from '@modelcontextprotocol/ext-apps';
 import { createRoot } from 'react-dom/client';
-import { CrimeMap, type MapCenter } from '../crime-map/CrimeMap.tsx';
-import type { Crime } from '../crime-map/types.ts';
+import { type Criminal, Criminals } from '../criminals/Criminals.tsx';
 
-type Meta = {
-  city: string;
-  center: MapCenter;
-  crimes: Crime[];
-  connectChronologically?: boolean;
-};
-
+// DEMO
 const app = new App({ name: 'Batman Oracle', version: '1.0.0' });
 
 app.addEventListener('toolresult', (result) => {
-
+  const criminals = result.structuredContent?.criminals as Criminal[];
+  createRoot(document.getElementById('root')!).render(<Criminals criminals={criminals} />);
 });
 
 app.connect().catch((err) => {
   console.error('Failed to connect to app', err);
 });
+// END DEMO
