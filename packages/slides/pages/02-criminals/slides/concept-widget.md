@@ -1,12 +1,35 @@
 ---
-layout: content
-columns: 1
+layout: blank
+background: /assets/images/bg-cave-drip.svg
+clicks: 2
+transition: view-transition
 ---
 
-::title::
-C'est quoi une UI MCP ?
+<McpAppChat>
+  <McpAppMessage from="me">Liste les criminels du GCPD.</McpAppMessage>
+  <McpAppMessage :at="1" from="bot" kind="json" />
+  <McpAppMessage :at="2" from="me">🥴</McpAppMessage>
+</McpAppChat>
 
-::default::
-Le tool vient de recracher un JSON. Personne n'enquête là-dessus.
+---
+layout: blank
+background: /assets/images/bg-cave-drip.svg
+clicks: 5
+---
 
-Un tool peut porter un **widget** : une vraie app dans l'hôte, à côté du chat. Il lit une **resource**. Une **meta** sur le tool dit quoi afficher.
+<McpAppRecipe />
+
+---
+layout: blank
+background: /assets/images/bg-cave-drip.svg
+clicks: 1
+transition: view-transition
+---
+
+<McpAppChat pin-bottom>
+  <McpAppMessage from="me">Liste les criminels du GCPD.</McpAppMessage>
+  <McpAppMessage from="bot" kind="json" />
+  <McpAppMessage from="me">🥴</McpAppMessage>
+  <McpAppMessage :at="1" from="bot">Ah tiens, pardon. C'est mieux comme ça.</McpAppMessage>
+  <McpAppMessage :at="1" from="bot" kind="widget" />
+</McpAppChat>

@@ -1,10 +1,9 @@
 ---
-layout: title
-align: center
+layout: blank
+background: /assets/images/bg-cave-drip.svg
 ---
 
-::default::
-Go to Claude
+<DesktopApps />
 
 <!--
 Alt+Tab Claude. Le widget casse. Enchaîner sur la CSP.
