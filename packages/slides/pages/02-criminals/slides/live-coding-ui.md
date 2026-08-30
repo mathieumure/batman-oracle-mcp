@@ -1,5 +1,6 @@
 ---
 layout: blank
+background: /assets/images/bg-cave-drip.svg
 ---
 
 <div class="h-full flex items-center justify-center p-4">
@@ -14,6 +15,7 @@ layout: blank
 
 ---
 layout: blank
+background: /assets/images/bg-cave-drip.svg
 ---
 
 <div class="h-full flex items-center justify-center p-4">
@@ -38,4 +40,3 @@ background: /assets/images/bg-cave-drip.svg
         <iframe src="http://localhost:6274/" height="500px" style="width: 100%" />
     </MacWindow>
 </div>
----

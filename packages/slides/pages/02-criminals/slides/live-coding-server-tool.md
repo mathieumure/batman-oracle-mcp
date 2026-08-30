@@ -1,5 +1,6 @@
 ---
 layout: blank
+background: /assets/images/bg-cave-drip.svg
 ---
 
 <div class="h-full flex items-center justify-center p-4">
