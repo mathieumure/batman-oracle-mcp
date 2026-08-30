@@ -48,7 +48,14 @@ defineProps({
   text-align: center;
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.team-member :deep(> *) {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .team-member::before {
   content: '';
@@ -60,23 +67,34 @@ defineProps({
   background: var(--color-slate, #ccc);
   opacity: 0.5;
 }
-.team-member:has(:deep(img))::before {
+.team-member:has(:deep(img.avatar))::before {
   display: none;
 }
-.team-member :deep(img) {
+.team-member :deep(img.avatar) {
+  display: block;
   width: 10rem;
   height: 10rem;
   border-radius: 999px;
   object-fit: cover;
-  margin-bottom: 0.75rem;
   border: 3px solid #fff;
 }
 .team-member :deep(h3) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
   margin: 0;
   font-size: 2rem;
   text-transform: uppercase;
   font-weight: 700;
   color: var(--text-primary, #fff);
+}
+.team-member :deep(img.company) {
+  width: auto;
+  height: 1.7rem;
+  border: 0;
+  border-radius: 0;
+  object-fit: contain;
 }
 .team-member :deep(p) {
   margin: 0.25rem 0 0;
