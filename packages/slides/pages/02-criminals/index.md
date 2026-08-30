@@ -3,11 +3,7 @@ src: ./slides/gcpd-api.md
 ---
 
 ---
-src: ./slides/context.md
----
-
----
-src: ./slides/concept-mcp-tool.md
+src: ./slides/concept-mcp.md
 ---
 
 ---
@@ -20,6 +16,10 @@ src: ./slides/concept-widget.md
 
 ---
 src: ./slides/live-coding-ui.md
+---
+
+---
+src: ./slides/go-to-claude.md
 ---
 
 ---

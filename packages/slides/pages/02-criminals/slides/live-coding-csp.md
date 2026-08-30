@@ -12,10 +12,6 @@ layout: blank
             hideStatusBar />
 </div>
 
-<!--
-Démo : suite de 01-criminal-tools.ts — ajout de la resource, ajout de la meta dans le tool, UI branchée.
-Démo dans Claude : ça foire (cf. DEMO.md 1.2.4) — sert de transition vers le concept CSP.
--->
 ---
 layout: blank
 background: /assets/images/bg-cave-drip.svg

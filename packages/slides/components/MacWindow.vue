@@ -3,6 +3,7 @@ defineProps({
   title: { type: String, default: 'code.ts' },
   height: { type: String, default: '260px' },
   label: { type: String, default: '' },
+  contentBg: { type: String, default: '' },
 });
 </script>
 
@@ -16,7 +17,7 @@ defineProps({
       <span v-if="label" class="mac-label">{{ label }}</span>
       <slot name="titlebar-actions" />
     </div>
-    <div class="mac-content" :style="{ height }">
+    <div class="mac-content" :style="{ height, background: contentBg || undefined }">
       <slot />
     </div>
   </div>

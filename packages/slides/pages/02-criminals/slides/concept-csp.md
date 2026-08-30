@@ -7,10 +7,6 @@ columns: 1
 C'est quoi la CSP ?
 
 ::default::
-Le widget tourne sandboxé : la Content-Security-Policy dit ce qu'il a le droit de charger et de contacter.
+On vient de le voir : le widget ne s'affiche pas. L'hôte le met dans un sandbox, et par défaut il n'a le droit de rien charger.
 
-Sans elle, l'hôte bloque le widget par sécurité — c'est pour ça que « tout foire ».
-
-<!--
-Concept juste après le moment "tout foire" : explique pourquoi, avant le fix CSP en live.
--->
+La Content-Security-Policy dit ce que le widget peut charger et contacter. Sans elle, Claude bloque. C'est normal. C'est même voulu.

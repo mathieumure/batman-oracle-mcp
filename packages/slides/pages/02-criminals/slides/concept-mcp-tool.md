@@ -7,10 +7,6 @@ columns: 1
 C'est quoi un serveur MCP ?
 
 ::default::
-Un serveur qui expose des **tools** (des actions appelables) et des **resources** (des données lisibles) à un LLM.
+Le protocole ne suffit pas. Quelqu'un doit exposer le GCPD.
 
-Rien d'autre pour l'instant : pas d'UI, juste un protocole.
-
-<!--
-Concept avant démo 1 : poser le vocabulaire (serveur, tool) avant de coder le serveur nu + le premier tool sans UI.
--->
+Un **serveur** MCP publie des **tools** : des actions. Et des **resources** : des données à lire. Pour l'instant, pas d'UI. Juste le câble.

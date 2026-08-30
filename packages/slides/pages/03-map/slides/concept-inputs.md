@@ -7,10 +7,6 @@ columns: 1
 Un tool, des filtres
 
 ::default::
-Le tool carte a un schéma d'input : ville, suspect, molécule, empreinte, tri chronologique.
+Une carte avec tous les crimes d'un coup, c'est illisible. Il faut pouvoir zoomer : cette ville, ce suspect, cette molécule.
 
-Ces filtres peuvent venir de l'agent... ou directement de l'utilisateur, dans l'UI.
-
-<!--
-Concept avant démo 1 : le schéma d'input du tool crime-map, avant de le montrer en action.
--->
+Le tool carte a un schéma d'input. L'agent peut remplir ces filtres. Toi aussi, directement dans l'UI.

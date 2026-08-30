@@ -7,10 +7,6 @@ columns: 1
 Le widget peut parler tout seul
 
 ::default::
-Un tool ou une resource peut être marqué `visibility: ['app']` : caché au LLM, mais appelable directement par le widget.
+On ne va pas demander à Claude de rafraîchir les indices à chaque clic. Trop lent, et ça pollue le chat.
 
-Le bouton « Sync » va chercher les indices sans repasser par l'agent.
-
-<!--
-Concept avant démo 2 : le vrai sens de "communication hôte ↔ app", avant de montrer le bouton Sync en live.
--->
+Un tool marqué `visibility: ['app']` est caché au LLM. Le bouton Sync l'appelle tout seul.

@@ -7,11 +7,11 @@ columns: 2
 Deux publics, deux payloads
 
 ::default::
-**L'agent voit** : des agrégats (total, molécules, empreintes).
+L'agent n'a pas besoin de chaque GPS. S'il avale la liste complète, le contexte explose.
+
+Il reçoit des agrégats : total, molécules, empreintes.
 
 ::col-2::
-**Le widget voit** : la liste complète des crimes, avec coordonnées, via `_meta`.
+Le widget, si. Il doit poser les pins.
 
-<!--
-Concept juste après les filtres : le vrai split structuredContent (agent) vs _meta (widget), avant de le montrer en live.
--->
+La liste complète passe dans `_meta`. L'agent ne voit pas ça.

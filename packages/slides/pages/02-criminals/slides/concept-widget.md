@@ -7,10 +7,6 @@ columns: 1
 C'est quoi une UI MCP ?
 
 ::default::
-Un tool peut porter un **widget** : une app qui s'affiche dans l'hôte, à côté de la conversation.
+Le tool vient de recracher un JSON. Personne n'enquête là-dessus.
 
-Le widget est branché sur une **resource** ; le tool y ajoute une **meta** pour dire quoi afficher.
-
-<!--
-Concept avant démo 2 : introduire widget/resource/meta avant de les brancher en live.
--->
+Un tool peut porter un **widget** : une vraie app dans l'hôte, à côté du chat. Il lit une **resource**. Une **meta** sur le tool dit quoi afficher.

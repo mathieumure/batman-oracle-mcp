@@ -7,10 +7,6 @@ columns: 1
 S'authentifier
 
 ::default::
-La scène de crime d'Alfred est protégée par un vrai flow OAuth2 (Better Auth).
+La scène d'Alfred n'est pas le Swagger du GCPD. On n'ouvre pas une scène de crime à n'importe qui.
 
-Comme n'importe quelle API : pas d'accès sans login.
-
-<!--
-Concept avant démo 1 : poser l'auth avant de la montrer en live.
--->
+OAuth2, Better Auth. Comme n'importe quelle API : pas de login, pas d'accès.
