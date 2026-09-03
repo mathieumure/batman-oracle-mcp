@@ -52,4 +52,66 @@
     "body": ["content: [{ type: 'text', text: $2 }],"],
     "include": ["**/demo/01-criminal-tools.ts"],
   },
+"criminal-tools meta": {
+    "scope": "javascript,typescript",
+    "prefix": "--demo-tool-meta",
+    "body": [
+        "_meta: {",
+        "\tui: {",
+        "\t\tresourceUri: 'ui://get_criminals',",
+        "\t},",
+        "},",
+    ],
+    "include": ["**/demo/01-criminal-tools.ts"],
+  },
+"criminal-tools - ressource - mimeType": {
+    "scope": "javascript,typescript",
+    "prefix": "--demo-tool-mimeType",
+    "body": [
+        "'text/html;profile=mcp-app'"
+    ],
+    "include": ["**/demo/01-criminal-tools.ts"],
+  },
+"criminal-tools - ressource - fileload": {
+    "scope": "javascript,typescript",
+    "prefix": "--demo-tool-file",
+    "body": [
+        "const html = await resolveDistFiles('src/criminals/index.html');"
+    ],
+    "include": ["**/demo/01-criminal-tools.ts"],
+  },
+"criminal-tools - ressource - result": {
+    "scope": "javascript,typescript",
+    "prefix": "--demo-tool-resource-result",
+    "body": [
+        "contents: [{",
+        "\turi: 'ui://get_criminals',",
+        "\tmimeType: 'text/html;profile=mcp-app',",
+        "\ttext: html,",
+        "}],",
+    ],
+    "include": ["**/demo/01-criminal-tools.ts"],
+  },
+  "criminal-tools ui": {
+    "scope": "javascript,typescript,javascriptreact,typescriptreact",
+    "prefix": "--demo-app",
+    "body": ["const app = new App({ name: '$1', version: '$2' });"],
+    "include": ["**/demo/criminals.tsx"],
+  },
+  "criminal-tools handler": {
+     "scope": "javascript,typescript,javascriptreact,typescriptreact",
+    "prefix": "--demo-handler",
+    "body": [
+      "const criminals = data.structuredContent?.criminals as Criminal[];",
+    ],
+    "include": ["**/demo/criminals.tsx"],
+  },
+  "criminal-tools react": {
+     "scope": "javascript,typescript,javascriptreact,typescriptreact",
+    "prefix": "--demo-react",
+    "body": [
+      "createRoot(document.getElementById('root')!).render($1);",
+    ],
+    "include": ["**/demo/criminals.tsx"],
+  }
 }

@@ -5,7 +5,7 @@ background: /assets/images/bg-cave-drip.svg
 
 <div class="h-full flex items-center justify-center p-4">
     <Editor
-        session="demo"
+        session="demo-1-ui"
         defaultFolder="../.."
         openFile="../../packages/mcp-ui/src/demo/criminals.tsx"
         hideMinimap
@@ -14,27 +14,8 @@ background: /assets/images/bg-cave-drip.svg
 </div>
 
 ---
-
 layout: blank
 background: /assets/images/bg-cave-drip.svg
-
----
-
-<div class="h-full flex items-center justify-center p-4">
-    <Editor
-            session="demo"
-            defaultFolder="../mcp/demo"
-            file="./01-criminal-tools.ts"
-            hideMinimap
-            hideActivityBar
-            hideStatusBar />
-</div>
-
----
-
-layout: blank
-background: /assets/images/bg-cave-drip.svg
-
 ---
 
 ::default::

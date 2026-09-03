@@ -7,17 +7,15 @@ background: /assets/images/bg-cave-drip.svg
     <Editor
             session="demo"
             defaultFolder="../.."
-            file="./packages/mcp/demo/01-criminal-tools.ts"
+            openFile="./packages/mcp/demo/01-criminal-tools.ts"
             hideMinimap
             hideActivityBar
             hideStatusBar />
 </div>
 
 ---
-
 layout: blank
 background: /assets/images/bg-cave-drip.svg
-
 ---
 
 ::default::

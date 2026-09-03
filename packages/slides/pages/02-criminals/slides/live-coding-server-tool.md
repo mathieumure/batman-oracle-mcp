@@ -14,10 +14,8 @@ background: /assets/images/bg-cave-drip.svg
 </div>
 
 ---
-
 layout: blank
 background: /assets/images/bg-cave-drip.svg
-
 ---
 
 <InspectorTerminal />

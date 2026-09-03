@@ -12,7 +12,8 @@
       "options": {
         "command": "pnpm dev",
         "cwd": "{projectRoot}"
-      }
+      },
+      "continuous": true
     },
     "build": {
       "executor": "nx:run-commands",
