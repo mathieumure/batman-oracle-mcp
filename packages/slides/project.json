@@ -5,6 +5,10 @@
   "targets": {
     "dev": {
       "executor": "nx:run-commands",
+      "dependsOn": [
+        { "projects": ["mcp"], "target": "demo" },
+        { "projects": ["mcp"], "target": "inspect" }
+      ],
       "options": {
         "command": "pnpm dev",
         "cwd": "{projectRoot}"

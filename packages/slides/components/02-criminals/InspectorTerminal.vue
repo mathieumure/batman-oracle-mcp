@@ -1,25 +1,23 @@
 <script setup>
 import { ref, watch } from 'vue';
 import { onSlideLeave, useNav } from '@slidev/client';
+import ScaledIframe from '../ScaledIframe.vue';
 
 const WAIT_MS = 1400;
 const { clicks } = useNav();
 const showInspector = ref(false);
 let timer;
 
-watch(
-  clicks,
-  (n) => {
-    clearTimeout(timer);
-    if (n >= 2) {
-      timer = setTimeout(() => {
-        showInspector.value = true;
-      }, WAIT_MS);
-      return;
-    }
-    showInspector.value = false;
-  },
-);
+watch(clicks, (n) => {
+  clearTimeout(timer);
+  if (n >= 2) {
+    timer = setTimeout(() => {
+      showInspector.value = true;
+    }, WAIT_MS);
+    return;
+  }
+  showInspector.value = false;
+});
 
 onSlideLeave(() => {
   clearTimeout(timer);
@@ -50,7 +48,7 @@ onSlideLeave(() => {
     <div v-if="showInspector" class="inspector-overlay">
       <div class="inspector-win">
         <MacWindow title="MCP Inspector" height="500px" style="width: 100%">
-          <iframe src="http://localhost:6274/" height="500px" style="width: 100%; border: 0" />
+          <ScaledIframe src="http://localhost:6274/" />
         </MacWindow>
       </div>
     </div>

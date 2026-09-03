@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue';
 import { onSlideLeave } from '@slidev/client';
+import ScaledIframe from '../ScaledIframe.vue';
 
 const open = ref(false);
 
@@ -21,18 +22,8 @@ onSlideLeave(() => {
         <button type="button" class="gcpd-cta" @click.stop="consult">
           <svg class="gcpd-cta-icon" viewBox="0 0 24 24" aria-hidden="true">
             <ellipse cx="12" cy="6" rx="7" ry="2.6" fill="none" stroke="currentColor" stroke-width="1.7" />
-            <path
-              d="M5 6v8.5c0 1.5 3.1 2.6 7 2.6s7-1.1 7-2.6V6"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.7"
-            />
-            <path
-              d="M5 10.2c0 1.5 3.1 2.6 7 2.6s7-1.1 7-2.6"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.7"
-            />
+            <path d="M5 6v8.5c0 1.5 3.1 2.6 7 2.6s7-1.1 7-2.6V6" fill="none" stroke="currentColor" stroke-width="1.7" />
+            <path d="M5 10.2c0 1.5 3.1 2.6 7 2.6s7-1.1 7-2.6" fill="none" stroke="currentColor" stroke-width="1.7" />
           </svg>
           Consulter la base de données
         </button>
@@ -42,7 +33,7 @@ onSlideLeave(() => {
     <div v-if="open" class="gcpd-overlay" @click.stop>
       <div class="gcpd-swagger" :class="{ in: open }">
         <MacWindow title="https://api.gcpd.com/swagger" height="500px" style="width: 100%">
-          <iframe src="http://127.0.0.1:8080/swagger" height="500px" style="width: 100%; border: 0" />
+          <ScaledIframe src="http://127.0.0.1:8080/swagger" />
         </MacWindow>
       </div>
     </div>

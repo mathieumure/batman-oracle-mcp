@@ -1,15 +1,20 @@
 <script setup>
 import { useNav } from '@slidev/client';
+import { useTemplateRef } from 'vue';
 
 const { nextSlide } = useNav();
+const buttonRef = useTemplateRef('usb-toast');
 
 function openDevice() {
-  nextSlide();
+  buttonRef.value.classList.add('move-down');
+  setTimeout(() => {
+    nextSlide();
+  }, 100);
 }
 </script>
 
 <template>
-  <button type="button" class="usb-toast" @click.stop="openDevice">
+  <button type="button" class="usb-toast" @click.stop="openDevice" ref="usb-toast">
     <span class="usb-icon" aria-hidden="true">
       <svg viewBox="0 0 24 24" fill="none">
         <path d="M8 8V4h3v4h2V4h3v4" stroke="currentColor" stroke-width="1.6" />
@@ -28,6 +33,21 @@ function openDevice() {
 </template>
 
 <style scoped>
+.slidev-vclick-current {
+  transform: translateX(0%);
+  opacity: 1;
+}
+
+.slidev-vclick-hidden {
+  transform: translateX(100%);
+  opacity: 0;
+}
+
+.move-down {
+  opacity: 0;
+  transform: translateY(100%);
+}
+
 .usb-toast {
   position: absolute;
   top: 2.2rem;
@@ -45,6 +65,7 @@ function openDevice() {
   color: var(--text-primary);
   text-align: left;
   cursor: pointer;
+  transition: 0.3s all;
 }
 
 .usb-toast:hover {

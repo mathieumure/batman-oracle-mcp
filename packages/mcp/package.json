@@ -7,7 +7,7 @@
     "build": "tsup src/index.ts 'src/tools/*.ts' --format esm --clean",
     "serve": "node dist/index.js",
     "dev": "nx dev",
-    "inspect": "mcp-inspector"
+    "inspect": "DANGEROUSLY_OMIT_AUTH=true MCP_AUTO_OPEN_ENABLED=false mcp-inspector"
   },
   "dependencies": {
     "@batman/data": "workspace:",
