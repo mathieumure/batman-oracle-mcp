@@ -113,5 +113,15 @@
       "createRoot(document.getElementById('root')!).render($1);",
     ],
     "include": ["**/demo/criminals.tsx"],
-  }
+  },
+"criminal-tools - csp": {
+    "scope": "javascript,typescript",
+    "prefix": "--demo-tool-csp",
+    "body": [
+        "const csp = {",
+        "\tresourceDomains: [process.env.MCP_ORIGIN, 'https://static.wikia.nocookie.net'],",
+        "};",
+    ],
+    "include": ["**/demo/01-criminal-tools.ts"],
+  },
 }

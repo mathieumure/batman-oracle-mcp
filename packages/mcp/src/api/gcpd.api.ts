@@ -3,10 +3,8 @@ import type { Crime } from '@batman/data/crimes.js';
 import type { CrimeScene } from '@batman/data/crime-scene.js';
 import { ApiClient } from './apiClient.js';
 
-type AuthenticatedRequest<T> = T & { token?: string };
-
 class GCPDApiClient extends ApiClient {
-  async getCriminals(options?: AuthenticatedRequest<{ affiliation?: string }>): Promise<BatmanCriminal[]> {
+  async getCriminals(options?: { affiliation?: string }): Promise<BatmanCriminal[]> {
     let url = '/criminals';
     const searchParams = new URLSearchParams();
     if (options?.affiliation) {
@@ -17,7 +15,7 @@ class GCPDApiClient extends ApiClient {
   }
 
   async getCrimes(
-    options: AuthenticatedRequest<{ city: string; suspect?: string[]; molecule?: string[]; fingerprint?: string[] }>,
+    options: { city: string; suspect?: string[]; molecule?: string[]; fingerprint?: string[] },
   ): Promise<{ crimes: Crime[]; center: { lat: number; lng: number } }> {
     let url = '/crimes';
     const searchParams = new URLSearchParams();
