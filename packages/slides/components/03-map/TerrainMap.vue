@@ -84,7 +84,7 @@ const extra = [
           d="M430 150 h90 v70 h-90 z M250 200 h70 v50 h-70 z M580 250 h80 v60 h-80 z"
         />
       </svg>
-      <MapPin
+      <CrimePin
         v-for="pin in pins"
         :key="pin.name"
         :name="pin.name"
@@ -92,7 +92,7 @@ const extra = [
         :style="{ left: pin.x + '%', top: pin.y + '%' }"
       />
       <template v-for="(pos, i) in extra" :key="'extra-' + i">
-        <MapPin
+        <CrimePin
           v-if="flood"
           :name="'extra-' + i"
           class="spot extra"

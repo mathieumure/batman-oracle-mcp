@@ -21,9 +21,9 @@ const showNeed = computed(() => clicks.value >= 3);
     <div v-if="showPositions" class="row pop">
       <p>Positions</p>
       <div class="pins">
-        <MapPin name="recap-loc-1" />
+        <CrimePin name="recap-loc-1" />
         <span class="trail" />
-        <MapPin name="recap-loc-2" />
+        <CrimePin name="recap-loc-2" />
       </div>
       <span class="check">✓</span>
     </div>

@@ -35,7 +35,7 @@ const showPins = computed(() => clicks.value >= 1);
             <span class="skel line" />
             <span class="skel line short" />
             <span class="pin-slot">
-              <MapPin v-if="showPins" class="pop" :name="`terrain-pin-${n}`" />
+              <CrimePin v-if="showPins" class="pop" :name="`terrain-pin-${n}`" />
             </span>
           </div>
         </div>
