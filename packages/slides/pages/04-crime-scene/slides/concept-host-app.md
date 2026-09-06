@@ -1,12 +1,14 @@
 ---
-layout: content
-columns: 1
+layout: blank
+background: /assets/images/bg-cave-drip.svg
 ---
 
-::title::
-Le widget peut parler tout seul
+<McpHostApp />
 
-::default::
-On ne va pas demander à Claude de rafraîchir les indices à chaque clic. Trop lent, et ça pollue le chat.
+<!--
+Chat. Ça passe par l'agent. Un nouveau widget.
 
-Un tool marqué `visibility: ['app']` est caché au LLM. Le bouton Sync l'appelle tout seul.
+Sync. L'hôte appelle. Même widget. Pas un nouveau.
+
+visibility: ['app']. Le modèle ne voit rien.
+-->

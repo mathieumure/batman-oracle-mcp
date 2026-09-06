@@ -4,6 +4,10 @@ import { onSlideEnter, useNav } from '@slidev/client';
 
 const props = defineProps({
   pinBottom: { type: Boolean, default: false },
+  height: { type: String, default: '480px' },
+  width: { type: String, default: 'min(78%, 720px)' },
+  input: { type: String, default: '' },
+  scrollKey: { type: [Number, String], default: 0 },
 });
 
 const { clicks } = useNav();
@@ -17,11 +21,12 @@ async function stickBottom() {
 
 onSlideEnter(stickBottom);
 watch(clicks, stickBottom);
+watch(() => [props.input, props.scrollKey], stickBottom);
 </script>
 
 <template>
   <div class="chat">
-    <MacWindow title="claude.ai" height="480px" content-bg="#1a1a1a" style="width: min(78%, 720px)">
+    <MacWindow title="claude.ai" :height="height" content-bg="#1a1a1a" :style="{ width }">
       <div class="claude">
         <div class="claude-top">
           <img class="brand-logo" src="../../pages/02-criminals/assets/logos/claude.svg" alt="" />
@@ -31,7 +36,9 @@ watch(clicks, stickBottom);
           <slot />
         </div>
         <div class="claude-input">
-          <span class="claude-placeholder">Répondre à Claude…</span>
+          <span class="claude-placeholder" :class="{ live: input }">
+            {{ input || 'Répondre à Claude…' }}<span v-if="input" class="caret" />
+          </span>
           <span class="claude-send" />
         </div>
       </div>
@@ -103,6 +110,26 @@ watch(clicks, stickBottom);
   flex: 1;
   font-size: 0.66rem;
   color: #777;
+}
+
+.claude-placeholder.live {
+  color: #eee;
+}
+
+.caret {
+  display: inline-block;
+  width: 1px;
+  height: 0.85em;
+  margin-left: 1px;
+  background: #eee;
+  vertical-align: text-bottom;
+  animation: blink 0.8s step-end infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
 }
 
 .claude-send {

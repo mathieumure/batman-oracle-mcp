@@ -1,12 +1,11 @@
 ---
-layout: content
-columns: 1
+layout: blank
+background: /assets/images/bg-cave-drip.svg
 ---
 
-::title::
-La scène d'Alfred
+<GcpdCrimeGate />
 
-::default::
-Il faut s'authentifier pour accéder à sa scène de crime.
-
-Et cette fois, l'app va parler directement à l'hôte, sans repasser par l'agent.
+<!--
+Le site du GCPD. La scène d'Alfred est derrière.
+Cadenas. Pas de login, pas d'accès.
+-->

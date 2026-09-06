@@ -1,12 +1,15 @@
 ---
-layout: content
-columns: 1
+layout: blank
+background: /assets/images/bg-cave-drip.svg
+clicks: 4
 ---
 
-::title::
-S'authentifier
+<McpAuth />
 
-::default::
-La scène d'Alfred n'est pas le Swagger du GCPD. On n'ouvre pas une scène de crime à n'importe qui.
+<!--
+Si nous on est bloqué, on le sera aussi avec l'agent.
 
-OAuth2, Better Auth. Comme n'importe quelle API : pas de login, pas d'accès.
+401. WWW-Authenticate. Claude ouvre le login.
+
+OAuth. authorization_servers. mcp:tools. Bearer, le tool répond.
+-->
