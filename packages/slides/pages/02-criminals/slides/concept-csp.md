@@ -1,12 +1,23 @@
 ---
-layout: content
-columns: 1
+layout: blank
+background: /assets/images/bg-cave-drip.svg
+clicks: 6
 ---
 
-::title::
-C'est quoi la CSP ?
+<McpAppCsp />
 
-::default::
-On vient de le voir : le widget ne s'affiche pas. L'hôte le met dans un sandbox, et par défaut il n'a le droit de rien charger.
+<!--
+Ce n'est pas un bug. Claude n'a pas foiré.
 
-La Content-Security-Policy dit ce que le widget peut charger et contacter. Sans elle, Claude bloque. C'est normal. C'est même voulu.
+Notre iframe. Seule, pour l'instant.
+
+L'iframe parle au dehors. Images, fetch.
+
+Sandbox. L'hôte enferme le widget.
+
+Wikia. Bloqué. Deny by default. Content Security Policy.
+
+On déclare _meta.ui.csp sur la resource.
+
+L'hôte en fait un header. resourceDomains devient img-src. Les photos passent.
+-->

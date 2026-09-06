@@ -1,12 +1,13 @@
 ---
-layout: content
-columns: 1
+layout: blank
+background: /assets/images/bg-cave-drip.svg
+clicks: 1
+transition: view-transition
 ---
 
-::title::
-Une première interface
+<McpAppRecap />
 
-::default::
-Une UI propre, en lecture seule, qui parle au tool MCP.
-
-Ce qu'Alfred subissait en JSON brut, on le voit enfin clairement.
+<!--
+Une UI en lecture seule. Branchée sur le tool.
+Fini le JSON de 24 000 lignes.
+-->
