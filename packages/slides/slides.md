@@ -36,7 +36,3 @@ src: ./pages/05-prime-suspects/index.md
 ---
 src: ./pages/06-closing/index.md
 ---
-
----
-src: ./pages/samples/index.md
----
