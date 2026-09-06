@@ -1,17 +1,33 @@
 ---
-layout: content
-columns: 2
+layout: blank
+background: /assets/images/bg-cave-drip.svg
+clicks: 1
+transition: view-transition
 ---
 
-::title::
-Deux publics, deux payloads
+<MapDataSplit />
 
-::default::
-L'agent n'a pas besoin de chaque GPS. S'il avale la liste complète, le contexte explose.
+<!--
+structuredContent. Le serveur MCP le renvoie à l'agent. Jauge à zéro.
 
-Il reçoit des agrégats : total, molécules, empreintes.
+Tous les GPS. Le contexte passe au rouge.
+-->
 
-::col-2::
-Le widget, si. Il doit poser les pins.
+---
+layout: blank
+background: /assets/images/bg-cave-drip.svg
+clicks: 1
+transition: view-transition
+---
 
-La liste complète passe dans `_meta`. L'agent ne voit pas ça.
+<MapDataSplit :split="true" />
+
+<!--
+Crime Map renvoie les deux.
+
+structuredContent. Ce que Claude lit. Un résumé. 47 crimes à Gotham. Pas les GPS.
+
+_meta. La liste. Croix rouge. Ça n'entre pas dans le contexte.
+
+La croix saute. Le widget prend _meta. L'iframe. Les pins.
+-->

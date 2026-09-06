@@ -1,12 +1,14 @@
 ---
-layout: content
-columns: 1
+layout: blank
+background: /assets/images/bg-cave-drip.svg
+clicks: 2
+transition: view-transition
 ---
 
-::title::
-Voir le terrain
+<TerrainMap />
 
-::default::
-Une carte, des filtres, des inputs.
+<!--
+Les fiches ont une position. On les pose sur une carte.
 
-Et un écart volontaire : l'agent ne voit pas ce que voit l'interface.
+Tous les crimes d'un coup, c'est illisible. Il faut cadrer.
+-->

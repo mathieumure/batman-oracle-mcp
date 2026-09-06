@@ -1,12 +1,18 @@
 ---
-layout: content
-columns: 1
+layout: blank
+background: /assets/images/bg-cave-drip.svg
+clicks: 3
+transition: view-transition
 ---
 
-::title::
-Deux vues, une carte
+<MapRecap />
 
-::default::
-L'agent voit des agrégats. L'UI voit tout.
+<!--
+Contexte. Réglé.
 
-Chacun reçoit exactement ce dont il a besoin.
+Positions. Les pins sont passés.
+
+On est bloqué.
+
+Il nous manque des preuves. La scène du GCPD.
+-->
