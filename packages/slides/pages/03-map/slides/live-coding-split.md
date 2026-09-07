@@ -6,7 +6,7 @@ layout: blank
     <Editor
             session="demo"
             defaultFolder="../.."
-            openFile="../../packages/mcp/demo/01-crime-map.ts"
+            openFile="../../packages/mcp/demo/02-crime-map.ts"
             hideMinimap
             hideActivityBar
             hideStatusBar />
