@@ -1,5 +1,6 @@
 import type { BatmanCriminal } from './src/generate/criminals/index.js';
-import { criminals as specialCriminals } from './src/specials/volcamp-criminals.js';
+// import { criminals as specialCriminals } from './src/specials/volcamp-criminals.js';
+import { criminals as specialCriminals } from './src/specials/lyonjs-criminals.js';
 
 export type { BatmanCriminal };
 

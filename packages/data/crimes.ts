@@ -1,5 +1,6 @@
 import type { Crime } from './src/generate/crimes/crime.js';
-import { crimes as specialCrimes } from './src/specials/volcamp-crimes.generated.js';
+// import { crimes as specialCrimes } from './src/specials/volcamp-crimes.generated.js';
+import { crimes as specialCrimes } from './src/specials/lyonjs-crimes.generated.js';
 
 export type { Crime };
 
