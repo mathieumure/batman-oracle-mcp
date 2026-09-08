@@ -13,3 +13,18 @@ background: /assets/images/bg-cave-drip.svg
             hideStatusBar />
 </div>
 
+---
+layout: blank
+background: /assets/images/bg-cave-drip.svg
+---
+<div class="h-full flex items-center justify-center p-12">
+    <MacWindow title="MCP Inspector" height="500px" style="width: 100%">
+        <ScaledIframe src="http://localhost:6274/" />
+    </MacWindow>
+</div>
+---
+layout: blank
+background: /assets/images/bg-cave-drip.svg
+---
+
+<DesktopApps />

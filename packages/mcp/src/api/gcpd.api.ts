@@ -14,9 +14,12 @@ class GCPDApiClient extends ApiClient {
     return this.fetch(url);
   }
 
-  async getCrimes(
-    options: { city: string; suspect?: string[]; molecule?: string[]; fingerprint?: string[] },
-  ): Promise<{ crimes: Crime[]; center: { lat: number; lng: number } }> {
+  async getCrimes(options: {
+    city: string;
+    suspect?: string[];
+    molecule?: string[];
+    fingerprint?: string[];
+  }): Promise<{ crimes: Crime[]; center: { lat: number; lng: number } }> {
     let url = '/crimes';
     const searchParams = new URLSearchParams();
     searchParams.append('city', options.city);

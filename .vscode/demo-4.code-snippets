@@ -1,0 +1,17 @@
+{
+  "Mcp Server": {
+    "scope": "javascript,typescript",
+    "prefix": "--demo-input",
+    "body": [
+      "inputSchema: {",
+      "  filter: z",
+      "    .object({",
+      "      affiliation: z.string().optional().describe('Filter the list of criminals based on the affiliation'),",
+      "    })",
+      "    .optional()",
+      "    .describe('Optional filtering the list of criminals'),",
+      "},",
+    ],
+    "include": ["**/demo/01-criminal-tools.ts"],
+  },
+}

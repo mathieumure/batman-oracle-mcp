@@ -40,7 +40,7 @@ export async function requireBearerAuth(req: FastifyRequest, res: FastifyReply):
   return false;
 }
 
-export async function isAuthenticated(req: FastifyRequest, res: FastifyReply): Promise<boolean> {
+export async function validateAuth(req: FastifyRequest, res: FastifyReply): Promise<boolean> {
   const authHeader = req.headers['authorization'];
   const token = typeof authHeader === 'string' && authHeader.startsWith('Bearer ') ? authHeader.slice('Bearer '.length) : undefined;
 

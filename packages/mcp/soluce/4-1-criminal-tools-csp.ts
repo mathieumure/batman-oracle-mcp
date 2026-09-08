@@ -39,9 +39,17 @@ mcpServer.registerTool(
         }),
       ),
     },
+    inputSchema: {
+      filter: z
+        .object({
+          affiliation: z.string().optional().describe('Filter the list of criminals based on the affiliation'),
+        })
+        .optional()
+        .describe('Optional filtering the list of criminals'),
+    },
   },
-  async () => {
-    const criminals = await GCPDClient.getCriminals();
+  async ({ filter }) => {
+    const criminals = await GCPDClient.getCriminals(filter);
 
     return {
       content: [{ type: 'text', text: JSON.stringify({ criminals }) }],

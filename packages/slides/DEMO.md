@@ -9,5 +9,9 @@
 2.2 | 02-crime-map.ts       => Move payload content in meta + update output and add new payload
 2.2 | crime-map.tsx         => change structured data with _meta
 
-3-1 Crime scene tool (focus authent)
-3-2 Crime scene refetch resources / tool
+3.1 | 03-crime-scene.ts     => Add app template & bind authInfo
+3.2 | mcp-server.ts         => Add auth description endpoint + auth validation
+3.3 | 03-crime-scene.ts     => Add new tool & new resource
+3.4 | crime-scene.tsx       => Call tool & resouce
+
+4.1 | 01-criminal-tool.ts   => Add input and forward filter to api client

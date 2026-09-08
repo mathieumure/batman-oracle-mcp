@@ -1,7 +1,7 @@
-import { mcpServer } from '../mcp-server.js';
-import { GCPDClient } from '../gcpd.api.js';
+import { mcpServer } from './mcp-server.js';
+import { GCPDClient } from './gcpd.api.js';
 import { z } from 'zod';
-import { resolveDistFiles } from '../utils.js';
+import { resolveDistFiles } from './utils.js';
 
 const csp = {
   resourceDomains: [process.env.MCP_ORIGIN],
@@ -27,8 +27,8 @@ mcpServer.registerTool(
       exhibits: z.array(z.string()),
     },
   },
-  async (extra) => {
-    const crimeScene = await GCPDClient.getCrimeScene(extra.authInfo?.token as string);
+  async ({ authInfo }) => {
+    const crimeScene = await GCPDClient.getCrimeScene(authInfo?.token as string);
 
     return {
       content: [{ type: 'text', text: JSON.stringify(crimeScene) }],
@@ -66,20 +66,6 @@ mcpServer.registerResource(
     };
   },
 );
-// </DEMO>
-// <DEMO-2>
-mcpServer.registerResource('batman_crime_scene_forensics_exhibits', `forensics:/exhibits`, { mimeType: 'application/json' }, async () => {
-  const crimeScene = await GCPDClient.getCrimeSceneWithForensic();
-  return {
-    contents: [
-      {
-        uri: `forensics:/exhibits`,
-        mimeType: 'application/json',
-        text: JSON.stringify(crimeScene.exhibits),
-      },
-    ],
-  };
-});
 
 mcpServer.registerTool(
   'get_forensics_residues',
@@ -102,4 +88,16 @@ mcpServer.registerTool(
     };
   },
 );
-// </DEMO-2>
+
+mcpServer.registerResource('batman_crime_scene_forensics_exhibits', `forensics:/exhibits`, { mimeType: 'application/json' }, async () => {
+  const crimeScene = await GCPDClient.getCrimeSceneWithForensic();
+  return {
+    contents: [
+      {
+        uri: `forensics:/exhibits`,
+        mimeType: 'application/json',
+        text: JSON.stringify(crimeScene.exhibits),
+      },
+    ],
+  };
+});

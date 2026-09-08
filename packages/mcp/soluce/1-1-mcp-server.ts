@@ -5,11 +5,10 @@ import { StreamableHTTPServerTransport } from '@modelcontextprotocol/sdk/server/
 export const mcpServer = new McpServer({
   name: 'GCPD MCP',
   version: '1.0.0',
-  description: 'GCPD Mcp Server listing criminals and crimes for any city'
+  description: 'GCPD Mcp Server listing criminals and crimes for any city',
 });
 
 httpServer.post('/mcp', async (req, res) => {
-
   const transport = new StreamableHTTPServerTransport({
     sessionIdGenerator: undefined,
   });
@@ -21,4 +20,4 @@ httpServer.post('/mcp', async (req, res) => {
     mcpServer.close();
     transport.close();
   });
-})
+});

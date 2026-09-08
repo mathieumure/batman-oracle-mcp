@@ -2,6 +2,21 @@
 layout: blank
 ---
 
-<div class="h-full flex items-center justify-center">
-  <h1 class="text-4xl font-bold" style="color: var(--text-primary)">🔴 Live coding</h1>
+<div class="h-full flex items-center justify-center p-4">
+    <Editor
+            session="demo"
+            defaultFolder="../.."
+            openFile="../../packages/mcp/demo/03-crime-scene.ts"
+            hideMinimap
+            hideActivityBar
+            hideStatusBar />
+</div>
+---
+layout: blank
+background: /assets/images/bg-cave-drip.svg
+---
+<div class="h-full flex items-center justify-center p-12">
+    <MacWindow title="MCP Inspector" height="500px" style="width: 100%">
+        <ScaledIframe src="http://localhost:6274/" />
+    </MacWindow>
 </div>

@@ -3,7 +3,6 @@ import { GCPDClient } from '../gcpd.api.js';
 import { z } from 'zod';
 import { resolveDistFiles } from '../utils.js';
 
-// <DEMO>
 const csp = {
   resourceDomains: [
     process.env.MCP_ORIGIN,
@@ -94,4 +93,3 @@ mcpServer.registerResource(
     };
   },
 );
-// </DEMO>
