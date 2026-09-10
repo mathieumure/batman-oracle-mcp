@@ -11,7 +11,7 @@ type ToolResult = {
 };
 
 const render = (result: McpUiToolResultNotification['params']) => {
-  const data = result._meta as ToolResult;
+  const data = result._meta as ToolResult || result.structuredContent as ToolResult;
   if (!data) return;
   createRoot(document.getElementById('root')!).render(
     <CrimeMap city={data.city} center={data.center} crimes={data.crimes} connectChronologically={data.connectChronologically} />,
@@ -19,13 +19,13 @@ const render = (result: McpUiToolResultNotification['params']) => {
 };
 
 if (import.meta.env.DEV) {
-  fetch('http://localhost:8080/crimes')
+  fetch('http://localhost:8080/crimes?city=Lyon')
     .then((it) => it.json())
     .then((data) => {
       createRoot(document.getElementById('root')!).render(
         <CrimeMap
-          city="Clermont-Ferrand"
-          center={{ lat: 45.7797, lng: 3.0863 }}
+          city="Lyon"
+          center={{ lat: 45.7578, lng: 4.8320 }}
           crimes={data.crimes as Crime[]}
           connectChronologically={false}
         />,

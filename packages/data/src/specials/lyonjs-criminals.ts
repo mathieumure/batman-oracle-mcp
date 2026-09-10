@@ -20,7 +20,7 @@ const base: BatmanCriminal = {
 export const criminals: BatmanCriminal[] = [
   {
     name: 'Mat the wall',
-    picture: 'http://localhost:3000/img/MMU.jpg',
+    picture: 'http://localhost:3000/img/mmu.jpg',
     details: {
       realName: 'Mat Wall',
       aliases: [],
@@ -36,7 +36,7 @@ export const criminals: BatmanCriminal[] = [
   },
   {
     name: 'Le Carton',
-    picture: 'http://localhost:3000/img/aco.jpg',
+    picture: 'http://localhost:3000/img/aco.png',
     details: {
       realName: 'Anton Roundcat',
       aliases: [],
@@ -52,7 +52,7 @@ export const criminals: BatmanCriminal[] = [
   },
   {
     name: 'Alvi Celest',
-    picture: 'http://localhost:3000/img/mal.jpg',
+    picture: 'http://localhost:3000/img/mal.png',
     details: {
       realName: 'Mike Allbest',
       aliases: [],
@@ -68,7 +68,7 @@ export const criminals: BatmanCriminal[] = [
   },
   {
     name: 'Djinn de Bali',
-    picture: 'http://localhost:3000/img/mdj.jpg',
+    picture: 'http://localhost:3000/img/mdj.png',
     details: {
       realName: '',
       aliases: [],
@@ -84,7 +84,7 @@ export const criminals: BatmanCriminal[] = [
   },
   {
     name: 'Bacchus',
-    picture: 'http://localhost:3000/img/jla.jpg',
+    picture: 'http://localhost:3000/img/jla.png',
     details: {
       realName: 'Jo La Vigne',
       aliases: [],
@@ -102,7 +102,7 @@ export const criminals: BatmanCriminal[] = [
   },
   {
     name: 'Dolceman',
-    picture: 'http://localhost:3000/img/eid.jpg',
+    picture: 'http://localhost:3000/img/eid.png',
     details: {
       realName: '',
       aliases: [],

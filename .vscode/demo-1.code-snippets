@@ -19,7 +19,7 @@
   },
   "criminal-tools": {
     "scope": "javascript,typescript",
-    "prefix": "--demo-tool-input",
+    "prefix": "--demo-tool-output",
     "body": [
       "z.object({",
       "\tname: z.string().describe('The name of the criminal'),",
@@ -97,7 +97,15 @@
   "criminal-tools - csp": {
     "scope": "javascript,typescript",
     "prefix": "--demo-tool-csp",
-    "body": ["const csp = {", "\tresourceDomains: [process.env.MCP_ORIGIN, 'https://static.wikia.nocookie.net'],", "};"],
+    "body": [
+        "_meta: {",
+        "  ui: {",
+        "    csp: {",
+        "           resourceDomains: [process.env.MCP_ORIGIN, 'https://static.wikia.nocookie.net'],",
+        "         },",
+        "  },",
+        "},",
+    ],
     "include": ["**/demo/01-criminal-tools.ts"],
   },
 }

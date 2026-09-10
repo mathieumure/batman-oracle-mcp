@@ -1,5 +1,5 @@
 import { criminals } from '@batman/data/criminals';
-import { crimes } from '@batman/data/crimes';
+import { crimes, specialCrimes } from '@batman/data/crimes';
 import { crimeScene } from '@batman/data/crime-scene';
 import fastifyCors from '@fastify/cors';
 import fastifySwagger from '@fastify/swagger';
@@ -57,13 +57,6 @@ async function bootstrap() {
 
   fastify.get('/crimes', { schema: crimesRouteSchema }, async (request) => {
     const filters = parseCrimeQuery(request.query as Record<string, unknown>);
-    const datasetCrimes = filterCrimes(
-      crimes.map((crime) => ({
-        ...crime,
-        suspectPicture: criminals.find((criminal) => criminal.name === crime.suspect)?.picture ?? fallbackPicture,
-      })),
-      filters,
-    );
 
     const center = await geocodeCity(filters.city);
 
@@ -71,8 +64,21 @@ async function bootstrap() {
       throw new Error(`Unable to find city ${filters.city}`);
     }
 
+    const crimesForCity = [
+      ...translateCrimesToCenter(crimes, center),
+      ...translateCrimesToCenter(specialCrimes, center),
+    ];
+
+    const datasetCrimes = filterCrimes(
+      crimesForCity.map((crime) => ({
+        ...crime,
+        suspectPicture: criminals.find((criminal) => criminal.name === crime.suspect)?.picture ?? fallbackPicture,
+      })),
+      filters,
+    );
+
     return {
-      crimes: translateCrimesToCenter(datasetCrimes, center),
+      crimes: datasetCrimes,
       center,
     };
   });
