@@ -35,6 +35,8 @@
     position: absolute;
     top: 25px;
     right: 25px;
+    max-width: 175px;
+    height: auto;
   }
 }
 
