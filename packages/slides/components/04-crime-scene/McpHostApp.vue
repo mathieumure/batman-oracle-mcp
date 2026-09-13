@@ -128,7 +128,7 @@ onUnmounted(stop);
             <svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M23 4v6h-6M1 20v-6h6M3.51 9a9 9 0 0114.85-3.36M20.49 15a9 9 0 01-14.85 3.36" />
             </svg>
-            Même widget. On met à jour.
+            Update in place
           </div>
         </div>
       </div>
@@ -142,8 +142,7 @@ onUnmounted(stop);
         </div>
 
         <div class="visibility-explanation">
-          <p class="visibility-title">App-only tools</p>
-          <p class="visibility-desc">Tools with visibility: ['app'] are useful for UI interactions that shouldn't clutter the agent's context — things like refresh buttons, pagination controls, or form submissions. The model never sees these tools; they exist purely for the View to call.</p>
+          <p class="visibility-title">Control tool visibility</p>
           <pre class="meta-visibility">{
   <span class="hi">visibility</span>: ['app']
 }</pre>
@@ -424,23 +423,15 @@ onUnmounted(stop);
 .visibility-explanation {
   display: flex;
   flex-direction: column;
-  gap: 0.6rem;
-  max-width: 85%;
-  text-align: center;
+  gap: 0.4rem;
+  align-items: center;
 }
 
 .visibility-title {
   margin: 0;
   color: #fff;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   font-weight: 700;
-}
-
-.visibility-desc {
-  margin: 0;
-  color: rgba(255, 255, 255, 0.75);
-  font-size: 0.8rem;
-  line-height: 1.5;
 }
 
 .meta-visibility {
