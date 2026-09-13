@@ -36,4 +36,4 @@ layout: blank
 background: /assets/images/bg-cave-drip.svg
 ---
 
-<DesktopApps />
+<DesktopApps openTab="https://claude.ai" />

@@ -2,6 +2,13 @@
 import { ref } from 'vue';
 import { useNav } from '@slidev/client';
 
+const props = defineProps({
+  openTab: {
+    type: String,
+    default: '',
+  },
+});
+
 const { next } = useNav();
 
 const selected = ref(null);
@@ -19,7 +26,11 @@ function onAppClick(app) {
 function onAppDblClick(app) {
   selected.value = app.id;
   if (app.id === 'claude') {
-    next();
+    if (props.openTab) {
+      window.open(props.openTab, '_blank');
+    } else {
+      next();
+    }
   }
 }
 </script>
