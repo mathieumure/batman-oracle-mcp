@@ -18,6 +18,8 @@ NX monorepo containing the Batman Oracle MCP server and its supporting packages.
 - [pnpm](https://pnpm.io/) v9+
 - [Node.js](https://nodejs.org/) v20+
 - [Docker](https://www.docker.com/) (for the `data` package)
+- [code-server](https://github.com/coder/code-server) 4.137.0+ (for the live coding slides, see
+  [Live coding in the slides](#live-coding-in-the-slides))
 
 ## Installation
 
@@ -114,13 +116,59 @@ cd packages/mcp && pnpm inspect
 
 - ngrok inspector (only if you fell back to ngrok): while the tunnel is running, `http://127.0.0.1:4040` shows every request/response crossing it. `cloudflared` has no equivalent local dashboard.
 
+## Live coding in the slides
+
+The `<Editor />` component embeds a real VS Code, served by
+[code-server](https://github.com/coder/code-server), inside an iframe. `pnpm dev:slides` starts it
+next to Slidev through the `slides:code-server` NX target, so one command covers both.
+
+### Setup
+
+code-server is not an npm dependency. Install it once:
+
+```bash
+curl -fsSL https://code-server.dev/install.sh | sh -s -- --method standalone
+```
+
+`--method standalone` matters on macOS. Without it the installer hands off to Homebrew, whose
+formula sits several versions back and predates `workbench.experimental.modernUI`, the setting that
+gives the editor its modern look. Check you got 4.137.0 or newer:
+
+```bash
+code-server --version
+```
+
+If the binary is missing, the `slides:code-server` step exits with that install command, so you
+find out at launch rather than in front of an audience with dead iframes.
+
+### Adding an editor slide
+
+`<Editor />` takes a `defaultFolder` and an `openFile`, both relative to `packages/slides`:
+
+```html
+<Editor session="demo" defaultFolder="../.." openFile="../../packages/mcp/demo/mcp-server.ts" />
+```
+
+`../..` is the repo root, and that is the level to stay at. It holds `node_modules` and lets the
+TypeScript server resolve the project, which is what the semantic colouring and the auto-import
+depend on.
+
+### Port and appearance
+
+The port lives in `packages/slides/livecode.config.mjs`, read by both the launch script and the
+component.
+
+The editor appearance lives in `packages/slides/.livecode-profile/`, which the launch script
+creates on first run and never overwrites, so anything you change from the editor UI sticks. It is
+gitignored. Delete the folder to get the defaults back.
+
 ## Commands
 
 ### Development
 
 ```bash
 pnpm dev:ui        # mcp-ui — Vite dev server with HMR
-pnpm dev:slides    # slides — Slidev dev server
+pnpm dev:slides    # slides — Slidev dev server + code-server on :9000
 ```
 
 ### Per-package targets via NX

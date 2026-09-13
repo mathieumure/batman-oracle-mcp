@@ -6,8 +6,24 @@
     "dev": {
       "executor": "nx:run-commands",
       "dependsOn": [
-        { "projects": ["mcp"], "target": "demo" },
-        { "projects": ["mcp"], "target": "inspect" }
+        {
+          "projects": [
+            "mcp"
+          ],
+          "target": "demo"
+        },
+        {
+          "projects": [
+            "mcp"
+          ],
+          "target": "inspect"
+        },
+        {
+          "projects": [
+            "slides"
+          ],
+          "target": "code-server"
+        }
       ],
       "options": {
         "command": "pnpm dev",
@@ -17,7 +33,9 @@
     },
     "build": {
       "executor": "nx:run-commands",
-      "outputs": ["{projectRoot}/dist"],
+      "outputs": [
+        "{projectRoot}/dist"
+      ],
       "options": {
         "command": "pnpm build",
         "cwd": "{projectRoot}"
@@ -29,6 +47,14 @@
         "command": "pnpm export",
         "cwd": "{projectRoot}"
       }
+    },
+    "code-server": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "node scripts/code-server.mjs",
+        "cwd": "{projectRoot}"
+      },
+      "continuous": true
     }
   }
 }

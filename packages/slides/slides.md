@@ -8,7 +8,6 @@ twoslash: true
 lineNumbers: true
 favicon: './assets/favicon.png'
 addons:
-  - livecode
   - slidev-addon-narrator
 src: ./pages/00-intro/index.md
 ---
