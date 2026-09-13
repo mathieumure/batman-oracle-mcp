@@ -115,13 +115,21 @@ onUnmounted(stop);
           </div>
         </div>
 
-        <div class="bypass" :class="{ on: mode === 'sync' }">
-          <svg viewBox="0 0 320 56" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-            <path d="M16 10 C 16 46, 304 46, 304 18" />
-            <g transform="translate(305 18) rotate(-45)">
-              <path d="M-12 -7 L0 0 L-12 7" />
-            </g>
-          </svg>
+        <div class="bypass-wrapper" :class="{ on: mode === 'sync' }">
+          <div class="bypass" :class="{ on: mode === 'sync' }">
+            <svg viewBox="0 0 320 56" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+              <path d="M16 10 C 16 46, 304 46, 304 18" />
+              <g transform="translate(305 18) rotate(-45)">
+                <path d="M-12 -7 L0 0 L-12 7" />
+              </g>
+            </svg>
+          </div>
+          <div class="sync-label" :class="{ on: mode === 'sync' }">
+            <svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M23 4v6h-6M1 20v-6h6M3.51 9a9 9 0 0114.85-3.36M20.49 15a9 9 0 01-14.85 3.36" />
+            </svg>
+            Même widget. On met à jour.
+          </div>
         </div>
       </div>
 
@@ -133,13 +141,13 @@ onUnmounted(stop);
           </div>
         </div>
 
-        <p class="note" :class="{ ready: mode === 'sync' }">
-          Même widget. On met à jour.
-        </p>
-
-        <pre class="meta" :class="{ ready: mode === 'sync' }">{
+        <div class="visibility-explanation">
+          <p class="visibility-title">App-only tools</p>
+          <p class="visibility-desc">Tools with visibility: ['app'] are useful for UI interactions that shouldn't clutter the agent's context — things like refresh buttons, pagination controls, or form submissions. The model never sees these tools; they exist purely for the View to call.</p>
+          <pre class="meta-visibility">{
   <span class="hi">visibility</span>: ['app']
 }</pre>
+        </div>
       </div>
     </div>
   </div>
@@ -310,10 +318,19 @@ onUnmounted(stop);
   stroke: #d97757;
 }
 
+.bypass-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 22rem;
+  gap: 0.3rem;
+  margin-top: -0.2rem;
+}
+
 .bypass {
   position: relative;
-  width: 22rem;
-  margin-top: -0.2rem;
+  width: 100%;
   visibility: hidden;
 }
 
@@ -334,6 +351,27 @@ onUnmounted(stop);
 
 .bypass.on svg {
   stroke: #6a9a4a;
+}
+
+.sync-label {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 0.92rem;
+  font-weight: 600;
+  visibility: hidden;
+}
+
+.sync-label.on {
+  visibility: visible;
+  color: #6a9a4a;
+}
+
+.sync-label svg {
+  width: 1.2rem;
+  height: 1.2rem;
+  flex-shrink: 0;
 }
 
 .footer {
@@ -383,19 +421,29 @@ onUnmounted(stop);
   font-weight: 700;
 }
 
-.note {
-  margin: 0 0 0.45rem;
-  color: rgba(255, 255, 255, 0.78);
-  font-size: 0.92rem;
-  font-weight: 600;
-  visibility: hidden;
+.visibility-explanation {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  max-width: 85%;
+  text-align: center;
 }
 
-.note.ready {
-  visibility: visible;
+.visibility-title {
+  margin: 0;
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 700;
 }
 
-.meta {
+.visibility-desc {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 0.8rem;
+  line-height: 1.5;
+}
+
+.meta-visibility {
   margin: 0;
   padding: 0.7rem 1.1rem 0.6rem;
   border: 1px solid #3a3a3a;
@@ -405,11 +453,7 @@ onUnmounted(stop);
   font-size: 0.88rem;
   line-height: 1.4;
   white-space: pre;
-  visibility: hidden;
-}
-
-.meta.ready {
-  visibility: visible;
+  align-self: center;
 }
 
 .hi {
