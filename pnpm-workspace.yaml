@@ -6,3 +6,6 @@ allowBuilds:
   nx: true
   better-sqlite3: true
   '@modelcontextprotocol/inspector': true
+
+minimumReleaseAgeExclude:
+  - slidev-addon-livecode@2.2.1
