@@ -141,7 +141,7 @@ onUnmounted(stop);
           </div>
         </div>
 
-        <div class="visibility-explanation">
+        <div class="visibility-explanation" :class="{ on: mode === 'sync' }">
           <p class="visibility-title">Contrôler la visibilité du tool</p>
           <pre class="meta-visibility">{
   <span class="hi">visibility</span>: ['app']
@@ -425,6 +425,11 @@ onUnmounted(stop);
   flex-direction: column;
   gap: 0.4rem;
   align-items: center;
+  visibility: hidden;
+}
+
+.visibility-explanation.on {
+  visibility: visible;
 }
 
 .visibility-title {
