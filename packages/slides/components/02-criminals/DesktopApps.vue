@@ -1,5 +1,8 @@
 <script setup>
 import { ref } from 'vue';
+import { useNav } from '@slidev/client';
+
+const { next } = useNav();
 
 const selected = ref(null);
 
@@ -8,6 +11,17 @@ const apps = [
   { id: 'chatgpt', name: 'ChatGPT' },
   { id: 'custom', name: 'Custom' },
 ];
+
+function onAppClick(app) {
+  selected.value = app.id;
+}
+
+function onAppDblClick(app) {
+  selected.value = app.id;
+  if (app.id === 'claude') {
+    next();
+  }
+}
 </script>
 
 <template>
@@ -18,7 +32,8 @@ const apps = [
       type="button"
       class="app"
       :class="{ on: selected === app.id }"
-      @click.stop="selected = app.id"
+      @click.stop="onAppClick(app)"
+      @dblclick.stop="onAppDblClick(app)"
     >
       <span class="icon">
         <img

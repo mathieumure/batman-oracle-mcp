@@ -23,11 +23,19 @@ src: ./slides/go-to-claude.md
 ---
 
 ---
+src: ./slides/claude-ai-interface.md
+---
+
+---
 src: ./slides/concept-csp.md
 ---
 
 ---
 src: ./slides/live-coding-csp.md
+---
+
+---
+src: ./slides/claude-ai-interface-2.md
 ---
 
 ---
