@@ -97,7 +97,7 @@ onUnmounted(stop);
 
           <div class="node" :class="{ dim: mode !== 'chat' }">
             <img src="../../pages/02-criminals/assets/logos/claude.svg" alt="" />
-            <span>Agent</span>
+            <span>Agent Chat</span>
           </div>
 
           <div class="link" :class="{ via: mode === 'chat' }">
