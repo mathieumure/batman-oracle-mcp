@@ -13,7 +13,10 @@ type Meta = {
 const app = new App({ name: 'Batman Oracle', version: '1.0.0' });
 
 app.addEventListener('toolresult', (result) => {
-
+  const data = result.structuredContent as Meta
+  createRoot(document.getElementById('root')!).render(
+    <CrimeMap city={data.city} center={data.center} crimes={data.crimes} connectChronologically={data.connectChronologically} />,
+  );
 });
 
 app.connect().catch((err) => {
