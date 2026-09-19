@@ -49,7 +49,7 @@
   "criminal-tools return": {
     "scope": "javascript,typescript",
     "prefix": "--demo-tool-return-content",
-    "body": ["content: [{ type: 'text', text: $2 }],"],
+    "body": ["[{ type: 'text', text: $2 }],"],
     "include": ["**/demo/01-criminal-tools.ts"],
   },
   "criminal-tools meta": {
