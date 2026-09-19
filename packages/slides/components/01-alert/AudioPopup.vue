@@ -1,6 +1,7 @@
 <script setup>
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 import { onSlideEnter, onSlideLeave } from '@slidev/client';
+import AudioCaptions from './AudioCaptions.vue';
 
 const audio = ref(null);
 const playing = ref(false);
@@ -17,6 +18,9 @@ function alfredStamp(date = new Date(Date.now() - 86_400_000)) {
 }
 
 const fileName = ref(alfredStamp());
+const transcriptOpen = ref(false);
+
+const macContentHeight = computed(() => (transcriptOpen.value ? '340px' : '96px'));
 
 function formatTime(seconds) {
   if (!seconds || Number.isNaN(seconds)) return '0:00';
@@ -36,6 +40,7 @@ async function toggle() {
   try {
     await el.play();
     playing.value = true;
+    transcriptOpen.value = true;
   } catch {
     playing.value = false;
   }
@@ -50,7 +55,6 @@ function onTime() {
 
 function onEnded() {
   playing.value = false;
-  current.value = 0;
 }
 
 function resetAudio() {
@@ -58,6 +62,7 @@ function resetAudio() {
   if (audio.value) audio.value.currentTime = 0;
   playing.value = false;
   current.value = 0;
+  transcriptOpen.value = false;
 }
 
 onSlideEnter(() => {
@@ -77,7 +82,13 @@ onSlideLeave(() => {
 <template>
   <div class="audio-stage">
     <div class="audio-window" :class="{ in: open }">
-      <MacWindow title="Bat-USB" height="168px" style="width: 100%">
+      <MacWindow
+        title="Bat-USB"
+        :height="macContentHeight"
+        class="bat-usb-window"
+        style="width: 100%"
+      >
+        <div class="window-body">
         <div class="player">
           <button type="button" class="player-play" :aria-pressed="playing" @click.stop="toggle">
             <svg v-if="!playing" viewBox="0 0 24 24" aria-hidden="true">
@@ -109,6 +120,8 @@ onSlideLeave(() => {
             @ended="onEnded"
           />
         </div>
+        <AudioCaptions v-if="transcriptOpen" :current="current" />
+        </div>
       </MacWindow>
     </div>
   </div>
@@ -134,13 +147,25 @@ onSlideLeave(() => {
   animation: popup-in 0.48s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
-.player {
+.bat-usb-window :deep(.mac-content) {
+  transition: height 0.42s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.window-body {
+  display: flex;
+  flex-direction: column;
   height: 100%;
+  min-height: 0;
+  background: #ececec;
+}
+
+.player {
+  flex-shrink: 0;
   display: flex;
   align-items: center;
   gap: 1.1rem;
   padding: 0 1.4rem;
-  background: #ececec;
+  min-height: 88px;
 }
 
 .player-play {
