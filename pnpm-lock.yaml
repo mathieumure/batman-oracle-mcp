@@ -215,10 +215,7 @@ importers:
         version: 1.9.4
       slidev-addon-livecode:
         specifier: ^2.2.1
-        version: 2.2.1(@slidev/types@52.19.1(@modelcontextprotocol/sdk@1.30.0(zod@4.4.3))(@nuxt/kit@3.21.10)(@vue/compiler-sfc@3.5.40)(cac@7.0.0)(esbuild@0.28.1)(rolldown@1.2.1)(rollup@4.62.3)(srvx@0.12.5)(typescript@6.0.3)(vite@8.2.0(@types/node@24.13.3)(esbuild@0.28.1)(jiti@2.7.0)(tsx@4.23.1)(yaml@2.9.0)))(coderaft@0.0.42)(vue@3.5.40(typescript@6.0.3))
-      slidev-addon-narrator:
-        specifier: ^0.1.3
-        version: 0.1.3(vue@3.5.40(typescript@6.0.3))
+        version: 2.2.1(@slidev/client@52.18.1(@modelcontextprotocol/sdk@1.30.0(zod@4.4.3))(@nuxt/kit@3.21.10)(@oxc-project/types@0.142.0)(@vue/compiler-sfc@3.5.40)(cac@7.0.0)(esbuild@0.28.1)(lightningcss@1.33.0)(react@19.2.8)(rolldown@1.2.1)(rollup@4.62.3)(srvx@0.12.5)(vite@8.2.0(@types/node@24.13.3)(esbuild@0.28.1)(jiti@2.7.0)(tsx@4.23.1)(yaml@2.9.0)))(@slidev/types@52.19.1(@modelcontextprotocol/sdk@1.30.0(zod@4.4.3))(@nuxt/kit@3.21.10)(@vue/compiler-sfc@3.5.40)(cac@7.0.0)(esbuild@0.28.1)(rolldown@1.2.1)(rollup@4.62.3)(srvx@0.12.5)(typescript@6.0.3)(vite@8.2.0(@types/node@24.13.3)(esbuild@0.28.1)(jiti@2.7.0)(tsx@4.23.1)(yaml@2.9.0)))(coderaft@0.0.42)(vue@3.5.40(typescript@6.0.3))
       vue:
         specifier: ^3.5.29
         version: 3.5.40(typescript@6.0.3)
@@ -5538,13 +5535,6 @@ packages:
       '@slidev/types': '>=52.0.0'
       coderaft: '>=0.0.26'
       vue: '>=3.4.0'
-
-  slidev-addon-narrator@0.1.3:
-    resolution: {integrity: sha512-5x+r3o9Nq0JmB2N3e+axsSaNz/preHnI1ffRCwSgMISS045X/Ca/a+bzXeAkrg982be4PW60NKkyK3MuD4LWDA==}
-    engines: {node: '>=20.0.0', slidev: '>=0.48.0 || >=51.0.0'}
-    peerDependencies:
-      '@slidev/client': ^0.48.0 || ^51.0.0
-      vue: ^3.2.34
 
   sonic-boom@4.2.1:
     resolution: {integrity: sha512-w6AxtubXa2wTXAUsZMMWERrsIRAdrK0Sc+FUytWvYAhBJLyuI4llrMIC1DtlNSdI99EI86KZum2MMq3EAZlF9Q==}
@@ -12157,14 +12147,11 @@ snapshots:
 
   sisteransi@1.0.5: {}
 
-  slidev-addon-livecode@2.2.1(@slidev/types@52.19.1(@modelcontextprotocol/sdk@1.30.0(zod@4.4.3))(@nuxt/kit@3.21.10)(@vue/compiler-sfc@3.5.40)(cac@7.0.0)(esbuild@0.28.1)(rolldown@1.2.1)(rollup@4.62.3)(srvx@0.12.5)(typescript@6.0.3)(vite@8.2.0(@types/node@24.13.3)(esbuild@0.28.1)(jiti@2.7.0)(tsx@4.23.1)(yaml@2.9.0)))(coderaft@0.0.42)(vue@3.5.40(typescript@6.0.3)):
+  slidev-addon-livecode@2.2.1(@slidev/client@52.18.1(@modelcontextprotocol/sdk@1.30.0(zod@4.4.3))(@nuxt/kit@3.21.10)(@oxc-project/types@0.142.0)(@vue/compiler-sfc@3.5.40)(cac@7.0.0)(esbuild@0.28.1)(lightningcss@1.33.0)(react@19.2.8)(rolldown@1.2.1)(rollup@4.62.3)(srvx@0.12.5)(vite@8.2.0(@types/node@24.13.3)(esbuild@0.28.1)(jiti@2.7.0)(tsx@4.23.1)(yaml@2.9.0)))(@slidev/types@52.19.1(@modelcontextprotocol/sdk@1.30.0(zod@4.4.3))(@nuxt/kit@3.21.10)(@vue/compiler-sfc@3.5.40)(cac@7.0.0)(esbuild@0.28.1)(rolldown@1.2.1)(rollup@4.62.3)(srvx@0.12.5)(typescript@6.0.3)(vite@8.2.0(@types/node@24.13.3)(esbuild@0.28.1)(jiti@2.7.0)(tsx@4.23.1)(yaml@2.9.0)))(coderaft@0.0.42)(vue@3.5.40(typescript@6.0.3)):
     dependencies:
+      '@slidev/client': 52.18.1(@modelcontextprotocol/sdk@1.30.0(zod@4.4.3))(@nuxt/kit@3.21.10)(@oxc-project/types@0.142.0)(@vue/compiler-sfc@3.5.40)(cac@7.0.0)(esbuild@0.28.1)(lightningcss@1.33.0)(react@19.2.8)(rolldown@1.2.1)(rollup@4.62.3)(srvx@0.12.5)(vite@8.2.0(@types/node@24.13.3)(esbuild@0.28.1)(jiti@2.7.0)(tsx@4.23.1)(yaml@2.9.0))
       '@slidev/types': 52.19.1(@modelcontextprotocol/sdk@1.30.0(zod@4.4.3))(@nuxt/kit@3.21.10)(@vue/compiler-sfc@3.5.40)(cac@7.0.0)(esbuild@0.28.1)(rolldown@1.2.1)(rollup@4.62.3)(srvx@0.12.5)(typescript@6.0.3)(vite@8.2.0(@types/node@24.13.3)(esbuild@0.28.1)(jiti@2.7.0)(tsx@4.23.1)(yaml@2.9.0))
       coderaft: 0.0.42
-      vue: 3.5.40(typescript@6.0.3)
-
-  slidev-addon-narrator@0.1.3(vue@3.5.40(typescript@6.0.3)):
-    dependencies:
       vue: 3.5.40(typescript@6.0.3)
 
   sonic-boom@4.2.1:
