@@ -2,11 +2,10 @@
 import { ref, onMounted, onBeforeUnmount } from 'vue';
 import { useNav } from '@slidev/client';
 
-const TRIGGER_PAGES = [1];
+const TRIGGER_PAGES = [1,7,12,17,24,28,34,38];
 const SWARM_TOTAL = 1.8;
 const NAV_AT = SWARM_TOTAL * 0.5;
-const COUNT_DESKTOP = 17000;
-const COUNT_MOBILE = 90;
+const COUNT = 17000;
 const WAVE_GATES = [0, 0.12, 0.35, 0.58];
 
 const nav = useNav();
@@ -42,7 +41,7 @@ function swarmProgress(t) {
 }
 
 function spawn() {
-  const count = W < 700 ? COUNT_MOBILE : COUNT_DESKTOP;
+  const count = COUNT;
   const unit = Math.min(W, H) / 900;
   bats = Array.from({ length: count }, (_, i) => {
     const d = Math.random() ** 2.2;
