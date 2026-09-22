@@ -37,3 +37,4 @@ background: /assets/images/bg-cave-drip.svg
 ---
 
 <DesktopApps openTab="https://claude.ai" />
+<InCaseOfFire />
