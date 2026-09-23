@@ -25,7 +25,7 @@ transition: view-transition
 <!--
 Crime Map renvoie les deux.
 
-structuredContent. Ce que Claude lit. Un résumé. 47 crimes à Gotham. Pas les GPS.
+structuredContent. Ce que Claude lit. Un résumé. 47 crimes à Lyon. Pas les GPS.
 
 _meta. La liste. Croix rouge. Ça n'entre pas dans le contexte.
 

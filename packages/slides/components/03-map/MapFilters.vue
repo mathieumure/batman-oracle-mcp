@@ -1,8 +1,9 @@
 <script setup>
 import { computed, onUnmounted, ref, watch } from 'vue';
 import { onSlideLeave, useNav } from '@slidev/client';
+import {localisation} from "../../conference";
 
-const TEXT = 'Montre-moi les derniers crimes dans la ville de Gotham.';
+const TEXT = `Montre-moi les derniers crimes dans la ville de ${localisation}.`;
 
 const { clicks } = useNav();
 const typed = ref('');
