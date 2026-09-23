@@ -110,7 +110,7 @@
   },
   "server-tool-new-resource": {
     "scope": "javascript,typescript",
-    "prefix": "--demo-server-new-tool",
+    "prefix": "--demo-server-new-resource",
     "body": [
       "mcpServer.registerResource('batman_crime_scene_forensics_exhibits', `forensics:/exhibits`, { mimeType: 'application/json' }, async () => {",
       "  const crimeScene = await GCPDClient.getCrimeSceneWithForensic();",
@@ -129,7 +129,7 @@
   },
   "server-tool-new-tool": {
     "scope": "javascript,typescript",
-    "prefix": "--demo-server-new-resource",
+    "prefix": "--demo-server-new-tool",
     "body": [
       "mcpServer.registerTool(",
       "  'get_forensics_residues',",
@@ -154,5 +154,21 @@
       ");",
     ],
     "include": ["**/demo/03-crime-scene.ts"],
+  },
+  "ui-return-resource": {
+    "scope": "javascript,typescript,javascriptreact,typescriptreact",
+    "prefix": "--demo-ui-return-resource",
+    "body": [
+      "return JSON.parse(resource.contents[0].text);"
+    ],
+    "include": ["**/demo/crime-scene.tsx"],
+  },
+  "ui-return-tool": {
+    "scope": "javascript,typescript,javascriptreact,typescriptreact",
+    "prefix": "--demo-ui-return-tool",
+    "body": [
+      "return data.structuredContent?.residues as string[];"
+    ],
+    "include": ["**/demo/crime-scene.tsx"],
   },
 }
