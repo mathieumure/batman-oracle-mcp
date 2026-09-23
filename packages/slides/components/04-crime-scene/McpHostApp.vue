@@ -435,18 +435,18 @@ onUnmounted(stop);
 .visibility-title {
   margin: 0;
   color: #fff;
-  font-size: 0.9rem;
+  font-size: 0.75rem;
   font-weight: 700;
 }
 
 .meta-visibility {
   margin: 0;
-  padding: 0.7rem 1.1rem 0.6rem;
+  padding: 0.5rem 0.9rem 0.45rem;
   border: 1px solid #3a3a3a;
   border-radius: 10px;
   background: #141414;
   color: #d4d4d4;
-  font-size: 0.88rem;
+  font-size: 0.72rem;
   line-height: 1.4;
   white-space: pre;
   align-self: center;

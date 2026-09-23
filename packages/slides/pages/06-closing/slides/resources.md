@@ -11,20 +11,20 @@ Ressources
 
 <ul class="res">
   <li>
-    <span>Slides</span>
-    <code>https://example.com/batman-oracle-mcp</code>
-  </li>
-  <li>
-    <span>Repo</span>
-    <code>https://github.com/example/batman-oracle-mcp</code>
-  </li>
-  <li>
     <span>Spec MCP</span>
     <code>https://modelcontextprotocol.io</code>
   </li>
   <li>
     <span>MCP Apps</span>
-    <code>https://modelcontextprotocol.io/docs/apps</code>
+    <code>https://modelcontextprotocol.io/extensions/apps</code>
+  </li>
+  <li>
+    <span>Alpic</span>
+    <code>https://alpic.ai/</code>
+  </li>
+  <li>
+    <span>Skybridge</span>
+    <code>https://github.com/alpic-ai/skybridge</code>
   </li>
 </ul>
 
