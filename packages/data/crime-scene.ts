@@ -8,5 +8,5 @@ export interface CrimeScene {
   exhibits: string[];
 }
 
-// export { crimeScene } from './src/specials/volcamp-crime-scene.js'
-export { crimeScene } from './src/specials/lyonjs-crime-scene.js'
+export { crimeScene } from './src/specials/volcamp-crime-scene.js'
+// export { crimeScene } from './src/specials/lyonjs-crime-scene.js'
