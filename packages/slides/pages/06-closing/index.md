@@ -9,3 +9,7 @@ src: ./slides/resources.md
 ---
 src: ./slides/thanks.md
 ---
+
+---
+src: ./slides/feedback.md
+---
