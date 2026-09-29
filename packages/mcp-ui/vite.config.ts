@@ -16,4 +16,6 @@ export default defineConfig({
     },
   },
   base: process.env.MCP_ORIGIN,
+  envPrefix: 'VITE_',
+  envDir: resolve(import.meta.dirname, '../..'),
 });
