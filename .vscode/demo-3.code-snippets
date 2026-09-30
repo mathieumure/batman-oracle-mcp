@@ -159,7 +159,7 @@
     "scope": "javascript,typescript,javascriptreact,typescriptreact",
     "prefix": "--demo-ui-return-resource",
     "body": [
-      "return JSON.parse(resource.contents[0].text);"
+      "return JSON.parse(data.contents[0].text);"
     ],
     "include": ["**/demo/crime-scene.tsx"],
   },
@@ -168,6 +168,18 @@
     "prefix": "--demo-ui-return-tool",
     "body": [
       "return data.structuredContent?.residues as string[];"
+    ],
+    "include": ["**/demo/crime-scene.tsx"],
+  },
+  "ui-switch": {
+    "scope": "javascript,typescript,javascriptreact,typescriptreact",
+    "prefix": "--demo-ui-switch",
+    "body": [
+      "if (type === 'exhibits') {",
+      "  // TODO call resource",
+      "} else {",
+      "  // TODO call tool",
+      "}",
     ],
     "include": ["**/demo/crime-scene.tsx"],
   },
