@@ -50,7 +50,7 @@ export const CrimeMap = ({ city, center, crimes, connectChronologically = false 
       <h1 className={styles.heading}>Gotham Watch — {city}</h1>
       <MapContainer center={[center.lat, center.lng]} zoom={12} className={styles.map}>
         <TileLayer
-          url={`https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png?key=${import.meta.env.VITE_CARTO_API_KEY}`}
+          url={`https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png?key=cb1_43w7_1_3ec2729abeedaeb6501a1876`}
           attribution="&copy; OpenStreetMap contributors &copy; CARTO"
         />
         {connectChronologically && chronologicalPositions.length >= 2 && (
