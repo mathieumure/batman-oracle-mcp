@@ -1,1 +1,1 @@
-export const localisation = 'Clermont-Ferrand';
+export const localisation = 'Bordeaux';
