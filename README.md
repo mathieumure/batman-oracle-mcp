@@ -66,28 +66,21 @@ nx run data:stop
 
 ## Try it in Claude
 
-claude.ai and Claude Desktop both need an HTTPS URL for custom connectors, so tunnel the local servers. Use **Cloudflare Tunnel**, not ngrok. Since OAuth now involves two servers (the MCP server and the auth server), tunnel both:
+claude.ai and Claude Desktop both need an HTTPS URL for custom connectors, so the local servers must be tunneled (Cloudflare Tunnel, not ngrok: `brew install cloudflared`, no account needed).
+
+One command does everything:
 
 ```bash
-cloudflared tunnel --url http://localhost:3000   # MCP server, prints its own https://<mcp-tunnel>.trycloudflare.com
-cloudflared tunnel --url http://localhost:3001   # auth server, prints its own https://<auth-tunnel>.trycloudflare.com
+pnpm demo:final
 ```
 
-(`brew install cloudflared` if you don't have it. No account needed, the quick-tunnel command above is enough.)
+It frees ports 3000/3001/8080, opens one quick tunnel for the MCP server and one for the auth server, rebuilds `mcp-ui` against the tunnel URL, starts `gcpd-api`, `auth` and `mcp` with `REQUIRE_AUTH=true` and the matching `MCP_ORIGIN` / `AUTH_ORIGIN`, then waits until both tunnels answer. It prints the connector URL (and copies it to the clipboard). `Ctrl+C` stops everything.
 
-Grab both `https://...trycloudflare.com` URLs, then restart both servers pointing at each other so the widget's own assets and the OAuth discovery URLs all point somewhere Claude can actually reach, not `localhost`:
+If a port is held by a process that doesn't belong to this repo, the script stops and lists it. Rerun with `pnpm demo:final --force` to kill it anyway.
 
-```bash
-lsof -ti:3000,3001 -sTCP:LISTEN | xargs -r kill
-AUTH_ORIGIN=https://<auth-tunnel> MCP_ORIGIN=https://<mcp-tunnel> npx tsx packages/auth/src/index.ts &
-REQUIRE_AUTH=true PUBLIC_ORIGIN=https://<mcp-tunnel> AUTH_ORIGIN=https://<auth-tunnel> node packages/mcp/dist/index.js &
-```
+Quick tunnel URLs change on every run, so the connector has to be re-added in Claude each time.
 
-`REQUIRE_AUTH=true` is required here, without it Claude can call every tool with no login at all.
-
-The origin vars (`PUBLIC_ORIGIN`, `AUTH_ORIGIN`, `MCP_ORIGIN`) are a separate concern from `REQUIRE_AUTH`: they control whether the widget's assets and the OAuth discovery URLs point somewhere Claude can actually reach, not `localhost`. Skip them and the widget silently falls back to a generic rendering instead of the real one, and the OAuth flow fails outright since the auth server can't validate the MCP server as a resource, regardless of what `REQUIRE_AUTH` is set to.
-
-There's no `.env` for this yet, it's plain env vars you set by hand each time the tunnels restart.
+The origin vars (`MCP_ORIGIN`, `AUTH_ORIGIN`) are a separate concern from `REQUIRE_AUTH`: they control whether the widget's assets and the OAuth discovery URLs point somewhere Claude can actually reach, not `localhost`. Without them the widget silently falls back to a generic rendering and the OAuth flow fails, whatever `REQUIRE_AUTH` is set to. `REQUIRE_AUTH=true` is required, without it Claude can call every tool with no login at all.
 
 1. **Settings** > **Connectors** > **Add custom connector**
 2. URL: `https://<mcp-tunnel>/mcp`
