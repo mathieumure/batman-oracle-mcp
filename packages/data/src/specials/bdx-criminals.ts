@@ -8,7 +8,7 @@ export const criminals: BatmanCriminal[] = [
       realName: 'Aïda  El Mernissi',
       aliases: [],
       citizenship: 'European',
-      affiliation: ['League of Assassins', 'BDX'],
+      affiliation: ['Gotham City Sirens', 'BDX'],
       relatives: [],
       eyes: 'brown',
       hair: 'black',
@@ -18,10 +18,10 @@ export const criminals: BatmanCriminal[] = [
     },
   },
   {
-    name: 'Amélie La Noire',
+    name: 'Amélie Bane',
     picture: 'http://localhost:3000/img/abe.webp',
     details: {
-      realName: 'La Noire',
+      realName: 'Amélie Bane',
       aliases: [],
       citizenship: 'European',
       affiliation: ['Injustice League', 'Formerly Injustice Gang', 'BDX'],
@@ -34,10 +34,10 @@ export const criminals: BatmanCriminal[] = [
     },
   },
   {
-    name: 'Vesper Mormin',
+    name: 'Chloro-Mormin',
     picture: 'http://localhost:3000/img/cmo.jpg',
     details: {
-      realName: 'Vesper Mormin',
+      realName: 'Chloro-Mormin',
       aliases: [],
       citizenship: 'European',
       affiliation: ['Formerly Sinestro Corps', 'Injustice League', 'BDX'],
@@ -50,10 +50,10 @@ export const criminals: BatmanCriminal[] = [
     },
   },
   {
-    name: 'La Martelle',
+    name: 'Harley Martet',
     picture: 'http://localhost:3000/img/cma.jpg',
     details: {
-      realName: 'La Martelle',
+      realName: 'Harley Martet',
       aliases: [],
       citizenship: 'European',
       affiliation: ['The Secret Six', 'The Misfits', 'BDX'],
@@ -82,10 +82,10 @@ export const criminals: BatmanCriminal[] = [
     },
   },
   {
-    name: 'Birona',
+    name: 'Birds of Bironneau',
     picture: 'http://localhost:3000/img/ebi.webp',
     details: {
-      realName: 'Birona',
+      realName: 'Birds of Bironneau',
       aliases: [],
       citizenship: 'European',
       affiliation: ['League of Assassins', 'BDX'],
@@ -98,10 +98,10 @@ export const criminals: BatmanCriminal[] = [
     },
   },
   {
-    name: 'Pharaoh Combo',
+    name: 'Combo Breaker',
     picture: 'http://localhost:3000/img/fab.webp',
     details: {
-      realName: 'Pharaoh Combo',
+      realName: 'Combo Breaker',
       aliases: [],
       citizenship: 'European',
       affiliation: ['The Society', 'Justice League of Arkham', 'BDX'],
@@ -114,13 +114,13 @@ export const criminals: BatmanCriminal[] = [
     },
   },
   {
-    name: 'Allainmant',
+    name: 'Allain Checkmate',
     picture: 'http://localhost:3000/img/fal.jpg',
     details: {
-      realName: 'Allainmant',
+      realName: 'Allain Checkmate',
       aliases: [],
       citizenship: 'European',
-      affiliation: ['Injustice League', 'Formerly Injustice Gang', 'BDX'],
+      affiliation: ['Checkmate', 'Injustice League', 'BDX'],
       relatives: [],
       eyes: 'black',
       hair: 'black',
@@ -130,10 +130,10 @@ export const criminals: BatmanCriminal[] = [
     },
   },
   {
-    name: 'Le Couseur',
+    name: 'Maxime Zeus',
     picture: 'http://localhost:3000/img/mco.jpg',
     details: {
-      realName: 'Le Couseur',
+      realName: 'Maxime Zeus',
       aliases: [],
       citizenship: 'European',
       affiliation: ['League of Assassins', 'Formerly Sinestro Corps', 'BDX'],
@@ -146,10 +146,10 @@ export const criminals: BatmanCriminal[] = [
     },
   },
   {
-    name: 'La Bâtisseuse',
+    name: 'Bat-Issou',
     picture: 'http://localhost:3000/img/mba.webp',
     details: {
-      realName: 'La Bâtisseuse',
+      realName: 'Bat-Issou',
       aliases: [],
       citizenship: 'European',
       affiliation: ['League of Assassins', 'BDX'],
