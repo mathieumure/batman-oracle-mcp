@@ -9,6 +9,7 @@
     "dev:ui": "nx run mcp-ui:dev",
     "dev:mcp": "nx run mcp:dev",
     "dev:auth": "nx run auth:dev",
+    "demo:final": "node scripts/demo-final.mjs",
     "fmt": "oxfmt",
     "fmt:check": "oxfmt --check"
   },
