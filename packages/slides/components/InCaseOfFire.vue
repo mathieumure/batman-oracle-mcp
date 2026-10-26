@@ -1,7 +1,7 @@
 <script setup>
 import { nextTick, onUnmounted, ref, watch } from 'vue';
 import { onSlideLeave, useIsSlideActive } from '@slidev/client';
-import defaultVideo from '../assets/Full_demo_mcp.webm';
+import defaultVideo from '../assets/Full_demo_mcp.mov';
 
 const props = defineProps({
   src: {
